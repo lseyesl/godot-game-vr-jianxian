@@ -13,7 +13,7 @@ func _init() -> void:
 		"res://tests/test_flying_sword.gd",
 	]
 	for path in test_paths:
-		if ResourceLoader.exists(path):
+		if FileAccess.file_exists(path):
 			_run_test_script(path)
 	if failures.is_empty():
 		print("TESTS PASSED: %d assertions" % assertions)
