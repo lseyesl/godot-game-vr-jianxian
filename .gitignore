@@ -1,4 +1,5 @@
 .godot/
+.worktrees/
 *.tmp
 *.import
 export_presets.cfg.bak
