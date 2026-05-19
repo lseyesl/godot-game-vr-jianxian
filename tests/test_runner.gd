@@ -1,0 +1,46 @@
+extends SceneTree
+
+var assertions := 0
+var failures: Array[String] = []
+
+func _init() -> void:
+	var test_paths := [
+		"res://tests/test_comfort_settings.gd",
+		"res://tests/test_quest_state.gd",
+		"res://tests/test_dialogue.gd",
+		"res://tests/test_spell_caster.gd",
+		"res://tests/test_seal_encounter.gd",
+		"res://tests/test_flying_sword.gd",
+	]
+	for path in test_paths:
+		if ResourceLoader.exists(path):
+			_run_test_script(path)
+	if failures.is_empty():
+		print("TESTS PASSED: %d assertions" % assertions)
+		quit(0)
+	else:
+		for failure in failures:
+			printerr(failure)
+		printerr("TESTS FAILED: %d failure(s), %d assertion(s)" % [failures.size(), assertions])
+		quit(1)
+
+func _run_test_script(path: String) -> void:
+	var script := load(path)
+	var instance: Object = script.new()
+	if instance.has_method("run"):
+		instance.run(self)
+	else:
+		fail(path, "missing run(test_runner) method")
+
+func assert_true(value: bool, message: String) -> void:
+	assertions += 1
+	if not value:
+		fail("assert_true", message)
+
+func assert_equal(actual: Variant, expected: Variant, message: String) -> void:
+	assertions += 1
+	if actual != expected:
+		fail("assert_equal", "%s | actual=%s expected=%s" % [message, str(actual), str(expected)])
+
+func fail(source: String, message: String) -> void:
+	failures.append("%s: %s" % [source, message])

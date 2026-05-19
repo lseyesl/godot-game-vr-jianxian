@@ -1,0 +1,33 @@
+; Engine configuration file.
+; Godot 4.6+ project for VR Xianxia Demo.
+
+config_version=5
+
+[application]
+config/name="VR Xianxia Demo"
+run/main_scene="res://scenes/menu/MainMenu.tscn"
+config/features=PackedStringArray("4.6", "Forward Plus")
+
+[autoload]
+EventBus="*res://scripts/autoload/EventBus.gd"
+Game="*res://scripts/autoload/Game.gd"
+
+[display]
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/vsync/vsync_mode=0
+
+[input]
+spell_primary={"deadzone":0.5,"events":[]}
+spell_guard={"deadzone":0.5,"events":[]}
+spell_seal={"deadzone":0.5,"events":[]}
+interact={"deadzone":0.5,"events":[]}
+flight_toggle={"deadzone":0.5,"events":[]}
+
+[rendering]
+renderer/rendering_method="mobile"
+anti_aliasing/quality/msaa_3d=2
+environment/defaults/default_clear_color=Color(0.46, 0.55, 0.62, 1)
+
+[xr]
+openxr/enabled=true
