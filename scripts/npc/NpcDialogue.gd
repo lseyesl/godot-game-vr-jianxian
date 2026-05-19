@@ -1,0 +1,41 @@
+extends Node
+class_name NpcDialogue
+
+@export var npc_id := "townsperson"
+
+const LINES := {
+	"innkeeper": {
+		"start": "少侠，你的飞剑昨夜化作青光飞向山谷。先去酒馆问问，说书人见过那道光。",
+		"complete": "飞剑归来，气息也稳了。你已踏出剑仙第一步。",
+		"default": "客栈有热茶，也有远行人的消息。",
+	},
+	"tavern_keeper": {
+		"ask_tavern": "山谷旧祭台有妖气盘旋。沿镇门外的石阶走，看到瀑布就到了。",
+		"default": "酒香压不住山里的怪风，今夜少往山里去。",
+	},
+	"trial_spirit": {
+		"cleanse_seal": "凝神，立定，掌心聚灵。以灵光破妖，以破封诀开阵。",
+		"default": "试炼只认心定之人。",
+	},
+}
+
+const EVENTS := {
+	"innkeeper": {"start": "talked_to_innkeeper"},
+	"tavern_keeper": {"ask_tavern": "talked_to_tavern_keeper"},
+}
+
+func line_for_step(step: String) -> String:
+	var npc_lines: Dictionary = LINES.get(npc_id, {})
+	return npc_lines.get(step, npc_lines.get("default", "……"))
+
+func quest_event_for_step(step: String) -> String:
+	var npc_events: Dictionary = EVENTS.get(npc_id, {})
+	return npc_events.get(step, "")
+
+func interact(current_step: String) -> String:
+	var event_id := quest_event_for_step(current_step)
+	if event_id != "":
+		var game := get_node_or_null("/root/Game")
+		if game != null and game.has_method("advance_quest"):
+			game.advance_quest(event_id)
+	return line_for_step(current_step)

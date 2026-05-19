@@ -29,6 +29,9 @@ func _run_test_script(path: String) -> void:
 	if script == null:
 		fail(path, "failed to load test script")
 		return
+	if script is GDScript and not script.can_instantiate():
+		fail(path, "test script cannot instantiate")
+		return
 	var instance: Object = script.new()
 	if instance.has_method("run"):
 		instance.run(self)
