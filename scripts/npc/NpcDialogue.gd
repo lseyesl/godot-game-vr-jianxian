@@ -2,6 +2,7 @@ extends Node
 class_name NpcDialogue
 
 @export var npc_id := "townsperson"
+var last_line := ""
 
 const LINES := {
 	"innkeeper": {
@@ -38,4 +39,14 @@ func interact(current_step: String) -> String:
 		var game := get_node_or_null("/root/Game")
 		if game != null and game.has_method("advance_quest"):
 			game.advance_quest(event_id)
-	return line_for_step(current_step)
+	last_line = line_for_step(current_step)
+	return last_line
+
+func _on_interact_area_body_entered(body: Node3D) -> void:
+	if not body.is_in_group("player"):
+		return
+	var game := get_node_or_null("/root/Game")
+	var step := "start"
+	if game != null:
+		step = game.quest_state.current_step
+	interact(step)

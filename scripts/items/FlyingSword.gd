@@ -31,3 +31,7 @@ func recall_to_hand(hand_position: Vector3) -> void:
 	if not unlocked:
 		return
 	global_position = hand_position + Vector3.UP * hover_height_m
+
+func _on_collect_area_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		collect()

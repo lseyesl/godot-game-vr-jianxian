@@ -32,3 +32,9 @@ func _cleanse() -> void:
 	var game := get_node_or_null("/root/Game")
 	if game != null and game.has_method("advance_quest"):
 		game.advance_quest("seal_cleansed")
+
+func _on_hit_area_area_entered(area: Area3D) -> void:
+	if area.has_method("_on_body_entered"):
+		area._on_body_entered(self)
+	elif "spell_id" in area:
+		receive_spell(area.spell_id)
