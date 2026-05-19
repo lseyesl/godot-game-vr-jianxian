@@ -19,3 +19,10 @@
 - PCVR headset FPS in mountain: not measured; no HMD detected in current environment.
 - Worst visible stutter location: not measured.
 - Largest suspected cost: future dense town/mountain meshes and XR Tools runtime providers; current graybox is lightweight.
+
+## Task 12 Acceptance Notes
+
+- Automated tests and syntax checks are covered by `docs/testing/vr-demo-acceptance.md`.
+- Manual PCVR checklist remains unchecked because no HMD is detected in the current headless environment.
+- Full Godot XR Tools submodule was removed from tracked files because headless Godot startup/import hung after cache cleanup. The dependency is documented in `docs/setup/xr-tools.md` for local editor installation.
+- PCVR export was attempted and failed due to missing local Godot 4.6.2 Windows export templates: `windows_debug_x86_64.exe` and `windows_release_x86_64.exe`.
