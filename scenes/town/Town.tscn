@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/npc/Npc.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/world/ReturnToTownTrigger.gd" id="2"]
+
+[node name="Town" type="Node3D"]
+
+[node name="Inn" type="Node3D" parent="."]
+
+[node name="Innkeeper" parent="Inn" instance=ExtResource("1")]
+npc_id = "innkeeper"
+
+[node name="Tavern" type="Node3D" parent="."]
+position = Vector3(8, 0, 0)
+
+[node name="TavernKeeper" parent="Tavern" instance=ExtResource("1")]
+npc_id = "tavern_keeper"
+
+[node name="MarketStreet" type="Node3D" parent="."]
+position = Vector3(4, 0, -6)
+
+[node name="GatePaifang" type="Node3D" parent="."]
+position = Vector3(0, 0, -18)
+
+[node name="SwordPracticeYard" type="Node3D" parent="."]
+position = Vector3(-8, 0, 3)
+
+[node name="ReturnToTownTrigger" type="Area3D" parent="."]
+position = Vector3(0, 3, 8)
+script = ExtResource("2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReturnToTownTrigger"]
+
+[node name="DistantTownShells" type="Node3D" parent="."]
+
+[node name="ShellA" type="MeshInstance3D" parent="DistantTownShells"]
+position = Vector3(16, 0, -10)
+
+[node name="ShellB" type="MeshInstance3D" parent="DistantTownShells"]
+position = Vector3(-16, 0, -12)
+
+[connection signal="body_entered" from="ReturnToTownTrigger" to="ReturnToTownTrigger" method="_on_body_entered"]

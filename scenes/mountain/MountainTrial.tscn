@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/TrialTrigger.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/interaction/SealEncounter.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/items/FlyingSword.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/npc/Npc.tscn" id="4"]
+
+[node name="MountainTrial" type="Node3D"]
+
+[node name="MountainPath" type="Node3D" parent="."]
+position = Vector3(0, 0, -34)
+
+[node name="WaterfallVista" type="Node3D" parent="."]
+position = Vector3(18, 6, -48)
+
+[node name="TrialTrigger" type="Area3D" parent="."]
+position = Vector3(0, 0, -28)
+script = ExtResource("1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrialTrigger"]
+
+[node name="SealEncounter" parent="." instance=ExtResource("2")]
+position = Vector3(0, 0, -48)
+
+[node name="FlyingSword" parent="." instance=ExtResource("3")]
+position = Vector3(0, 1.2, -52)
+
+[node name="TrialSpirit" parent="." instance=ExtResource("4")]
+position = Vector3(-3, 0, -46)
+npc_id = "trial_spirit"
+
+[node name="FlightRouteMarkers" type="Node3D" parent="."]
+
+[node name="DistantMountains" type="Node3D" parent="."]
+
+[connection signal="body_entered" from="TrialTrigger" to="TrialTrigger" method="_on_body_entered"]
