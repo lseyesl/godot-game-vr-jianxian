@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/TaskHud.gd" id="1"]
+
+[node name="TaskHud" type="CanvasLayer"]
+script = ExtResource("1")
+
+[node name="ObjectivePanel" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -560.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 104.0
+
+[node name="ObjectiveLabel" type="Label" parent="ObjectivePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = -12.0
+text = "前往客栈，询问遗失飞剑的线索"
+autowrap_mode = 3
