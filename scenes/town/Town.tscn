@@ -33,6 +33,9 @@ script = ExtResource("2")
 
 [node name="DistantTownShells" type="Node3D" parent="."]
 
+[node name="TownAmbience" type="AudioStreamPlayer3D" parent="."]
+unit_size = 12.0
+
 [node name="ShellA" type="MeshInstance3D" parent="DistantTownShells"]
 position = Vector3(16, 0, -10)
 

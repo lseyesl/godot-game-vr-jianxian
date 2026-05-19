@@ -10,3 +10,12 @@
 - 已创建隔离 worktree：`/Users/q/.config/superpowers/worktrees/jianxian/vr-xianxia-demo`，分支 `feature/vr-xianxia-demo`。
 - Task 1 空测试运行器通过：`TESTS PASSED: 0 assertions`。
 - 无头环境下 Godot 输出 OpenXR/HMD 未检测到警告；该警告不阻断 headless 逻辑测试，但 PCVR 真机验证仍需后续 headset 环境。
+
+## Task 11 Performance Notes
+
+- Desktop debug FPS in town: not measured in headless environment.
+- Desktop debug FPS in mountain: not measured in headless environment.
+- PCVR headset FPS in town: not measured; no HMD detected in current environment.
+- PCVR headset FPS in mountain: not measured; no HMD detected in current environment.
+- Worst visible stutter location: not measured.
+- Largest suspected cost: future dense town/mountain meshes and XR Tools runtime providers; current graybox is lightweight.
