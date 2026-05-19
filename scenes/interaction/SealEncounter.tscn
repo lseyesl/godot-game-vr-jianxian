@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/interaction/SealEncounter.gd" id="1"]
+
+[node name="SealEncounter" type="Node3D"]
+script = ExtResource("1")
+
+[node name="SealVisual" type="MeshInstance3D" parent="."]
+
+[node name="DemonVisual" type="MeshInstance3D" parent="."]
+
+[node name="HitArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
