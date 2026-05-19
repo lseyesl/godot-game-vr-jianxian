@@ -2,8 +2,8 @@
 
 ## Automated
 
-- [x] `godot --headless --path . --script res://tests/test_runner.gd` passes.
-- [x] `godot --headless --path . --check-only --quit` exits 0.
+- [x] `godot --headless --xr-mode off --path . --script res://tests/test_runner.gd` passes.
+- [x] `godot --headless --xr-mode off --path . --check-only --quit` exits 0.
 - [ ] PCVR Windows export succeeds. Current machine is missing Godot Windows export templates.
 
 ## Main Flow
@@ -43,5 +43,5 @@
 ## Environment Notes
 
 - Manual and headset checks are not completed in the current headless environment.
-- Godot reports OpenXR/HMD unavailable during headless runs; this requires PCVR headset verification later.
+- Godot reports OpenXR/HMD unavailable during plain headless runs; automated CI/headless checks use `--xr-mode off`, and PCVR headset verification remains required later.
 - `godot --headless --path . --export-release "PCVR Demo" builds/pcvr/VRXianxiaDemo.exe` was attempted and failed because `windows_debug_x86_64.exe` and `windows_release_x86_64.exe` export templates are not installed for Godot 4.6.2.

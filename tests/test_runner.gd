@@ -17,12 +17,15 @@ func _init() -> void:
 			_run_test_script(path)
 	if failures.is_empty():
 		print("TESTS PASSED: %d assertions" % assertions)
-		quit(0)
+		call_deferred("_finish", 0)
 	else:
 		for failure in failures:
 			printerr(failure)
 		printerr("TESTS FAILED: %d failure(s), %d assertion(s)" % [failures.size(), assertions])
-		quit(1)
+		call_deferred("_finish", 1)
+
+func _finish(exit_code: int) -> void:
+	quit(exit_code)
 
 func _run_test_script(path: String) -> void:
 	var script := load(path)

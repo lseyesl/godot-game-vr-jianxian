@@ -26,3 +26,4 @@
 - Manual PCVR checklist remains unchecked because no HMD is detected in the current headless environment.
 - Full Godot XR Tools submodule was removed from tracked files because headless Godot startup/import hung after cache cleanup. The dependency is documented in `docs/setup/xr-tools.md` for local editor installation.
 - PCVR export was attempted and failed due to missing local Godot 4.6.2 Windows export templates: `windows_debug_x86_64.exe` and `windows_release_x86_64.exe`.
+- After merging to `main`, automated verification passed with XR runtime disabled for headless mode: `godot --headless --xr-mode off --path . --script res://tests/test_runner.gd` and `godot --headless --xr-mode off --path . --check-only --quit` both exited 0.
