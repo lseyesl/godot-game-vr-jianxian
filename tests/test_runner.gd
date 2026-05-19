@@ -26,6 +26,9 @@ func _init() -> void:
 
 func _run_test_script(path: String) -> void:
 	var script := load(path)
+	if script == null:
+		fail(path, "failed to load test script")
+		return
 	var instance: Object = script.new()
 	if instance.has_method("run"):
 		instance.run(self)
