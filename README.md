@@ -65,6 +65,7 @@ Requires Godot 4.6+ Windows export templates.
 
 - [Design spec](docs/superpowers/specs/2026-05-19-vr-xianxia-demo-design.md)
 - [Implementation plan](docs/superpowers/plans/2026-05-19-vr-xianxia-demo-implementation.md)
+- [3D asset grid-size standard](docs/art/3d-grid-size-standard.md)
 - [XR Tools setup](docs/setup/xr-tools.md)
 - [VR acceptance checklist](docs/testing/vr-demo-acceptance.md)
 - [Agent instructions](AGENTS.md)

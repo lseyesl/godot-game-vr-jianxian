@@ -77,6 +77,13 @@ Both must exit 0. Expected test output: `TESTS PASSED: <N> assertions`.
 - `immersive`: smooth turn, smooth movement, vignette off, speed limit 9 m/s, height limit 60 m
 - Unknown mode falls back to `comfort`
 
+## 3D Asset Grid Standard
+
+- Full 3D asset sizing rules live in `docs/art/3d-grid-size-standard.md`.
+- Godot `1 unit = 1 meter`; large scene modules align to a 1 m grid, mid-sized props to 0.5 m, and fine non-blocking details to 0.25 m.
+- Keep imported model node scale at `(1, 1, 1)` whenever possible; author dimensions in the model file instead of compensating with scene scale.
+- VR comfort dimensions are mandatory on gameplay paths: main routes should be 3 m wide, minimum passable paths 1.5 m, and core door openings at least 1.5 m × 2.4 m.
+
 ## Test Runner Conventions
 
 - Tests live in `tests/test_*.gd`, each `extends RefCounted` with a `run(t)` method.
