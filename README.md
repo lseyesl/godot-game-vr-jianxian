@@ -12,6 +12,8 @@ A PCVR vertical-slice demo built with **Godot 4.6+**, **OpenXR**, and **Godot XR
 
 ## Running
 
+The project is **VR-first**: art scale, interaction distance, comfort rules, and performance targets are designed for PCVR. Day-to-day development can use the desktop simulation player for faster code iteration and basic flow testing, but VR headset checks remain the final acceptance path for comfort, interaction feel, and performance.
+
 ```bash
 # Open in Godot editor
 godot --path .
@@ -22,6 +24,11 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 # Syntax / scene validation
 godot --headless --xr-mode off --path . --check-only --quit
 ```
+
+`scenes/main/Main.tscn` selects the active player through `scripts/main/Main.gd`:
+
+- `desktop_simulation` loads `scenes/player/DesktopDebugPlayer.tscn` for non-HMD development.
+- `vr` loads `scenes/player/XRPlayer.tscn` for headset testing and PCVR validation.
 
 ## Export (PCVR)
 
@@ -37,11 +44,12 @@ Requires Godot 4.6+ Windows export templates.
 |------|----------|
 | `scripts/core/` | Quest state machine, comfort settings, save state |
 | `scripts/autoload/` | EventBus (global signals), Game (runtime state) |
+| `scripts/main/` | Main scene bootstrapping and player mode selection |
 | `scripts/spells/` | Spellcasting cooldowns and projectiles |
 | `scripts/interaction/` | Seal encounter logic |
 | `scripts/items/` | Flying sword unlock and flight |
 | `scripts/npc/` | NPC dialogue by quest step |
-| `scripts/player/` | XR player bridge, desktop debug controller |
+| `scripts/player/` | XR player bridge, desktop simulation controller |
 | `scripts/ui/` | Task HUD, comfort settings panel, main menu |
 | `scripts/world/` | Area triggers (trial, return-to-town) |
 | `scenes/` | Godot scene files (.tscn) |
@@ -50,7 +58,7 @@ Requires Godot 4.6+ Windows export templates.
 
 ## Controls
 
-| Action | VR | Desktop Debug |
+| Action | VR | Desktop Simulation |
 |--------|----|---------------|
 | Move | XR Tools locomotion | WASD / Arrow keys |
 | Fly (after sword unlock) | Flight provider | Space = ascend |
