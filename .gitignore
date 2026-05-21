@@ -4,3 +4,11 @@
 *.import
 export_presets.cfg.bak
 *.translation
+.DS_Store
+
+# Blender backups
+*.blend[0-9]*
+
+# Blender temp/recovery
+*.blend@
+.quit.blend
