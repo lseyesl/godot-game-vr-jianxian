@@ -1,19 +1,17 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://scenes/player/DesktopDebugPlayer.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/main/Main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/town/Town.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/mountain/MountainTrial.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/ui/TaskHud.tscn" id="4"]
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 rotation = Vector3(-0.8, 0.4, 0.0)
-
-[node name="DesktopDebugPlayer" parent="." instance=ExtResource("1")]
-position = Vector3(0, 1, 6)
 
 [node name="Town" parent="." instance=ExtResource("2")]
 

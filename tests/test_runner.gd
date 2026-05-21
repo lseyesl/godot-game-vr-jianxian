@@ -11,6 +11,7 @@ func _init() -> void:
 		"res://tests/test_spell_caster.gd",
 		"res://tests/test_seal_encounter.gd",
 		"res://tests/test_flying_sword.gd",
+		"res://tests/test_player_mode.gd",
 	]
 	for path in test_paths:
 		if FileAccess.file_exists(path):

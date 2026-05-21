@@ -1,7 +1,7 @@
 extends Node3D
 class_name XRPlayer
 
-@export var comfort_settings: ComfortSettings
+@export var comfort_settings: Resource
 var flight_enabled := false
 
 func _ready() -> void:
