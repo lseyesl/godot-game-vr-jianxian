@@ -126,6 +126,7 @@ NEVER create worktrees outside `.worktrees/` (e.g. `~/`, `/tmp/`, `~/.config/sup
 
 - `.gd` scripts use `class_name` declarations matching PascalCase filenames
 - Scenes (.tscn) reference scripts via `ext_resource` paths starting with `res://`
+- When moving, renaming, or deleting Godot project files, also check for a same-path `.uid` sidecar file and apply the same operation to it when present (for example, `scripts/main/Main.gd` ⇄ `scripts/main/Main.gd.uid`).
 - `export_presets.cfg` IS tracked (not in .gitignore)
 - `.godot/`, `.worktrees/`, `*.import`, `*.tmp`, `*.translation` are gitignored
 - Asset placeholder dirs (`assets/audio/`, `assets/models/`, `assets/textures/`) contain `.gitkeep`
