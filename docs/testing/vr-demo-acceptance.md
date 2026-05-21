@@ -9,6 +9,8 @@
 ## Main Flow
 
 - [ ] Main menu opens.
+- [ ] Main scene can run in `desktop_simulation` mode for basic non-HMD flow checks.
+- [ ] Main scene can run in `vr` mode with `XRPlayer` for headset validation.
 - [ ] Comfort mode is default.
 - [ ] Immersive mode can be selected.
 - [ ] Player can enter town.
@@ -43,5 +45,6 @@
 ## Environment Notes
 
 - Manual and headset checks are not completed in the current headless environment.
+- Desktop simulation checks are allowed for quest logic, dialogue, triggers, and other basic gameplay flow, but they do not replace VR acceptance for comfort, hand interaction, spatial scale, or performance.
 - Godot reports OpenXR/HMD unavailable during plain headless runs; automated CI/headless checks use `--xr-mode off`, and PCVR headset verification remains required later.
 - `godot --headless --path . --export-release "PCVR Demo" builds/pcvr/VRXianxiaDemo.exe` was attempted and failed because `windows_debug_x86_64.exe` and `windows_release_x86_64.exe` export templates are not installed for Godot 4.6.2.

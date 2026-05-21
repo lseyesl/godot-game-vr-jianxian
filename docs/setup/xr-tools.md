@@ -11,3 +11,9 @@ For interactive VR development:
 3. Enable the addon in Project Settings.
 4. Wire the movement/turn/vignette/flight provider nodes to `scenes/player/XRPlayer.tscn` and `scripts/player/XRPlayer.gd`.
 5. Keep `scripts/player/XRPlayer.gd` as the bridge for comfort settings and sword flight state.
+
+## Player Modes
+
+`scenes/main/Main.tscn` uses `scripts/main/Main.gd` to choose the player scene at startup. Use `desktop_simulation` for daily non-HMD development and automated-friendly checks. Use `vr` when validating the final PCVR experience with OpenXR and XR Tools.
+
+Desktop simulation is only a development aid. Final decisions about scene scale, reach distance, locomotion comfort, flight feel, and performance must be verified with `scenes/player/XRPlayer.tscn` on a headset.
