@@ -27,3 +27,9 @@
 - Full Godot XR Tools submodule was removed from tracked files because headless Godot startup/import hung after cache cleanup. The dependency is documented in `docs/setup/xr-tools.md` for local editor installation.
 - PCVR export was attempted and failed due to missing local Godot 4.6.2 Windows export templates: `windows_debug_x86_64.exe` and `windows_release_x86_64.exe`.
 - After merging to `main`, automated verification passed with XR runtime disabled for headless mode: `godot --headless --xr-mode off --path . --script res://tests/test_runner.gd` and `godot --headless --xr-mode off --path . --check-only --quit` both exited 0.
+
+## 2026-05-22
+
+- 已继续执行 `task_plan.md` 阶段 5，并将阶段状态从 `in_progress` 同步为 `complete`。
+- 当前工作区提交后状态已验证为干净，继续执行前 `git status --short` 无输出，当前分支为 `main`。
+- 已重新执行自动验证：`godot --headless --xr-mode off --path . --script res://tests/test_runner.gd` 输出 `TESTS PASSED: 60 assertions`，`godot --headless --xr-mode off --path . --check-only --quit` 正常退出。
