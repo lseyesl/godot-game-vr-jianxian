@@ -46,3 +46,21 @@ pre-commit:
   jobs:
     - name: check large files use git lfs
       run: bash tools/git-hooks/check-lfs.sh
+
+post-merge:
+  jobs:
+    - name: git lfs pull
+      run: |
+        git lfs version >/dev/null 2>&1 && git lfs pull || true
+
+post-checkout:
+  jobs:
+    - name: git lfs pull
+      run: |
+        git lfs version >/dev/null 2>&1 && git lfs pull || true
+
+post-rewrite:
+  jobs:
+    - name: git lfs pull
+      run: |
+        git lfs version >/dev/null 2>&1 && git lfs pull || true
