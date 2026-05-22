@@ -122,6 +122,24 @@ NEVER create worktrees outside `.worktrees/` (e.g. `~/`, `/tmp/`, `~/.config/sup
 
 `.worktrees/` is gitignored — worktree contents will not pollute the main checkout's git status.
 
+## Mandatory Planning
+
+Requests are classified before planning:
+
+| Classification | Criteria | Plan Required? |
+|----------------|----------|----------------|
+| **Trivial** | Single-line fix, typo, simple config/value change, one file affected | ❌ No plan needed — just do it |
+| **Standard** | 2–4 steps, 1–3 files, clear scope, low risk | ✅ Plan required |
+| **Complex** | 5+ steps, 3+ files, architecture impact, or unclear scope | ✅ Plan required |
+
+When a plan is required:
+
+1. **Create a plan** before writing any code.
+2. **Persist the plan** to `docs/superpowers/plans/` as a markdown file. Naming convention: `YYYY-MM-DD-<slug>.md` (e.g. `2026-05-22-add-sword-trail.md`).
+3. **Plan file must include**: Goal, scope, affected files, step-by-step implementation, and verification criteria.
+4. **Update the plan** as work progresses — mark steps done, note deviations.
+5. **No implementation without a plan file** — if `docs/superpowers/plans/` does not contain a matching plan, write one first.
+
 ## File Conventions
 
 - `.gd` scripts use `class_name` declarations matching PascalCase filenames
