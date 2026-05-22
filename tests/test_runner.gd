@@ -6,6 +6,8 @@ var failures: Array[String] = []
 func _init() -> void:
 	var test_paths := [
 		"res://tests/test_comfort_settings.gd",
+		"res://tests/test_environment_state.gd",
+		"res://tests/test_environment_controller.gd",
 		"res://tests/test_quest_state.gd",
 		"res://tests/test_dialogue.gd",
 		"res://tests/test_spell_caster.gd",
