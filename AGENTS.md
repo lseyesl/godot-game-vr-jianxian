@@ -4,6 +4,11 @@
 
 PCVR vertical-slice demo built in Godot 4.6+ with GDScript, OpenXR, and Godot XR Tools. Player is a novice sword cultivator who explores a town, receives NPC clues, completes a mountain trial with standing spellcasting, recovers a flying sword, and flies back. ~15 min play session. Chinese-language UI/dialogue throughout.
 
+## Local Project Skills
+
+- Project-local skills live under `agents/skills/`. AI CLI tools that support project skills should scan this directory in addition to their global skill locations.
+- `archive-planning-files` is available at `agents/skills/archive-planning-files/SKILL.md`. Use it when the user asks to archive planning files, including triggers such as `归档`, `archive`, `清理规划文件`, or `存档`.
+
 ## Verification Commands
 
 ```bash
