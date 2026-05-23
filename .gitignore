@@ -5,6 +5,7 @@
 export_presets.cfg.bak
 *.translation
 .DS_Store
+.omo/
 
 # Blender backups
 *.blend[0-9]*
