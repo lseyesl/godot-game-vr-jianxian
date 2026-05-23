@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/Main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/town/Town.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/mountain/MountainTrial.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/ui/TaskHud.tscn" id="4"]
 [ext_resource type="Script" path="res://scripts/world/EnvironmentController.gd" id="5"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1"]
+size = Vector2(120, 120)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(120, 0.2, 120)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1")
@@ -18,6 +24,15 @@ rotation = Vector3(-0.8, 0.4, 0.0)
 script = ExtResource("5")
 directional_light_path = NodePath("../DirectionalLight3D")
 world_environment_path = NodePath("../WorldEnvironment")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+position = Vector3(0, -0.1, 0)
+shape = SubResource("BoxShape3D_1")
 
 [node name="Town" parent="." instance=ExtResource("2")]
 
