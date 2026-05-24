@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/npc/Npc.tscn" id="1"]
 [ext_resource type="Script" path="res://scripts/world/ReturnToTownTrigger.gd" id="2"]
@@ -6,6 +6,11 @@
 [ext_resource type="PackedScene" path="res://assets/models/Tavern/Tavern.glb" id="4"]
 [ext_resource type="PackedScene" path="res://assets/models/Market_Stall/Market_Stall.glb" id="5"]
 [ext_resource type="PackedScene" path="res://assets/models/Innkeeper/Innkeeper.glb" id="6"]
+[ext_resource type="PackedScene" path="res://assets/models/Gate/Gate.glb" id="7"]
+[ext_resource type="PackedScene" path="res://assets/models/Wall/Wall_2x3.glb" id="8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(1.5, 0.25, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(5, 4, 5)
@@ -13,7 +18,7 @@ size = Vector3(5, 4, 5)
 [node name="Town" type="Node3D"]
 
 [node name="Inn" type="Node3D" parent="."]
-position = Vector3(-5, 0, -6)
+position = Vector3(-12, 0, 6)
 rotation = Vector3(0, 0.35, 0)
 
 [node name="InnModel" parent="Inn" instance=ExtResource("3")]
@@ -26,7 +31,7 @@ npc_id = "innkeeper"
 [node name="InnkeeperModel" parent="Inn/Innkeeper/Body" instance=ExtResource("6")]
 
 [node name="Tavern" type="Node3D" parent="."]
-position = Vector3(5, 0, -6)
+position = Vector3(10, 0, 12)
 rotation = Vector3(0, -0.35, 0)
 
 [node name="TavernModel" parent="Tavern" instance=ExtResource("4")]
@@ -37,7 +42,7 @@ rotation = Vector3(0, -2.8, 0)
 npc_id = "tavern_keeper"
 
 [node name="MarketStreet" type="Node3D" parent="."]
-position = Vector3(0, 0, -2)
+position = Vector3(0, 0, 8)
 
 [node name="StallCenter" parent="MarketStreet" instance=ExtResource("5")]
 position = Vector3(0, 0, -2)
@@ -51,13 +56,118 @@ position = Vector3(3, 0, 1.5)
 rotation = Vector3(0, -0.45, 0)
 
 [node name="GatePaifang" type="Node3D" parent="."]
-position = Vector3(0, 0, -18)
+position = Vector3(0, 0, -32)
+
+[node name="GateModel" parent="GatePaifang" instance=ExtResource("7")]
+
+[node name="SouthGatePaifang" type="Node3D" parent="."]
+position = Vector3(0, 0, 28)
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="GateModel" parent="SouthGatePaifang" instance=ExtResource("7")]
+
+[node name="WestGatePaifang" type="Node3D" parent="."]
+position = Vector3(-24, 0, 10)
+rotation = Vector3(0, -1.5708, 0)
+
+[node name="GateModel" parent="WestGatePaifang" instance=ExtResource("7")]
+
+[node name="TownWalls" type="Node3D" parent="."]
+position = Vector3(0, 0, 0)
+
+[node name="NorthWallWest" parent="TownWalls" instance=ExtResource("8")]
+position = Vector3(-4, 0, -32)
+
+[node name="NorthWallEast" parent="TownWalls" instance=ExtResource("8")]
+position = Vector3(4, 0, -32)
+
+[node name="SouthWallWest" parent="TownWalls" instance=ExtResource("8")]
+position = Vector3(-4, 0, 28)
+
+[node name="SouthWallEast" parent="TownWalls" instance=ExtResource("8")]
+position = Vector3(4, 0, 28)
+
+[node name="WestWallNorth" parent="TownWalls" instance=ExtResource("8")]
+position = Vector3(-24, 0, 4)
+rotation = Vector3(0, 1.5708, 0)
+
+[node name="WestWallSouth" parent="TownWalls" instance=ExtResource("8")]
+position = Vector3(-24, 0, 16)
+rotation = Vector3(0, 1.5708, 0)
+
+[node name="EastWallNorth" parent="TownWalls" instance=ExtResource("8")]
+position = Vector3(22, 0, -6)
+rotation = Vector3(0, 1.5708, 0)
+
+[node name="EastWallSouth" parent="TownWalls" instance=ExtResource("8")]
+position = Vector3(22, 0, 8)
+rotation = Vector3(0, 1.5708, 0)
 
 [node name="SwordPracticeYard" type="Node3D" parent="."]
 position = Vector3(-10, 0, 4)
 
+[node name="WestDistrict" type="Node3D" parent="."]
+position = Vector3(0, 0, 0)
+
+[node name="CanalMarker" type="MeshInstance3D" parent="WestDistrict"]
+position = Vector3(-10, 0, 8)
+mesh = SubResource("BoxMesh_1")
+
+[node name="WaterwheelMarker" type="MeshInstance3D" parent="WestDistrict"]
+position = Vector3(-18, 0, 10)
+mesh = SubResource("BoxMesh_1")
+
+[node name="FarmlandWestMarker" type="MeshInstance3D" parent="WestDistrict"]
+position = Vector3(-20, 0, 2)
+mesh = SubResource("BoxMesh_1")
+
+[node name="FarmlandNorthWestMarker" type="MeshInstance3D" parent="WestDistrict"]
+position = Vector3(-22, 0, -14)
+mesh = SubResource("BoxMesh_1")
+
+[node name="FarmlandSouthWestMarker" type="MeshInstance3D" parent="WestDistrict"]
+position = Vector3(-24, 0, 20)
+mesh = SubResource("BoxMesh_1")
+
+[node name="EastDistrict" type="Node3D" parent="."]
+position = Vector3(0, 0, 0)
+
+[node name="YamenMarker" type="MeshInstance3D" parent="EastDistrict"]
+position = Vector3(16, 0, 2)
+mesh = SubResource("BoxMesh_1")
+
+[node name="DockMarker" type="MeshInstance3D" parent="EastDistrict"]
+position = Vector3(22, 0, 10)
+mesh = SubResource("BoxMesh_1")
+
+[node name="SouthEastDistrict" type="Node3D" parent="."]
+position = Vector3(0, 0, 0)
+
+[node name="TempleMarker" type="MeshInstance3D" parent="SouthEastDistrict"]
+position = Vector3(12, 0, 18)
+mesh = SubResource("BoxMesh_1")
+
+[node name="NorthEastDistrict" type="Node3D" parent="."]
+position = Vector3(0, 0, 0)
+
+[node name="GranaryMarker" type="MeshInstance3D" parent="NorthEastDistrict"]
+position = Vector3(8, 0, -16)
+mesh = SubResource("BoxMesh_1")
+
+[node name="BlacksmithMarker" type="MeshInstance3D" parent="NorthEastDistrict"]
+position = Vector3(14, 0, -12)
+mesh = SubResource("BoxMesh_1")
+
+[node name="ForestryMarker" type="MeshInstance3D" parent="NorthEastDistrict"]
+position = Vector3(18, 0, -24)
+mesh = SubResource("BoxMesh_1")
+
+[node name="FishingVillageMarker" type="MeshInstance3D" parent="NorthEastDistrict"]
+position = Vector3(24, 0, -18)
+mesh = SubResource("BoxMesh_1")
+
 [node name="ReturnToTownTrigger" type="Area3D" parent="."]
-position = Vector3(0, 3, 10)
+position = Vector3(12, 3, 24)
 script = ExtResource("2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ReturnToTownTrigger"]
