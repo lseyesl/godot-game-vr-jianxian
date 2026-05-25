@@ -1,11 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://des1xbflnr234"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(0.75, 1.75, 0.75)
+[ext_resource type="PackedScene" uid="uid://ex3fy2prji7x" path="res://assets/models/Innkeeper/Innkeeper.glb" id="1"]
 
-[node name="Innkeeper" type="Node3D"]
+[node name="Innkeeper" type="Node3D" unique_id=1156396336]
 metadata/source_model_path = "res://assets/models/Innkeeper/Innkeeper.glb"
 
-[node name="Model" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_1")
-metadata/source_model_path = "res://assets/models/Innkeeper/Innkeeper.glb"
+[node name="Model" parent="." unique_id=1116778268 instance=ExtResource("1")]

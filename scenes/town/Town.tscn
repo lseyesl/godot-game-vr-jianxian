@@ -1,13 +1,22 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene format=3 uid="uid://bko50we0fm2yr"]
 
-[ext_resource type="PackedScene" path="res://scenes/npc/Npc.tscn" id="1"]
-[ext_resource type="Script" path="res://scripts/world/ReturnToTownTrigger.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://dpq3ixd3u85jn" path="res://scenes/npc/Npc.tscn" id="1"]
+[ext_resource type="Script" uid="uid://dk1j0axibvk6x" path="res://scripts/world/ReturnToTownTrigger.gd" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/Inn/Inn.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/Tavern/Tavern.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/Market_Stall/Market_Stall.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Innkeeper/Innkeeper.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Gate/Gate.tscn" id="7"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Wall/Wall_2x3.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://1qp5oqc4207h" path="res://scenes/prefabs/models/Gate/Gate.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://c8olh5tnwn5b1" path="res://scenes/prefabs/models/Wall/Wall_2x3.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof01.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof02.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof03.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof04.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof05.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof06.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof07.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof08.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof09.tscn" id="17"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof10.tscn" id="18"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(1.5, 0.25, 1.5)
@@ -15,173 +24,399 @@ size = Vector3(1.5, 0.25, 1.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(5, 4, 5)
 
-[node name="Town" type="Node3D"]
+[node name="Town" type="Node3D" unique_id=8724783]
 
-[node name="Inn" type="Node3D" parent="."]
-position = Vector3(-12, 0, 6)
-rotation = Vector3(0, 0.35, 0)
+[node name="Inn" type="Node3D" parent="." unique_id=749930718]
+transform = Transform3D(0.9393727, 0, 0.3428978, 0, 1, 0, -0.3428978, 0, 0.9393727, -12, 0, 6)
 
-[node name="InnModel" parent="Inn" instance=ExtResource("3")]
+[node name="InnModel" parent="Inn" unique_id=1116407412 instance=ExtResource("3")]
 
-[node name="Innkeeper" parent="Inn" instance=ExtResource("1")]
-position = Vector3(1.5, 0, 2.5)
-rotation = Vector3(0, 2.8, 0)
+[node name="Innkeeper" parent="Inn" unique_id=1060692209 instance=ExtResource("1")]
+transform = Transform3D(-0.9422223, 0, 0.3349882, 0, 1, 0, -0.3349882, 0, -0.9422223, 1.5, 0, 2.5)
 npc_id = "innkeeper"
 
-[node name="InnkeeperModel" parent="Inn/Innkeeper/Body" instance=ExtResource("6")]
+[node name="Tavern" type="Node3D" parent="." unique_id=865168633]
+transform = Transform3D(0.9393727, 0, -0.3428978, 0, 1, 0, 0.3428978, 0, 0.9393727, 10, 0, 12)
 
-[node name="Tavern" type="Node3D" parent="."]
-position = Vector3(10, 0, 12)
-rotation = Vector3(0, -0.35, 0)
+[node name="TavernModel" parent="Tavern" unique_id=1833055172 instance=ExtResource("4")]
 
-[node name="TavernModel" parent="Tavern" instance=ExtResource("4")]
-
-[node name="TavernKeeper" parent="Tavern" instance=ExtResource("1")]
-position = Vector3(-1.5, 0, 2.5)
-rotation = Vector3(0, -2.8, 0)
+[node name="TavernKeeper" parent="Tavern" unique_id=791312724 instance=ExtResource("1")]
+transform = Transform3D(-0.9422223, 0, -0.3349882, 0, 1, 0, 0.3349882, 0, -0.9422223, -1.5, 0, 2.5)
 npc_id = "tavern_keeper"
 
-[node name="MarketStreet" type="Node3D" parent="."]
-position = Vector3(0, 0, 8)
+[node name="MarketStreet" type="Node3D" parent="." unique_id=353811937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="StallCenter" parent="MarketStreet" instance=ExtResource("5")]
-position = Vector3(0, 0, -2)
+[node name="StallCenter" parent="MarketStreet" unique_id=1349453600 instance=ExtResource("5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="StallLeft" parent="MarketStreet" instance=ExtResource("5")]
-position = Vector3(-3, 0, 1.5)
-rotation = Vector3(0, 0.45, 0)
+[node name="StallLeft" parent="MarketStreet" unique_id=611389599 instance=ExtResource("5")]
+transform = Transform3D(0.90044713, 0, 0.43496552, 0, 1, 0, -0.43496552, 0, 0.90044713, -3, 0, 1.5)
 
-[node name="StallRight" parent="MarketStreet" instance=ExtResource("5")]
-position = Vector3(3, 0, 1.5)
-rotation = Vector3(0, -0.45, 0)
+[node name="StallRight" parent="MarketStreet" unique_id=288536804 instance=ExtResource("5")]
+transform = Transform3D(0.90044713, 0, -0.43496552, 0, 1, 0, 0.43496552, 0, 0.90044713, 3, 0, 1.5)
 
-[node name="GatePaifang" type="Node3D" parent="."]
-position = Vector3(0, 0, -32)
+[node name="GatePaifang" type="Node3D" parent="." unique_id=63409185]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
 
-[node name="GateModel" parent="GatePaifang" instance=ExtResource("7")]
+[node name="GateModel" parent="GatePaifang" unique_id=2008448597 instance=ExtResource("7")]
 
-[node name="SouthGatePaifang" type="Node3D" parent="."]
-position = Vector3(0, 0, 28)
-rotation = Vector3(0, 3.14159, 0)
+[node name="SouthGatePaifang" type="Node3D" parent="." unique_id=1188221121]
+transform = Transform3D(-1, 0, 2.5351817e-06, 0, 1, 0, -2.5351817e-06, 0, -1, 0, 0, 28)
 
-[node name="GateModel" parent="SouthGatePaifang" instance=ExtResource("7")]
+[node name="GateModel" parent="SouthGatePaifang" unique_id=745674973 instance=ExtResource("7")]
 
-[node name="WestGatePaifang" type="Node3D" parent="."]
-position = Vector3(-24, 0, 10)
-rotation = Vector3(0, -1.5708, 0)
+[node name="WestGatePaifang" type="Node3D" parent="." unique_id=82923745]
+transform = Transform3D(-3.6199901e-06, 0, -1, 0, 1, 0, 1, 0, -3.6199901e-06, -24, 0, 10)
 
-[node name="GateModel" parent="WestGatePaifang" instance=ExtResource("7")]
+[node name="GateModel" parent="WestGatePaifang" unique_id=41887502 instance=ExtResource("7")]
 
-[node name="TownWalls" type="Node3D" parent="."]
-position = Vector3(0, 0, 0)
+[node name="TownWalls" type="Node3D" parent="." unique_id=290559327]
 
-[node name="NorthWallWest" parent="TownWalls" instance=ExtResource("8")]
-position = Vector3(-4, 0, -32)
+[node name="NorthWallWest" parent="TownWalls" unique_id=1357479330 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3611145, 0, -32)
 
-[node name="NorthWallEast" parent="TownWalls" instance=ExtResource("8")]
-position = Vector3(4, 0, -32)
+[node name="NorthWallWest2" parent="TownWalls" unique_id=1758104628 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.298686, 0, -32)
 
-[node name="SouthWallWest" parent="TownWalls" instance=ExtResource("8")]
-position = Vector3(-4, 0, 28)
+[node name="NorthWallWest3" parent="TownWalls" unique_id=2068179819 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.235785, 0, -32)
 
-[node name="SouthWallEast" parent="TownWalls" instance=ExtResource("8")]
-position = Vector3(4, 0, 28)
+[node name="NorthWallWest4" parent="TownWalls" unique_id=702955747 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.162056, 0, -32)
 
-[node name="WestWallNorth" parent="TownWalls" instance=ExtResource("8")]
-position = Vector3(-24, 0, 4)
-rotation = Vector3(0, 1.5708, 0)
+[node name="NorthWallWest5" parent="TownWalls" unique_id=1050590831 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.100578, 0, -32)
 
-[node name="WestWallSouth" parent="TownWalls" instance=ExtResource("8")]
-position = Vector3(-24, 0, 16)
-rotation = Vector3(0, 1.5708, 0)
+[node name="NorthWallWest6" parent="TownWalls" unique_id=820117701 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.023998, 0, -32)
 
-[node name="EastWallNorth" parent="TownWalls" instance=ExtResource("8")]
-position = Vector3(22, 0, -6)
-rotation = Vector3(0, 1.5708, 0)
+[node name="NorthWallWest7" parent="TownWalls" unique_id=901889337 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.080015, 0, -32)
 
-[node name="EastWallSouth" parent="TownWalls" instance=ExtResource("8")]
-position = Vector3(22, 0, 8)
-rotation = Vector3(0, 1.5708, 0)
+[node name="NorthWallEast" parent="TownWalls" unique_id=1523787622 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.279231, 0, -32)
 
-[node name="SwordPracticeYard" type="Node3D" parent="."]
-position = Vector3(-10, 0, 4)
+[node name="NorthWallEast2" parent="TownWalls" unique_id=1705053770 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.168362, 0, -32)
 
-[node name="WestDistrict" type="Node3D" parent="."]
-position = Vector3(0, 0, 0)
+[node name="NorthWallEast3" parent="TownWalls" unique_id=564932605 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.097364, 0, -32)
 
-[node name="CanalMarker" type="MeshInstance3D" parent="WestDistrict"]
-position = Vector3(-10, 0, 8)
+[node name="NorthWallEast4" parent="TownWalls" unique_id=533308317 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.006065, 0, -32)
+
+[node name="NorthWallEast5" parent="TownWalls" unique_id=339227295 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.924875, 0, -32)
+
+[node name="NorthWallEast6" parent="TownWalls" unique_id=1295058762 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.843771, 0, -32)
+
+[node name="NorthWallEast7" parent="TownWalls" unique_id=148015913 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.946629, 0, -32)
+
+[node name="SouthWallWest" parent="TownWalls" unique_id=2115951338 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.083186, 0, 28)
+
+[node name="SouthWallWest2" parent="TownWalls" unique_id=1656056937 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.023949, 0, 28)
+
+[node name="SouthWallWest3" parent="TownWalls" unique_id=964206553 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.96593, 4.7683716e-07, 28.000044)
+
+[node name="SouthWallWest4" parent="TownWalls" unique_id=1286383873 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.895657, 4.7683716e-07, 28.000044)
+
+[node name="SouthWallWest5" parent="TownWalls" unique_id=269455262 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.804995, 4.7683716e-07, 28.000044)
+
+[node name="SouthWallWest6" parent="TownWalls" unique_id=1082889319 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.743898, 4.7683716e-07, 28.000044)
+
+[node name="SouthWallWest7" parent="TownWalls" unique_id=1275076462 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.09199, 4.7683716e-07, 28.000044)
+
+[node name="SouthWallEast" parent="TownWalls" unique_id=1336848314 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.29267, 0, 28)
+
+[node name="SouthWallEast2" parent="TownWalls" unique_id=363135276 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.252788, 0, 28)
+
+[node name="SouthWallEast3" parent="TownWalls" unique_id=1962949695 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.187899, 0, 28)
+
+[node name="SouthWallEast4" parent="TownWalls" unique_id=1798248925 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.103073, 0, 28)
+
+[node name="SouthWallEast5" parent="TownWalls" unique_id=347839659 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.039364, 0, 28)
+
+[node name="SouthWallEast6" parent="TownWalls" unique_id=1860471531 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.982897, 0, 28)
+
+[node name="SouthWallEast7" parent="TownWalls" unique_id=562559221 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.919252, 0, 28)
+
+[node name="WestWallNorth" parent="TownWalls" unique_id=178009945 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -2.3047197)
+
+[node name="WestWallNorth2" parent="TownWalls" unique_id=2069246694 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -4.2273602)
+
+[node name="WestWallNorth3" parent="TownWalls" unique_id=331024400 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -6.167426)
+
+[node name="WestWallNorth4" parent="TownWalls" unique_id=1856380278 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -8.08717)
+
+[node name="WestWallNorth5" parent="TownWalls" unique_id=1371314600 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -10.025084)
+
+[node name="WestWallNorth6" parent="TownWalls" unique_id=2100294152 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -11.927908)
+
+[node name="WestWallNorth7" parent="TownWalls" unique_id=1819495564 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -13.854177)
+
+[node name="WestWallNorth8" parent="TownWalls" unique_id=1288598864 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -15.8038225)
+
+[node name="WestWallNorth9" parent="TownWalls" unique_id=758883003 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -17.73453)
+
+[node name="WestWallNorth10" parent="TownWalls" unique_id=955358193 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -19.665487)
+
+[node name="WestWallNorth11" parent="TownWalls" unique_id=1614655769 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -21.59292)
+
+[node name="WestWallNorth12" parent="TownWalls" unique_id=349772816 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -23.52111)
+
+[node name="WestWallNorth13" parent="TownWalls" unique_id=1074025091 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -25.448908)
+
+[node name="WestWallNorth14" parent="TownWalls" unique_id=1495858367 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -27.37691)
+
+[node name="WestWallNorth15" parent="TownWalls" unique_id=530287735 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -29.304104)
+
+[node name="WestWallNorth16" parent="TownWalls" unique_id=265524201 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, -30.997757)
+
+[node name="WestWallSouth" parent="TownWalls" unique_id=499890989 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, 22.247688)
+
+[node name="WestWallSouth2" parent="TownWalls" unique_id=543659500 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, 24.186071)
+
+[node name="WestWallSouth3" parent="TownWalls" unique_id=1764016492 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, 26.12506)
+
+[node name="WestWallSouth4" parent="TownWalls" unique_id=2052054863 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, -24, 0, 27.057049)
+
+[node name="EastWallNorth" parent="TownWalls" unique_id=1900767378 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -31.011683)
+
+[node name="EastWallNorth2" parent="TownWalls" unique_id=1713929193 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -29.078196)
+
+[node name="EastWallNorth3" parent="TownWalls" unique_id=1112019865 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -27.108036)
+
+[node name="EastWallNorth4" parent="TownWalls" unique_id=271266319 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -25.150406)
+
+[node name="EastWallNorth5" parent="TownWalls" unique_id=1838811418 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -23.18942)
+
+[node name="EastWallNorth6" parent="TownWalls" unique_id=657812871 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -21.254488)
+
+[node name="EastWallNorth7" parent="TownWalls" unique_id=1510898242 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -19.320621)
+
+[node name="EastWallNorth8" parent="TownWalls" unique_id=769847178 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -17.397825)
+
+[node name="EastWallNorth9" parent="TownWalls" unique_id=1366109821 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -15.429668)
+
+[node name="EastWallNorth10" parent="TownWalls" unique_id=574232877 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -13.514942)
+
+[node name="EastWallNorth11" parent="TownWalls" unique_id=414521144 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -11.540206)
+
+[node name="EastWallNorth12" parent="TownWalls" unique_id=516849776 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -9.585846)
+
+[node name="EastWallNorth13" parent="TownWalls" unique_id=2086495789 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -7.6180716)
+
+[node name="EastWallNorth14" parent="TownWalls" unique_id=322098129 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -5.6846995)
+
+[node name="EastWallNorth15" parent="TownWalls" unique_id=1436849026 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -3.7324476)
+
+[node name="EastWallNorth16" parent="TownWalls" unique_id=584511193 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, -1.7648556)
+
+[node name="EastWallNorth17" parent="TownWalls" unique_id=641689897 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 0.20193851)
+
+[node name="EastWallNorth18" parent="TownWalls" unique_id=1050346891 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 2.1922278)
+
+[node name="EastWallNorth19" parent="TownWalls" unique_id=987032693 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 4.165188)
+
+[node name="EastWallNorth20" parent="TownWalls" unique_id=1415406220 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 6.121073)
+
+[node name="EastWallNorth21" parent="TownWalls" unique_id=1605143522 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 8.124678)
+
+[node name="EastWallNorth22" parent="TownWalls" unique_id=1232181926 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 10.087772)
+
+[node name="EastWallNorth23" parent="TownWalls" unique_id=1631281934 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 12.033333)
+
+[node name="EastWallNorth24" parent="TownWalls" unique_id=1893386091 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 13.970207)
+
+[node name="EastWallNorth25" parent="TownWalls" unique_id=1696814680 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 15.971758)
+
+[node name="EastWallNorth26" parent="TownWalls" unique_id=1628063821 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 17.910358)
+
+[node name="EastWallNorth27" parent="TownWalls" unique_id=1150725556 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 19.863495)
+
+[node name="EastWallNorth28" parent="TownWalls" unique_id=1478295124 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 21.855452)
+
+[node name="EastWallNorth29" parent="TownWalls" unique_id=1123897444 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 23.811754)
+
+[node name="EastWallNorth30" parent="TownWalls" unique_id=2093356482 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 25.827589)
+
+[node name="EastWallNorth31" parent="TownWalls" unique_id=1520585649 instance=ExtResource("8")]
+transform = Transform3D(-3.6199901e-06, 0, 1, 0, 1, 0, -1, 0, -3.6199901e-06, 23.950743, 0, 27.03674)
+
+[node name="SwordPracticeYard" type="Node3D" parent="." unique_id=1224037680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 4)
+
+[node name="RoofShowcase" type="Node3D" parent="." unique_id=1343000135]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+
+[node name="Roof01" parent="RoofShowcase" unique_id=463438234 instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="Roof02" parent="RoofShowcase" unique_id=2004492882 instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Roof03" parent="RoofShowcase" unique_id=1409560735 instance=ExtResource("11")]
+
+[node name="Roof04" parent="RoofShowcase" unique_id=1984114165 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Roof05" parent="RoofShowcase" unique_id=1381785471 instance=ExtResource("13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="Roof06" parent="RoofShowcase" unique_id=1702267721 instance=ExtResource("14")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 4)
+
+[node name="Roof07" parent="RoofShowcase" unique_id=1470464486 instance=ExtResource("15")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+
+[node name="Roof08" parent="RoofShowcase" unique_id=2066105006 instance=ExtResource("16")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Roof09" parent="RoofShowcase" unique_id=574546406 instance=ExtResource("17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="Roof10" parent="RoofShowcase" unique_id=172082527 instance=ExtResource("18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="WestDistrict" type="Node3D" parent="." unique_id=112917967]
+
+[node name="CanalMarker" type="MeshInstance3D" parent="WestDistrict" unique_id=913695453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 8)
 mesh = SubResource("BoxMesh_1")
 
-[node name="WaterwheelMarker" type="MeshInstance3D" parent="WestDistrict"]
-position = Vector3(-18, 0, 10)
+[node name="WaterwheelMarker" type="MeshInstance3D" parent="WestDistrict" unique_id=2079420079]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 10)
 mesh = SubResource("BoxMesh_1")
 
-[node name="FarmlandWestMarker" type="MeshInstance3D" parent="WestDistrict"]
-position = Vector3(-20, 0, 2)
+[node name="FarmlandWestMarker" type="MeshInstance3D" parent="WestDistrict" unique_id=815567161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 2)
 mesh = SubResource("BoxMesh_1")
 
-[node name="FarmlandNorthWestMarker" type="MeshInstance3D" parent="WestDistrict"]
-position = Vector3(-22, 0, -14)
+[node name="FarmlandNorthWestMarker" type="MeshInstance3D" parent="WestDistrict" unique_id=92475732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -14)
 mesh = SubResource("BoxMesh_1")
 
-[node name="FarmlandSouthWestMarker" type="MeshInstance3D" parent="WestDistrict"]
-position = Vector3(-24, 0, 20)
+[node name="FarmlandSouthWestMarker" type="MeshInstance3D" parent="WestDistrict" unique_id=1303902062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 20)
 mesh = SubResource("BoxMesh_1")
 
-[node name="EastDistrict" type="Node3D" parent="."]
-position = Vector3(0, 0, 0)
+[node name="EastDistrict" type="Node3D" parent="." unique_id=735152332]
 
-[node name="YamenMarker" type="MeshInstance3D" parent="EastDistrict"]
-position = Vector3(16, 0, 2)
+[node name="YamenMarker" type="MeshInstance3D" parent="EastDistrict" unique_id=1916240085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 2)
 mesh = SubResource("BoxMesh_1")
 
-[node name="DockMarker" type="MeshInstance3D" parent="EastDistrict"]
-position = Vector3(22, 0, 10)
+[node name="DockMarker" type="MeshInstance3D" parent="EastDistrict" unique_id=1226343930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 10)
 mesh = SubResource("BoxMesh_1")
 
-[node name="SouthEastDistrict" type="Node3D" parent="."]
-position = Vector3(0, 0, 0)
+[node name="SouthEastDistrict" type="Node3D" parent="." unique_id=1380221737]
 
-[node name="TempleMarker" type="MeshInstance3D" parent="SouthEastDistrict"]
-position = Vector3(12, 0, 18)
+[node name="TempleMarker" type="MeshInstance3D" parent="SouthEastDistrict" unique_id=336240732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 18)
 mesh = SubResource("BoxMesh_1")
 
-[node name="NorthEastDistrict" type="Node3D" parent="."]
-position = Vector3(0, 0, 0)
+[node name="NorthEastDistrict" type="Node3D" parent="." unique_id=1625841343]
 
-[node name="GranaryMarker" type="MeshInstance3D" parent="NorthEastDistrict"]
-position = Vector3(8, 0, -16)
+[node name="GranaryMarker" type="MeshInstance3D" parent="NorthEastDistrict" unique_id=1414675900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -16)
 mesh = SubResource("BoxMesh_1")
 
-[node name="BlacksmithMarker" type="MeshInstance3D" parent="NorthEastDistrict"]
-position = Vector3(14, 0, -12)
+[node name="BlacksmithMarker" type="MeshInstance3D" parent="NorthEastDistrict" unique_id=1106625875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -12)
 mesh = SubResource("BoxMesh_1")
 
-[node name="ForestryMarker" type="MeshInstance3D" parent="NorthEastDistrict"]
-position = Vector3(18, 0, -24)
+[node name="ForestryMarker" type="MeshInstance3D" parent="NorthEastDistrict" unique_id=1781945542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -24)
 mesh = SubResource("BoxMesh_1")
 
-[node name="FishingVillageMarker" type="MeshInstance3D" parent="NorthEastDistrict"]
-position = Vector3(24, 0, -18)
+[node name="FishingVillageMarker" type="MeshInstance3D" parent="NorthEastDistrict" unique_id=1382209369]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.280882, 0, -18)
 mesh = SubResource("BoxMesh_1")
 
-[node name="ReturnToTownTrigger" type="Area3D" parent="."]
-position = Vector3(12, 3, 24)
+[node name="ReturnToTownTrigger" type="Area3D" parent="." unique_id=58882631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 24)
 script = ExtResource("2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ReturnToTownTrigger"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReturnToTownTrigger" unique_id=863962893]
 shape = SubResource("BoxShape3D_1")
 
-[node name="DistantTownShells" type="Node3D" parent="."]
+[node name="DistantTownShells" type="Node3D" parent="." unique_id=397495801]
 
-[node name="TownAmbience" type="AudioStreamPlayer3D" parent="."]
+[node name="ShellA" type="MeshInstance3D" parent="DistantTownShells" unique_id=687719714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -10)
+
+[node name="ShellB" type="MeshInstance3D" parent="DistantTownShells" unique_id=1685753158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -12)
+
+[node name="TownAmbience" type="AudioStreamPlayer3D" parent="." unique_id=2146811265]
 unit_size = 12.0
-
-[node name="ShellA" type="MeshInstance3D" parent="DistantTownShells"]
-position = Vector3(16, 0, -10)
-
-[node name="ShellB" type="MeshInstance3D" parent="DistantTownShells"]
-position = Vector3(-16, 0, -12)
 
 [connection signal="body_entered" from="ReturnToTownTrigger" to="ReturnToTownTrigger" method="_on_body_entered"]

@@ -1,11 +1,8 @@
 [gd_scene load_steps=2 format=3]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(2, 1, 2)
+[ext_resource type="PackedScene" path="res://assets/models/Roof/Roof04.glb" id="1"]
 
-[node name="Roof04" type="Node3D"]
+[node name="Roof01" type="Node3D"]
 metadata/source_model_path = "res://assets/models/Roof/Roof04.glb"
 
-[node name="Model" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_1")
-metadata/source_model_path = "res://assets/models/Roof/Roof04.glb"
+[node name="Model" instance=ExtResource("1") parent="."]

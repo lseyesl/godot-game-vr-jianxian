@@ -1,11 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://c8olh5tnwn5b1"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(2, 3, 0.25)
+[ext_resource type="PackedScene" uid="uid://cdm54s50srt8n" path="res://assets/models/Wall/Wall_2x3.glb" id="1"]
 
-[node name="Wall_2x3" type="Node3D"]
+[node name="Wall_2x3" type="Node3D" unique_id=1758104628]
 metadata/source_model_path = "res://assets/models/Wall/Wall_2x3.glb"
 
-[node name="Model" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_1")
-metadata/source_model_path = "res://assets/models/Wall/Wall_2x3.glb"
+[node name="Model" parent="." unique_id=1449489347 instance=ExtResource("1")]

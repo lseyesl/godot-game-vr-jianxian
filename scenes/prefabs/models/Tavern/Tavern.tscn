@@ -6,4 +6,3 @@
 metadata/source_model_path = "res://assets/models/Tavern/Tavern.glb"
 
 [node name="Model" parent="." instance=ExtResource("1")]
-metadata/source_model_path = "res://assets/models/Tavern/Tavern.glb"

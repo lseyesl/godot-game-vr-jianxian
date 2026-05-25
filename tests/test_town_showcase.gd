@@ -14,6 +14,7 @@ func run(t) -> void:
 	if town == null:
 		return
 	_test_showcase_models(t, town)
+	_test_roof_showcase_models(t, town)
 	_test_town_wall_models(t, town)
 	_test_visible_town_landmarks(t, town)
 	_test_npc_logic_nodes(t, town)
@@ -46,6 +47,16 @@ func _test_showcase_models(t, town: Node) -> void:
 	t.assert_true(town.has_node("SouthEastDistrict"), "SouthEastDistrict visual anchor exists")
 	t.assert_true(town.has_node("NorthEastDistrict"), "NorthEastDistrict visual anchor exists")
 	t.assert_equal(town.get_node("ReturnToTownTrigger").position, Vector3(12, 3, 24), "Return trigger sits near the southeast return edge")
+
+func _test_roof_showcase_models(t, town: Node) -> void:
+	t.assert_true(town.has_node("RoofShowcase"), "Roof showcase anchor exists")
+	for roof_index in range(1, 11):
+		var roof_name := "Roof%02d" % roof_index
+		var roof_path := "RoofShowcase/%s" % roof_name
+		t.assert_true(town.has_node(roof_path), "%s is placed in town" % roof_path)
+		var roof = town.get_node_or_null(roof_path)
+		t.assert_true(roof is Node3D, "%s is a 3D roof node" % roof_path)
+		t.assert_equal(_source_model_path(roof), "res://assets/models/Roof/%s.glb" % roof_name, "%s uses the matching Roof source asset" % roof_name)
 
 func _test_town_wall_models(t, town: Node) -> void:
 	t.assert_true(town.has_node("TownWalls"), "Town wall anchor exists")
