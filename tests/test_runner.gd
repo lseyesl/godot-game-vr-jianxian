@@ -14,6 +14,7 @@ func _init() -> void:
 		"res://tests/test_seal_encounter.gd",
 		"res://tests/test_flying_sword.gd",
 		"res://tests/test_player_mode.gd",
+		"res://tests/test_desktop_debug_player.gd",
 		"res://tests/test_xr_player.gd",
 		"res://tests/test_scene_lod_group.gd",
 		"res://tests/test_model_prefabs.gd",
