@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(2, 3, 0.25)
+
+[node name="Wall_2x3" type="Node3D"]
+metadata/source_model_path = "res://assets/models/Wall/Wall_2x3.glb"
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_1")
+metadata/source_model_path = "res://assets/models/Wall/Wall_2x3.glb"

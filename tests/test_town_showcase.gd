@@ -27,11 +27,11 @@ func _test_showcase_models(t, town: Node) -> void:
 	t.assert_true(town.has_node("WestGatePaifang/GateModel"), "West gate model is attached to the west gate")
 	var gate_model = town.get_node_or_null("GatePaifang/GateModel")
 	t.assert_true(gate_model is Node3D, "Gate model is a visible 3D node")
-	t.assert_equal(gate_model.scene_file_path, "res://assets/models/Gate/Gate.glb", "Gate model uses the imported Gate.glb asset")
+	t.assert_equal(_source_model_path(gate_model), "res://assets/models/Gate/Gate.glb", "Gate model uses the Gate source asset")
 	var south_gate_model = town.get_node_or_null("SouthGatePaifang/GateModel")
 	var west_gate_model = town.get_node_or_null("WestGatePaifang/GateModel")
-	t.assert_equal(south_gate_model.scene_file_path if south_gate_model != null else "", "res://assets/models/Gate/Gate.glb", "South gate uses the imported Gate.glb asset")
-	t.assert_equal(west_gate_model.scene_file_path if west_gate_model != null else "", "res://assets/models/Gate/Gate.glb", "West gate uses the imported Gate.glb asset")
+	t.assert_equal(_source_model_path(south_gate_model), "res://assets/models/Gate/Gate.glb", "South gate uses the Gate source asset")
+	t.assert_equal(_source_model_path(west_gate_model), "res://assets/models/Gate/Gate.glb", "West gate uses the Gate source asset")
 	t.assert_true(town.has_node("MarketStreet/StallCenter"), "Center market stall is placed in town")
 	t.assert_true(town.has_node("MarketStreet/StallLeft"), "Left market stall is placed in town")
 	t.assert_true(town.has_node("MarketStreet/StallRight"), "Right market stall is placed in town")
@@ -65,8 +65,23 @@ func _test_town_wall_models(t, town: Node) -> void:
 		t.assert_true(wall is Node3D, "%s is a 3D wall node" % wall_path)
 		var scene_path := ""
 		if wall != null:
-			scene_path = wall.scene_file_path
+			scene_path = _source_model_path(wall)
 		t.assert_equal(scene_path, "res://assets/models/Wall/Wall_2x3.glb", "%s uses the Wall_2x3 model" % wall_path)
+
+func _source_model_path(node: Node) -> String:
+	if node == null:
+		return ""
+	if node.scene_file_path.begins_with("res://assets/models/"):
+		return node.scene_file_path
+	var model = node.get_node_or_null("Model")
+	if model != null:
+		if model.scene_file_path.begins_with("res://assets/models/"):
+			return model.scene_file_path
+		var model_metadata: Variant = model.get_meta("source_model_path", "")
+		if model_metadata is String:
+			return model_metadata
+	var metadata: Variant = node.get_meta("source_model_path", "")
+	return metadata if metadata is String else ""
 
 func _test_visible_town_landmarks(t, town: Node) -> void:
 	var marker_paths := [

@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" path="res://scenes/npc/Npc.tscn" id="1"]
 [ext_resource type="Script" path="res://scripts/world/ReturnToTownTrigger.gd" id="2"]
-[ext_resource type="PackedScene" path="res://assets/models/Inn/Inn.glb" id="3"]
-[ext_resource type="PackedScene" path="res://assets/models/Tavern/Tavern.glb" id="4"]
-[ext_resource type="PackedScene" path="res://assets/models/Market_Stall/Market_Stall.glb" id="5"]
-[ext_resource type="PackedScene" path="res://assets/models/Innkeeper/Innkeeper.glb" id="6"]
-[ext_resource type="PackedScene" path="res://assets/models/Gate/Gate.glb" id="7"]
-[ext_resource type="PackedScene" path="res://assets/models/Wall/Wall_2x3.glb" id="8"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Inn/Inn.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Tavern/Tavern.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Market_Stall/Market_Stall.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Innkeeper/Innkeeper.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Gate/Gate.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Wall/Wall_2x3.tscn" id="8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(1.5, 0.25, 1.5)

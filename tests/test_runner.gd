@@ -16,6 +16,7 @@ func _init() -> void:
 		"res://tests/test_player_mode.gd",
 		"res://tests/test_xr_player.gd",
 		"res://tests/test_scene_lod_group.gd",
+		"res://tests/test_model_prefabs.gd",
 		"res://tests/test_main_ground.gd",
 		"res://tests/test_town_showcase.gd",
 	]
