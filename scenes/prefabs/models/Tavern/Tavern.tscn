@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="PackedScene" path="res://assets/models/Tavern/Tavern.glb" id="1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
+size = Vector3(11.42679, 7.795195, 5.990171)
 
 [node name="Tavern" type="Node3D"]
 metadata/source_model_path = "res://assets/models/Tavern/Tavern.glb"
 
 [node name="Model" parent="." instance=ExtResource("1")]
+
+[node name="CollisionBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002958, 3.898229, 0.1566625)
+shape = SubResource("BoxShape3D_collision")

@@ -1,9 +1,18 @@
-[gd_scene format=3 uid="uid://1qp5oqc4207h"]
+[gd_scene load_steps=3 format=3 uid="uid://1qp5oqc4207h"]
 
 [ext_resource type="PackedScene" uid="uid://bcjeldr6xykeq" path="res://assets/models/Gate/Gate.glb" id="1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
+size = Vector3(12.09839, 15.01635, 22.85367)
 
 [node name="Gate" type="Node3D" unique_id=724966319]
 metadata/source_model_path = "res://assets/models/Gate/Gate.glb"
 
 [node name="Model" parent="." unique_id=1100292310 instance=ExtResource("1")]
 transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, 0, 0, 0)
+
+[node name="CollisionBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.029504, 7.132612, -0.001605)
+shape = SubResource("BoxShape3D_collision")

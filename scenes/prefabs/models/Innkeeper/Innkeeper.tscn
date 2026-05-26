@@ -1,8 +1,17 @@
-[gd_scene format=3 uid="uid://des1xbflnr234"]
+[gd_scene load_steps=3 format=3 uid="uid://des1xbflnr234"]
 
 [ext_resource type="PackedScene" uid="uid://ex3fy2prji7x" path="res://assets/models/Innkeeper/Innkeeper.glb" id="1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
+size = Vector3(0.762115, 1.697309, 0.488375)
 
 [node name="Innkeeper" type="Node3D" unique_id=1156396336]
 metadata/source_model_path = "res://assets/models/Innkeeper/Innkeeper.glb"
 
 [node name="Model" parent="." unique_id=1116778268 instance=ExtResource("1")]
+
+[node name="CollisionBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0031795, 0.3497035, 4.75e-05)
+shape = SubResource("BoxShape3D_collision")

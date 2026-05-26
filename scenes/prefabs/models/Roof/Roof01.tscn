@@ -1,8 +1,17 @@
-[gd_scene format=3 uid="uid://dg1yyvepqmqlj"]
+[gd_scene load_steps=3 format=3 uid="uid://dg1yyvepqmqlj"]
 
 [ext_resource type="PackedScene" uid="uid://dnvq332rjyank" path="res://assets/models/Roof/Roof01.glb" id="1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
+size = Vector3(4.34819, 2.926806, 6.000936)
 
 [node name="Roof01" type="Node3D" unique_id=69602343]
 metadata/source_model_path = "res://assets/models/Roof/Roof01.glb"
 
 [node name="Model" parent="." unique_id=172224640 instance=ExtResource("1")]
+
+[node name="CollisionBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002245, 1.461122, 0.004432)
+shape = SubResource("BoxShape3D_collision")

@@ -1,8 +1,17 @@
-[gd_scene format=3 uid="uid://c8olh5tnwn5b1"]
+[gd_scene load_steps=3 format=3 uid="uid://c8olh5tnwn5b1"]
 
 [ext_resource type="PackedScene" uid="uid://cdm54s50srt8n" path="res://assets/models/Wall/Wall_2x3.glb" id="1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
+size = Vector3(2, 3, 0.1)
 
 [node name="Wall_2x3" type="Node3D" unique_id=1758104628]
 metadata/source_model_path = "res://assets/models/Wall/Wall_2x3.glb"
 
 [node name="Model" parent="." unique_id=1449489347 instance=ExtResource("1")]
+
+[node name="CollisionBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003748, 1.495643, -0.001619)
+shape = SubResource("BoxShape3D_collision")
