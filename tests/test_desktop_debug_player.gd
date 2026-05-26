@@ -7,6 +7,7 @@ func run(t) -> void:
 	_test_movement_input_vector(t)
 	_test_yaw_relative_direction(t)
 	_test_mouse_look_pitch_clamp(t)
+	_test_camera_eye_height(t)
 	_test_mouse_capture_events(t)
 
 func _test_project_wasd_actions(t) -> void:
@@ -61,6 +62,16 @@ func _test_mouse_look_pitch_clamp(t) -> void:
 	player.apply_mouse_look(Vector2(0, -4000))
 	if camera is Camera3D:
 		t.assert_true(is_equal_approx(camera.rotation_degrees.x, 80.0), "mouse look clamps downward pitch")
+	player.free()
+
+func _test_camera_eye_height(t) -> void:
+	var player = _instantiate_player(t)
+	if player == null:
+		return
+	var camera: Node = player.get_node_or_null("Camera3D")
+	t.assert_true(camera is Camera3D, "desktop player has a Camera3D")
+	if camera is Camera3D:
+		t.assert_true(is_equal_approx(camera.position.y, 1.7), "desktop camera eye height is 1.7m")
 	player.free()
 
 func _test_mouse_capture_events(t) -> void:
