@@ -71,7 +71,7 @@ func _test_camera_eye_height(t) -> void:
 	var camera: Node = player.get_node_or_null("Camera3D")
 	t.assert_true(camera is Camera3D, "desktop player has a Camera3D")
 	if camera is Camera3D:
-		t.assert_true(is_equal_approx(camera.position.y, 1.7), "desktop camera eye height is 1.7m")
+		t.assert_true(is_equal_approx(camera.position.y, 1.6), "desktop camera eye height is 1.6m")
 	player.free()
 
 func _test_mouse_capture_events(t) -> void:

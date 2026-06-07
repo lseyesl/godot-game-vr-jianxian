@@ -7,7 +7,7 @@ const DESKTOP_PLAYER_SCENE_PATH := "res://scenes/player/DesktopDebugPlayer.tscn"
 const VR_PLAYER_SCENE_PATH := "res://scenes/player/XRPlayer.tscn"
 
 @export_enum("desktop_simulation", "vr") var player_mode := PLAYER_MODE_DESKTOP_SIMULATION
-@export var player_spawn_position := Vector3(0, 1, 6)
+@export var player_spawn_position := Vector3(0, 0, 6)
 
 var player_node: Node
 
