@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/debug/PlayerTestArena.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/interaction/SealEncounter.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/items/FlyingSword.tscn" id="3"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1"]
+size = Vector2(32, 32)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(32, 0.2, 32)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.1, 1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.25, 0.33, 0.29, 1)
+
+[node name="PlayerTestArena" type="Node3D"]
+script = ExtResource("1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.9, 0.35, 0)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+position = Vector3(0, -0.1, 0)
+shape = SubResource("BoxShape3D_1")
+
+[node name="PlayerSpawn" type="Marker3D" parent="."]
+position = Vector3(0, 0, 6)
+
+[node name="DebugLabel" type="Label3D" parent="."]
+position = Vector3(-4, 2.2, 4)
+text = "玩家测试场景
+WASD移动，鼠标观察
+拾取飞剑测试飞行
+前方封印用于技能命中调试"
+font_size = 32
+billboard = 1
+
+[node name="TestFixtures" type="Node3D" parent="."]
+
+[node name="SealEncounter" parent="TestFixtures" instance=ExtResource("2")]
+position = Vector3(0, 0, -8)
+
+[node name="FlyingSword" parent="TestFixtures" instance=ExtResource("3")]
+position = Vector3(2, 1.2, 3)
+
+[node name="DistanceMarkers" type="Node3D" parent="TestFixtures"]
+
+[node name="Marker5m" type="MeshInstance3D" parent="TestFixtures/DistanceMarkers"]
+position = Vector3(-3, 0.5, 1)
+mesh = SubResource("BoxMesh_1")
+
+[node name="Marker10m" type="MeshInstance3D" parent="TestFixtures/DistanceMarkers"]
+position = Vector3(-3, 0.5, -4)
+mesh = SubResource("BoxMesh_1")
+
+[node name="Marker15m" type="MeshInstance3D" parent="TestFixtures/DistanceMarkers"]
+position = Vector3(-3, 0.5, -9)
+mesh = SubResource("BoxMesh_1")
