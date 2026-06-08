@@ -1,0 +1,93 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/WaterBody.gd" id="1"]
+[ext_resource type="Material" path="res://assets/materials/mat_water_flow.tres" id="2"]
+[ext_resource type="Material" path="res://assets/materials/mat_water_foam.tres" id="3"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fall_sheet"]
+size = Vector2(5, 12)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pool"]
+size = Vector2(7, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_water_area"]
+size = Vector3(6, 12, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_splash_area"]
+size = Vector3(7, 2, 5)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mist"]
+emission_shape = 1
+emission_sphere_radius = 1.8
+direction = Vector3(0, 1, 0)
+spread = 38.0
+gravity = Vector3(0, -1.2, 0)
+initial_velocity_min = 0.6
+initial_velocity_max = 1.8
+scale_min = 0.25
+scale_max = 0.9
+color = Color(0.78, 0.92, 1, 0.45)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_splash"]
+emission_shape = 1
+emission_sphere_radius = 1.2
+direction = Vector3(0, 1, 0)
+spread = 55.0
+gravity = Vector3(0, -3.0, 0)
+initial_velocity_min = 1.2
+initial_velocity_max = 3.2
+scale_min = 0.12
+scale_max = 0.35
+color = Color(0.78, 0.92, 1, 0.55)
+
+[node name="Waterfall" type="Node3D"]
+script = ExtResource("1")
+water_type = "waterfall"
+flow_speed = 0.9
+flow_direction = Vector2(0, -1)
+
+[node name="FallSheet" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6, 0)
+mesh = SubResource("PlaneMesh_fall_sheet")
+surface_material_override/0 = ExtResource("2")
+
+[node name="PoolSurface" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+mesh = SubResource("PlaneMesh_pool")
+surface_material_override/0 = ExtResource("2")
+
+[node name="Foam" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0.6)
+mesh = SubResource("PlaneMesh_pool")
+surface_material_override/0 = ExtResource("3")
+
+[node name="MistParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.4)
+emitting = true
+amount = 64
+lifetime = 2.2
+process_material = SubResource("ParticleProcessMaterial_mist")
+
+[node name="SplashParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 1.2)
+emitting = true
+amount = 48
+lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_splash")
+
+[node name="WaterArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("BoxShape3D_water_area")
+
+[node name="SplashArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SplashArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 1.4)
+shape = SubResource("BoxShape3D_splash_area")
+
+[node name="WaterfallAudio" type="AudioStreamPlayer3D" parent="."]
+autoplay = true
+unit_size = 10.0
+max_distance = 40.0

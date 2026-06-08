@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://assets/materials/water_flow.gdshader" id="1"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1")
+shader_parameter/shallow_color = Color(0.12, 0.58, 0.78, 0.58)
+shader_parameter/deep_color = Color(0.02, 0.22, 0.42, 0.72)
+shader_parameter/flow_direction = Vector2(0, 1)
+shader_parameter/flow_phase = 0.0
+shader_parameter/wave_scale = 5.0
+shader_parameter/wave_strength = 0.045

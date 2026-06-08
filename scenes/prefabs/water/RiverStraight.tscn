@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/WaterBody.gd" id="1"]
+[ext_resource type="Material" path="res://assets/materials/mat_water_flow.tres" id="2"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_surface"]
+size = Vector2(4, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_water_area"]
+size = Vector3(4, 1.0, 16)
+
+[node name="RiverStraight" type="Node3D"]
+script = ExtResource("1")
+water_type = "river"
+flow_speed = 0.45
+flow_direction = Vector2(0, 1)
+
+[node name="Surface" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_surface")
+surface_material_override/0 = ExtResource("2")
+
+[node name="WaterArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+shape = SubResource("BoxShape3D_water_area")
+
+[node name="WaterAudio" type="AudioStreamPlayer3D" parent="."]
+autoplay = true
+unit_size = 6.0
+max_distance = 24.0
