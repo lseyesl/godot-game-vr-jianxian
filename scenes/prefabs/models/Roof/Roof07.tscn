@@ -5,7 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
 size = Vector3(2.748968, 1.268831, 2.392083)
 
-[node name="Roof01" type="Node3D"]
+[node name="Roof07" type="Node3D"]
 metadata/source_model_path = "res://assets/models/Roof/Roof07.glb"
 
 [node name="Model" instance=ExtResource("1") parent="."]

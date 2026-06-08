@@ -144,5 +144,5 @@ func _test_npc_logic_nodes(t, town: Node) -> void:
 	var tavern_keeper = town.get_node("Tavern/TavernKeeper")
 	t.assert_equal(innkeeper.npc_id, "innkeeper", "Innkeeper quest id remains intact")
 	t.assert_equal(tavern_keeper.npc_id, "tavern_keeper", "TavernKeeper quest id remains intact")
-	t.assert_true(town.has_node("Inn/Innkeeper/Body/InnkeeperModel"), "Innkeeper visual model is attached to NPC body")
+	t.assert_true(town.has_node("Inn/Innkeeper/Model"), "Innkeeper visual model is attached to NPC")
 	t.assert_equal(town.get_node("ReturnToTownTrigger").position, Vector3(12, 3, 24), "Return trigger sits on the southeast return edge")
