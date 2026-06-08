@@ -12,6 +12,11 @@ PCVR vertical-slice demo built in Godot 4.6+ with GDScript, OpenXR, and Godot XR
 ## Verification Commands
 
 ```bash
+# Initialize or refresh Godot import metadata/cache before tests when assets changed
+godot --headless --xr-mode off --path . --import
+# Alternative if --import is insufficient in your local Godot version:
+godot --headless --xr-mode off --path . --editor --quit
+
 # Run headless unit tests (MUST pass before marking work complete)
 godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
@@ -22,6 +27,8 @@ godot --headless --xr-mode off --path . --check-only --quit
 Both must exit 0. Expected test output: `TESTS PASSED: <N> assertions`.
 
 **Always use `--xr-mode off`** in headless environments — OpenXR/HMD is unavailable and will emit warnings otherwise.
+
+Run the import command whenever `.glb`, textures, or other imported assets are added or changed, or after `.godot/imported` has been cleaned. This regenerates local `.import` metadata and `.godot/imported` cache files so model resources can load as `PackedScene` in headless tests. Without this step, prefab tests may fail with missing metadata/import-cache errors even when the source `.glb` file exists.
 
 ## Architecture
 
