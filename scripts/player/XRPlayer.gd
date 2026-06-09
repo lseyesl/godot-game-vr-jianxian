@@ -10,6 +10,7 @@ const TURN_MODE_SMOOTH := 2
 @export var turn_provider_path: NodePath = ^"XROrigin3D/RightHand/MovementTurn"
 @export var flight_provider_path: NodePath = ^"XROrigin3D/MovementFlight"
 @export var vignette_path: NodePath = ^"XROrigin3D/XRCamera3D/Vignette"
+@export var health_component_path: NodePath = ^"HealthComponent"
 var flight_enabled := false
 
 func _ready() -> void:
@@ -66,3 +67,17 @@ func _set_provider_property(path: NodePath, property_name: StringName, value: Va
 	var node := get_node_or_null(path)
 	if node != null and property_name in node:
 		node.set(property_name, value)
+
+func get_health_component() -> Node:
+	return get_node_or_null(health_component_path)
+
+func receive_damage(amount: int, source_id: String = "") -> int:
+	var health = get_health_component()
+	if health == null:
+		return 0
+	var current: int = health.apply_damage(amount, source_id)
+	if is_inside_tree():
+		var event_bus := get_node_or_null("/root/EventBus")
+		if event_bus != null and event_bus.has_signal("player_health_changed"):
+			event_bus.player_health_changed.emit(current, health.max_health)
+	return current

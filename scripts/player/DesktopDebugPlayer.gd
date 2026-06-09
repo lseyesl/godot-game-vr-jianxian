@@ -6,6 +6,7 @@ class_name DesktopDebugPlayer
 @export var mouse_sensitivity := 0.08
 @export var min_pitch_degrees := -80.0
 @export var max_pitch_degrees := 80.0
+@export var health_component_path: NodePath = ^"HealthComponent"
 var flight_enabled := false
 var mouse_capture_requested := false
 
@@ -67,6 +68,20 @@ func get_camera() -> Camera3D:
 	if camera == null:
 		camera = get_node_or_null("Camera3D") as Camera3D
 	return camera
+
+func get_health_component() -> Node:
+	return get_node_or_null(health_component_path)
+
+func receive_damage(amount: int, source_id: String = "") -> int:
+	var health = get_health_component()
+	if health == null:
+		return 0
+	var current: int = health.apply_damage(amount, source_id)
+	if is_inside_tree():
+		var event_bus := get_node_or_null("/root/EventBus")
+		if event_bus != null and event_bus.has_signal("player_health_changed"):
+			event_bus.player_health_changed.emit(current, health.max_health)
+	return current
 
 func _on_flight_mode_changed(enabled: bool) -> void:
 	flight_enabled = enabled

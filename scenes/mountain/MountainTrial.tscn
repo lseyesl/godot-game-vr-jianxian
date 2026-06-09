@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/world/TrialTrigger.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/interaction/SealEncounter.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/items/FlyingSword.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/npc/Npc.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/LesserDemon.tscn" id="5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(4, 3, 4)
@@ -36,6 +37,12 @@ position = Vector3(0, 1.2, -52)
 [node name="TrialSpirit" parent="." instance=ExtResource("4")]
 position = Vector3(-3, 0, -46)
 npc_id = "trial_spirit"
+
+[node name="LesserDemonA" parent="." instance=ExtResource("5")]
+position = Vector3(-2.5, 0, -44)
+
+[node name="LesserDemonB" parent="." instance=ExtResource("5")]
+position = Vector3(2.5, 0, -46)
 
 [node name="FlightRouteMarkers" type="Node3D" parent="."]
 

@@ -30,5 +30,6 @@ func run(t) -> void:
 	t.assert_true(scene.get_node_or_null("Ground") is StaticBody3D, "PlayerTestArena has StaticBody3D Ground")
 	t.assert_true(scene.get_node_or_null("TestFixtures/SealEncounter") != null, "PlayerTestArena has SealEncounter fixture")
 	t.assert_true(scene.get_node_or_null("TestFixtures/FlyingSword") != null, "PlayerTestArena has FlyingSword fixture")
+	t.assert_true(scene.get_node_or_null("TestFixtures/LesserDemon") != null, "PlayerTestArena has LesserDemon combat fixture")
 	t.assert_true(scene.get_node_or_null("DebugLabel") is Label3D, "PlayerTestArena has Chinese debug label")
 	scene.free()

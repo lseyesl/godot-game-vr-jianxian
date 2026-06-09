@@ -2,6 +2,7 @@ extends RefCounted
 
 const ComfortSettingsScript := preload("res://scripts/core/ComfortSettings.gd")
 const XRPlayerScript := preload("res://scripts/player/XRPlayer.gd")
+const HealthComponentScript := preload("res://scripts/combat/HealthComponent.gd")
 
 class MockProvider:
 	extends Node3D
@@ -23,6 +24,7 @@ func run(t) -> void:
 	_test_comfort_mode_configures_provider_nodes(t)
 	_test_immersive_mode_configures_provider_nodes(t)
 	_test_flight_state_controls_flight_provider_and_vignette(t)
+	_test_health_reception(t)
 
 func _test_scene_wires_xr_tools_nodes(t) -> void:
 	var file := FileAccess.open("res://scenes/player/XRPlayer.tscn", FileAccess.READ)
@@ -40,6 +42,7 @@ func _test_scene_wires_xr_tools_nodes(t) -> void:
 	t.assert_true(scene_text.contains("parent=\"XROrigin3D/RightHand\" instance=ExtResource"), "movement providers are under right hand")
 	t.assert_true(scene_text.contains("parent=\"XROrigin3D/XRCamera3D\" instance=ExtResource"), "vignette is under camera")
 	t.assert_true(scene_text.contains("[node name=\"PlayerBody\" parent=\"XROrigin3D\" groups=[\"player\"] instance=ExtResource"), "XR PlayerBody is in player group for gameplay triggers")
+	t.assert_true(scene_text.contains("[node name=\"HealthComponent\""), "XR scene includes HealthComponent")
 
 func _test_comfort_mode_configures_provider_nodes(t) -> void:
 	var player = _make_player_with_mock_providers()
@@ -78,6 +81,21 @@ func _test_flight_state_controls_flight_provider_and_vignette(t) -> void:
 	t.assert_true(not player.get_node("XROrigin3D/XRCamera3D/Vignette").auto_adjust, "vignette disables when flight state is off")
 	t.assert_equal(player.get_node("XROrigin3D/MovementFlight").set_flying_calls, 2, "disabling flight stops active XR Tools flight")
 	t.assert_true(not player.get_node("XROrigin3D/MovementFlight").last_flying, "flight provider receives set_flying false")
+	player.free()
+
+func _test_health_reception(t) -> void:
+	var player = XRPlayerScript.new()
+	var health = HealthComponentScript.new()
+	health.name = "HealthComponent"
+	health.max_health = 5
+	health.current_health = 5
+	player.add_child(health)
+	t.assert_true(player.has_method("get_health_component"), "XR player exposes get_health_component")
+	t.assert_true(player.has_method("receive_damage"), "XR player exposes receive_damage")
+	if player.has_method("get_health_component") and player.has_method("receive_damage"):
+		t.assert_true(player.get_health_component() == health, "XR player returns HealthComponent")
+		player.receive_damage(1, "lesser_demon")
+		t.assert_equal(health.current_health, 4, "XR player damage reduces health")
 	player.free()
 
 func _make_player_with_mock_providers():

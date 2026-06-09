@@ -9,6 +9,7 @@ func run(t) -> void:
 	_test_mouse_look_pitch_clamp(t)
 	_test_camera_eye_height(t)
 	_test_mouse_capture_events(t)
+	_test_health_reception(t)
 
 func _test_project_wasd_actions(t) -> void:
 	for action in ["move_forward", "move_back", "move_left", "move_right"]:
@@ -94,6 +95,23 @@ func _test_mouse_capture_events(t) -> void:
 	player._unhandled_input(click_event)
 	t.assert_true(player.mouse_capture_requested, "left click recaptures mouse")
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	player.free()
+
+func _test_health_reception(t) -> void:
+	var player = _instantiate_player(t)
+	if player == null:
+		return
+	t.assert_true(player.has_method("get_health_component"), "desktop player exposes get_health_component")
+	t.assert_true(player.has_method("receive_damage"), "desktop player exposes receive_damage")
+	if not player.has_method("get_health_component") or not player.has_method("receive_damage"):
+		player.free()
+		return
+	var health = player.get_health_component()
+	t.assert_true(health != null and health.has_method("apply_damage"), "desktop player has HealthComponent")
+	if health != null and health.has_method("apply_damage"):
+		var before: int = health.current_health
+		player.receive_damage(1, "lesser_demon")
+		t.assert_equal(health.current_health, before - 1, "desktop player damage reduces health")
 	player.free()
 
 func _instantiate_player(t):

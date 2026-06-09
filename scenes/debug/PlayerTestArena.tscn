@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/debug/PlayerTestArena.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/interaction/SealEncounter.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/items/FlyingSword.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/LesserDemon.tscn" id="4"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1"]
 size = Vector2(32, 32)
@@ -42,7 +43,8 @@ position = Vector3(-4, 2.2, 4)
 text = "玩家测试场景
 WASD移动，鼠标观察
 拾取飞剑测试飞行
-前方封印用于技能命中调试"
+前方封印用于技能命中调试
+小妖用于生命值与战斗交互测试"
 font_size = 32
 billboard = 1
 
@@ -53,6 +55,9 @@ position = Vector3(0, 0, -8)
 
 [node name="FlyingSword" parent="TestFixtures" instance=ExtResource("3")]
 position = Vector3(2, 1.2, 3)
+
+[node name="LesserDemon" parent="TestFixtures" instance=ExtResource("4")]
+position = Vector3(-2.5, 0, -5)
 
 [node name="DistanceMarkers" type="Node3D" parent="TestFixtures"]
 

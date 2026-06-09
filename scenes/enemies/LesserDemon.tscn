@@ -1,0 +1,101 @@
+[gd_scene load_steps=19 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/LesserDemon.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/combat/HealthComponent.gd" id="2"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="3"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="4"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/enemies/ai/IsDefeatedCondition.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/enemies/ai/DefeatedAction.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/enemies/ai/HasTargetCondition.gd" id="8"]
+[ext_resource type="Script" path="res://scripts/enemies/ai/IsTargetInAttackRangeCondition.gd" id="9"]
+[ext_resource type="Script" path="res://scripts/enemies/ai/AttackTargetAction.gd" id="10"]
+[ext_resource type="Script" path="res://scripts/enemies/ai/CanSeeTargetCondition.gd" id="11"]
+[ext_resource type="Script" path="res://scripts/enemies/ai/ChaseTargetAction.gd" id="12"]
+[ext_resource type="Script" path="res://scripts/enemies/ai/FindTargetAction.gd" id="13"]
+[ext_resource type="Script" path="res://scripts/enemies/ai/IdleAction.gd" id="14"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.35
+height = 1.4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1"]
+radius = 0.35
+height = 1.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.45, 0.08, 0.08, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.18
+height = 0.36
+
+[node name="LesserDemon" type="CharacterBody3D" groups=["enemy"]]
+script = ExtResource("1")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2")
+target_id = "lesser_demon"
+max_health = 3
+current_health = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.7, 0)
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.7, 0)
+mesh = SubResource("CapsuleMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="EyeGlow" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.25, -0.28)
+mesh = SubResource("SphereMesh_1")
+
+[node name="BehaviorTree" type="Node" parent="."]
+script = ExtResource("3")
+
+[node name="RootSelector" type="Node" parent="BehaviorTree"]
+script = ExtResource("4")
+
+[node name="DefeatedBranch" type="Node" parent="BehaviorTree/RootSelector"]
+script = ExtResource("5")
+
+[node name="IsDefeatedCondition" type="Node" parent="BehaviorTree/RootSelector/DefeatedBranch"]
+script = ExtResource("6")
+
+[node name="DefeatedAction" type="Node" parent="BehaviorTree/RootSelector/DefeatedBranch"]
+script = ExtResource("7")
+
+[node name="AttackBranch" type="Node" parent="BehaviorTree/RootSelector"]
+script = ExtResource("5")
+
+[node name="HasTargetCondition" type="Node" parent="BehaviorTree/RootSelector/AttackBranch"]
+script = ExtResource("8")
+
+[node name="IsTargetInAttackRangeCondition" type="Node" parent="BehaviorTree/RootSelector/AttackBranch"]
+script = ExtResource("9")
+
+[node name="AttackTargetAction" type="Node" parent="BehaviorTree/RootSelector/AttackBranch"]
+script = ExtResource("10")
+
+[node name="ChaseBranch" type="Node" parent="BehaviorTree/RootSelector"]
+script = ExtResource("5")
+
+[node name="HasTargetCondition" type="Node" parent="BehaviorTree/RootSelector/ChaseBranch"]
+script = ExtResource("8")
+
+[node name="CanSeeTargetCondition" type="Node" parent="BehaviorTree/RootSelector/ChaseBranch"]
+script = ExtResource("11")
+
+[node name="ChaseTargetAction" type="Node" parent="BehaviorTree/RootSelector/ChaseBranch"]
+script = ExtResource("12")
+
+[node name="IdleBranch" type="Node" parent="BehaviorTree/RootSelector"]
+script = ExtResource("5")
+
+[node name="FindTargetAction" type="Node" parent="BehaviorTree/RootSelector/IdleBranch"]
+script = ExtResource("13")
+
+[node name="IdleAction" type="Node" parent="BehaviorTree/RootSelector/IdleBranch"]
+script = ExtResource("14")
