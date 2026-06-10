@@ -486,7 +486,7 @@ godot --headless --xr-mode off --path . --check-only --quit
 
 Expected: exit 0.
 
-- [ ] **Step 4: Commit any final plan checkbox updates**
+- [x] **Step 4: Commit any final plan checkbox updates**
 
 If this plan file is updated during execution, commit the final checked state:
 
