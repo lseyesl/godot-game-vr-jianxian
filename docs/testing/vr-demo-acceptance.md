@@ -6,6 +6,8 @@
 - [x] `godot --headless --xr-mode off --path . --check-only --quit` exits 0.
 - [x] Automated main-flow acceptance covers quest event sequence through completion.
 - [x] Completion feedback is covered by headless UI tests.
+- [x] Headless tests verify town main-flow clearance markers for main street, market route, inn entrance, tavern entrance, NPC interaction spaces, and return landing.
+- [x] Headless tests verify seal combat feedback for accepted spell hits and prevent duplicate cleanse feedback after the seal is cleansed.
 - [ ] PCVR Windows export succeeds. Current machine is missing Godot Windows export templates.
 
 ## Main Flow
