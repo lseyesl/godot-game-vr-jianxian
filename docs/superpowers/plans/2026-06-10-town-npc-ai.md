@@ -43,7 +43,7 @@
 - Create: `tests/test_town_npc.gd`
 - Modify: `tests/test_runner.gd`
 
-- [ ] **Step 1: Write the failing test file**
+- [x] **Step 1: Write the failing test file**
 
 Create `tests/test_town_npc.gd`:
 
@@ -104,7 +104,7 @@ func run(t) -> void:
 	walker.free()
 ```
 
-- [ ] **Step 2: Register the failing test**
+- [x] **Step 2: Register the failing test**
 
 Modify `tests/test_runner.gd` and insert the new path after `test_dialogue.gd`:
 
@@ -114,7 +114,7 @@ Modify `tests/test_runner.gd` and insert the new path after `test_dialogue.gd`:
 "res://tests/test_spell_caster.gd",
 ```
 
-- [ ] **Step 3: Run tests and verify RED**
+- [x] **Step 3: Run tests and verify RED**
 
 Run:
 
@@ -130,7 +130,7 @@ Expected: FAIL because `res://scripts/npc/TownNpc.gd` does not exist.
 - Create: `scripts/npc/TownNpc.gd`
 - Test: `tests/test_town_npc.gd`
 
-- [ ] **Step 1: Add minimal TownNpc implementation**
+- [x] **Step 1: Add minimal TownNpc implementation**
 
 Create `scripts/npc/TownNpc.gd`:
 
@@ -250,7 +250,7 @@ func _on_sense_area_body_exited(body: Node3D) -> void:
 	clear_nearby_player(body)
 ```
 
-- [ ] **Step 2: Run tests and verify GREEN**
+- [x] **Step 2: Run tests and verify GREEN**
 
 Run:
 
@@ -270,7 +270,7 @@ Expected: all existing tests pass, including `test_town_npc.gd`.
 - Create: `scripts/npc/ai/LookAtPlayerAction.gd`
 - Create: `scripts/npc/ai/SpeakAmbientLineAction.gd`
 
-- [ ] **Step 1: Add condition scripts**
+- [x] **Step 1: Add condition scripts**
 
 Create `scripts/npc/ai/HasNearbyPlayerCondition.gd`:
 
@@ -294,7 +294,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	return FAILURE
 ```
 
-- [ ] **Step 2: Add action scripts**
+- [x] **Step 2: Add action scripts**
 
 Create `scripts/npc/ai/MoveToWaypointAction.gd`:
 
@@ -345,7 +345,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	return FAILURE
 ```
 
-- [ ] **Step 3: Run syntax validation**
+- [x] **Step 3: Run syntax validation**
 
 Run:
 
@@ -361,7 +361,7 @@ Expected: exit 0.
 - Create: `scenes/npc/TownNpc.tscn`
 - Modify: `tests/test_town_npc.gd`
 
-- [ ] **Step 1: Add failing scene assertions**
+- [x] **Step 1: Add failing scene assertions**
 
 Append this helper call in `tests/test_town_npc.gd` after the core behavior assertions:
 
@@ -390,7 +390,7 @@ func _test_town_npc_scene(t) -> void:
 	scene.free()
 ```
 
-- [ ] **Step 2: Run tests and verify RED**
+- [x] **Step 2: Run tests and verify RED**
 
 Run:
 
@@ -400,7 +400,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: FAIL because `scenes/npc/TownNpc.tscn` does not exist.
 
-- [ ] **Step 3: Create `scenes/npc/TownNpc.tscn`**
+- [x] **Step 3: Create `scenes/npc/TownNpc.tscn`**
 
 Use a `CharacterBody3D` root with `TownNpc.gd`, a capsule mesh, a capsule collision shape, a sphere sense area, and a Beehave tree with these branches:
 
@@ -425,7 +425,7 @@ TownNpc
 
 Use the same Beehave scene structure style as `scenes/enemies/LesserDemon.tscn`.
 
-- [ ] **Step 4: Run tests and verify GREEN**
+- [x] **Step 4: Run tests and verify GREEN**
 
 Run:
 
@@ -440,7 +440,7 @@ Expected: all tests pass.
 **Files:**
 - Modify: `tests/test_town_showcase.gd`
 
-- [ ] **Step 1: Extend town showcase tests**
+- [x] **Step 1: Extend town showcase tests**
 
 In `tests/test_town_showcase.gd`, call `_test_town_npc_ai_nodes(t, town)` from `run()` after `_test_npc_logic_nodes(t, town)`.
 
@@ -467,7 +467,7 @@ func _test_town_npc_ai_nodes(t, town: Node) -> void:
 	t.assert_equal(town.get_node("Tavern/TavernKeeper").npc_id, "tavern_keeper", "TavernKeeper quest id remains intact after town AI placement")
 ```
 
-- [ ] **Step 2: Run tests and verify RED**
+- [x] **Step 2: Run tests and verify RED**
 
 Run:
 
@@ -482,7 +482,7 @@ Expected: FAIL because `TownNpcGroup` does not exist.
 **Files:**
 - Modify: `scenes/town/Town.tscn`
 
-- [ ] **Step 1: Add TownNpc ext_resource**
+- [x] **Step 1: Add TownNpc ext_resource**
 
 Add an ext_resource for the reusable town NPC scene:
 
@@ -492,7 +492,7 @@ Add an ext_resource for the reusable town NPC scene:
 
 If Godot requires a different resource ID because of local ordering, use the next available ID and update the node instances consistently.
 
-- [ ] **Step 2: Add TownNpcGroup and representative instances**
+- [x] **Step 2: Add TownNpcGroup and representative instances**
 
 Add these nodes near the end of `scenes/town/Town.tscn`, before `TownAmbience`:
 
@@ -528,7 +528,7 @@ waypoints = Array[Vector3]([Vector3(4, 0, 18), Vector3(8, 0, 20), Vector3(8, 0, 
 
 Keep these instances out of the 3 m main route center where possible. The vendor nodes sit near stalls; pedestrians use short loops along market edges and the south route.
 
-- [ ] **Step 3: Run town tests and verify GREEN**
+- [x] **Step 3: Run town tests and verify GREEN**
 
 Run:
 
@@ -543,7 +543,7 @@ Expected: all tests pass.
 **Files:**
 - Review all touched files.
 
-- [ ] **Step 1: Run full test suite**
+- [x] **Step 1: Run full test suite**
 
 Run:
 
@@ -553,7 +553,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: exit 0 with `TESTS PASSED: <N> assertions`.
 
-- [ ] **Step 2: Run Godot syntax and scene validation**
+- [x] **Step 2: Run Godot syntax and scene validation**
 
 Run:
 
@@ -563,7 +563,7 @@ godot --headless --xr-mode off --path . --check-only --quit
 
 Expected: exit 0.
 
-- [ ] **Step 3: Inspect git diff**
+- [x] **Step 3: Inspect git diff**
 
 Run:
 
@@ -578,7 +578,7 @@ Expected:
 - Existing `NpcDialogue.gd` is unchanged unless a test failure forces a narrowly scoped compatibility fix.
 - `Inn/Innkeeper` and `Tavern/TavernKeeper` remain present with original `npc_id` values.
 
-- [ ] **Step 4: Commit implementation**
+- [x] **Step 4: Commit implementation**
 
 Run:
 

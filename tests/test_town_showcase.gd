@@ -18,6 +18,7 @@ func run(t) -> void:
 	_test_town_wall_models(t, town)
 	_test_visible_town_landmarks(t, town)
 	_test_npc_logic_nodes(t, town)
+	_test_town_npc_ai_nodes(t, town)
 	town.free()
 
 func _test_showcase_models(t, town: Node) -> void:
@@ -146,3 +147,23 @@ func _test_npc_logic_nodes(t, town: Node) -> void:
 	t.assert_equal(tavern_keeper.npc_id, "tavern_keeper", "TavernKeeper quest id remains intact")
 	t.assert_true(town.has_node("Inn/Innkeeper/Model"), "Innkeeper visual model is attached to NPC")
 	t.assert_equal(town.get_node("ReturnToTownTrigger").position, Vector3(12, 3, 24), "Return trigger sits on the southeast return edge")
+
+func _test_town_npc_ai_nodes(t, town: Node) -> void:
+	t.assert_true(town.has_node("TownNpcGroup"), "TownNpcGroup exists")
+	var town_npc_script := load("res://scripts/npc/TownNpc.gd")
+	var expected_roles := {
+		"TownNpcGroup/MarketVendorCenter": "vendor",
+		"TownNpcGroup/MarketVendorLeft": "vendor",
+		"TownNpcGroup/InnOwnerAmbient": "inn_owner",
+		"TownNpcGroup/TavernOwnerAmbient": "tavern_owner",
+		"TownNpcGroup/PedestrianA": "pedestrian",
+		"TownNpcGroup/PedestrianB": "pedestrian",
+	}
+	for npc_path in expected_roles.keys():
+		t.assert_true(town.has_node(npc_path), "%s exists" % npc_path)
+		var npc = town.get_node_or_null(npc_path)
+		t.assert_equal(npc.get_script() if npc != null else null, town_npc_script, "%s uses TownNpc script" % npc_path)
+		if npc != null:
+			t.assert_equal(npc.npc_role, expected_roles[npc_path], "%s has expected role" % npc_path)
+	t.assert_equal(town.get_node("Inn/Innkeeper").npc_id, "innkeeper", "Innkeeper quest id remains intact after town AI placement")
+	t.assert_equal(town.get_node("Tavern/TavernKeeper").npc_id, "tavern_keeper", "TavernKeeper quest id remains intact after town AI placement")

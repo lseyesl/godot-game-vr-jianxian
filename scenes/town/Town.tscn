@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof08.tscn" id="16"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof09.tscn" id="17"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof10.tscn" id="18"]
+[ext_resource type="PackedScene" path="res://scenes/npc/TownNpc.tscn" id="19"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(1.5, 0.25, 1.5)
@@ -415,6 +416,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -10)
 
 [node name="ShellB" type="MeshInstance3D" parent="DistantTownShells" unique_id=1685753158]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -12)
+
+[node name="TownNpcGroup" type="Node3D" parent="."]
+
+[node name="MarketVendorCenter" parent="TownNpcGroup" instance=ExtResource("19")]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 0.8, 0, 5.2)
+npc_role = "vendor"
+
+[node name="MarketVendorLeft" parent="TownNpcGroup" instance=ExtResource("19")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -2.2, 0, 9.1)
+npc_role = "vendor"
+
+[node name="InnOwnerAmbient" parent="TownNpcGroup" instance=ExtResource("19")]
+transform = Transform3D(-0.9396926, 0, 0.34202015, 0, 1, 0, -0.34202015, 0, -0.9396926, -10.7, 0, 8)
+npc_role = "inn_owner"
+
+[node name="TavernOwnerAmbient" parent="TownNpcGroup" instance=ExtResource("19")]
+transform = Transform3D(-0.9396926, 0, -0.34202015, 0, 1, 0, 0.34202015, 0, -0.9396926, 8.7, 0, 14)
+npc_role = "tavern_owner"
+
+[node name="PedestrianA" parent="TownNpcGroup" instance=ExtResource("19")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+npc_role = "pedestrian"
+waypoints = Array[Vector3]([Vector3(-2, 0, 2), Vector3(-2, 0, 12), Vector3(2, 0, 12), Vector3(2, 0, 2)])
+
+[node name="PedestrianB" parent="TownNpcGroup" instance=ExtResource("19")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 18)
+npc_role = "pedestrian"
+waypoints = Array[Vector3]([Vector3(4, 0, 18), Vector3(8, 0, 20), Vector3(8, 0, 25), Vector3(4, 0, 25)])
 
 [node name="TownAmbience" type="AudioStreamPlayer3D" parent="." unique_id=2146811265]
 unit_size = 12.0
