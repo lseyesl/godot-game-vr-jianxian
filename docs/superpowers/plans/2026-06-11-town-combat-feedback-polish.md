@@ -1,6 +1,6 @@
 # Town Combat Feedback Polish Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Add testable town route clearance markers and event-driven combat feedback for seal spell hits.
 
@@ -26,7 +26,7 @@
 - Create: `tests/test_town_playability.gd`
 - Modify: `tests/test_runner.gd`
 
-- [ ] **Step 1: Write the failing town clearance test**
+- [x] **Step 1: Write the failing town clearance test**
 
 Create `tests/test_town_playability.gd`:
 
@@ -76,7 +76,7 @@ func _assert_clearance(t, town: Node, marker_path: String, minimum_xz: Vector2, 
 	t.assert_true(shape.size.z >= minimum_xz.y, "%s depth is at least %.1f m" % [message, minimum_xz.y])
 ```
 
-- [ ] **Step 2: Register the test**
+- [x] **Step 2: Register the test**
 
 Add the new path near `test_town_showcase.gd` in `tests/test_runner.gd`:
 
@@ -85,7 +85,7 @@ Add the new path near `test_town_showcase.gd` in `tests/test_runner.gd`:
 		"res://tests/test_town_showcase.gd",
 ```
 
-- [ ] **Step 3: Run tests and verify the new test fails**
+- [x] **Step 3: Run tests and verify the new test fails**
 
 Run:
 
@@ -95,7 +95,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: exit 1 with failures mentioning missing `TownFlowMarkers/MainStreetRouteClearance` and other clearance marker paths.
 
-- [ ] **Step 4: Commit the failing test**
+- [x] **Step 4: Commit the failing test**
 
 ```bash
 git add tests/test_town_playability.gd tests/test_runner.gd
@@ -108,7 +108,7 @@ git commit -m "test: cover town playability clearances"
 - Modify: `scenes/town/Town.tscn`
 - Test: `tests/test_town_playability.gd`
 
-- [ ] **Step 1: Add BoxShape3D sub-resources**
+- [x] **Step 1: Add BoxShape3D sub-resources**
 
 Open `scenes/town/Town.tscn` and add these sub-resources after the existing `BoxShape3D_1` block. Use fresh IDs if any of these IDs already exist in the file.
 
@@ -135,7 +135,7 @@ size = Vector3(1.5, 2.4, 1.5)
 size = Vector3(2, 2.4, 2)
 ```
 
-- [ ] **Step 2: Add `TownFlowMarkers` nodes**
+- [x] **Step 2: Add `TownFlowMarkers` nodes**
 
 Append this node block near other top-level gameplay/marker nodes in `scenes/town/Town.tscn`. Keep current landmark nodes and positions unchanged.
 
@@ -185,7 +185,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3.2, 24)
 shape = SubResource("BoxShape3D_ReturnLandingClearance")
 ```
 
-- [ ] **Step 3: Run the focused town tests**
+- [x] **Step 3: Run the focused town tests**
 
 Run:
 
@@ -195,7 +195,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: all tests pass or no failures remain from `test_town_playability.gd`. If another unrelated test fails because the scene edit has a syntax error, fix the `.tscn` resource IDs and rerun.
 
-- [ ] **Step 4: Commit town markers**
+- [x] **Step 4: Commit town markers**
 
 ```bash
 git add scenes/town/Town.tscn
@@ -207,7 +207,7 @@ git commit -m "feat: add town playability clearance markers"
 **Files:**
 - Modify: `tests/test_seal_encounter.gd`
 
-- [ ] **Step 1: Extend the seal encounter test**
+- [x] **Step 1: Extend the seal encounter test**
 
 Replace `tests/test_seal_encounter.gd` with:
 
@@ -281,7 +281,7 @@ func _test_combat_feedback_signal(t, SealEncounter: Script) -> void:
 	root.free()
 ```
 
-- [ ] **Step 2: Run tests and verify failure**
+- [x] **Step 2: Run tests and verify failure**
 
 Run:
 
@@ -291,7 +291,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: exit 1 because `EventBus` does not yet expose `combat_feedback_requested`, or `SealEncounter` does not emit it.
 
-- [ ] **Step 3: Commit the failing combat feedback test**
+- [x] **Step 3: Commit the failing combat feedback test**
 
 ```bash
 git add tests/test_seal_encounter.gd
@@ -304,7 +304,7 @@ git commit -m "test: cover seal combat feedback"
 - Modify: `scripts/autoload/EventBus.gd`
 - Test: `tests/test_seal_encounter.gd`
 
-- [ ] **Step 1: Add the signal**
+- [x] **Step 1: Add the signal**
 
 Add this line to `scripts/autoload/EventBus.gd` near the other combat and feedback signals:
 
@@ -322,7 +322,7 @@ signal combat_feedback_requested(spell_id: String, target_id: String, outcome: S
 signal player_health_changed(current_health: int, max_health: int)
 ```
 
-- [ ] **Step 2: Run tests and verify remaining failure**
+- [x] **Step 2: Run tests and verify remaining failure**
 
 Run:
 
@@ -332,7 +332,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: the signal exists, but `test_seal_encounter.gd` still fails because no feedback events are emitted.
 
-- [ ] **Step 3: Commit the EventBus signal**
+- [x] **Step 3: Commit the EventBus signal**
 
 ```bash
 git add scripts/autoload/EventBus.gd
@@ -345,7 +345,7 @@ git commit -m "feat: add combat feedback event"
 - Modify: `scripts/interaction/SealEncounter.gd`
 - Test: `tests/test_seal_encounter.gd`
 
-- [ ] **Step 1: Add a target identifier and feedback helper**
+- [x] **Step 1: Add a target identifier and feedback helper**
 
 Update the top of `scripts/interaction/SealEncounter.gd`:
 
@@ -369,7 +369,7 @@ func _emit_combat_feedback(spell_id: String, outcome: String) -> void:
 		event_bus.combat_feedback_requested.emit(spell_id, target_id, outcome)
 ```
 
-- [ ] **Step 2: Emit accepted spell outcomes**
+- [x] **Step 2: Emit accepted spell outcomes**
 
 Replace `receive_spell()` with:
 
@@ -399,7 +399,7 @@ func receive_spell(spell_id: String) -> void:
 
 This preserves existing seal weakening and cleanse behavior while reporting accepted spell outcomes before `_cleanse()` can change tree state or quest state.
 
-- [ ] **Step 3: Run the test suite**
+- [x] **Step 3: Run the test suite**
 
 Run:
 
@@ -409,7 +409,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: all tests pass with `TESTS PASSED: <N> assertions`.
 
-- [ ] **Step 4: Commit seal feedback behavior**
+- [x] **Step 4: Commit seal feedback behavior**
 
 ```bash
 git add scripts/interaction/SealEncounter.gd
@@ -421,7 +421,7 @@ git commit -m "feat: emit seal combat feedback"
 **Files:**
 - Modify: `docs/testing/vr-demo-acceptance.md`
 
-- [ ] **Step 1: Add automated coverage notes without checking manual VR items**
+- [x] **Step 1: Add automated coverage notes without checking manual VR items**
 
 In `docs/testing/vr-demo-acceptance.md`, add an automated coverage note in the existing automated or notes section. If no automated section exists, add this section near the test command documentation:
 
@@ -434,7 +434,7 @@ In `docs/testing/vr-demo-acceptance.md`, add an automated coverage note in the e
 
 Do not change unchecked manual headset checklist lines such as inn/tavern enterability feel, full VR playthrough, flight framing, or no blocking collision traps.
 
-- [ ] **Step 2: Review the diff**
+- [x] **Step 2: Review the diff**
 
 Run:
 
@@ -444,7 +444,7 @@ git diff -- docs/testing/vr-demo-acceptance.md
 
 Expected: diff only adds or updates automated coverage wording; it does not mark manual VR acceptance items complete.
 
-- [ ] **Step 3: Commit documentation**
+- [x] **Step 3: Commit documentation**
 
 ```bash
 git add docs/testing/vr-demo-acceptance.md
@@ -456,7 +456,7 @@ git commit -m "docs: note town combat automated coverage"
 **Files:**
 - Verify: all modified files
 
-- [ ] **Step 1: Check working tree**
+- [x] **Step 1: Check working tree**
 
 Run:
 
@@ -466,7 +466,7 @@ git status --short
 
 Expected: no unexpected unrelated changes. If `.uid` sidecars appear and were generated by Godot import only, leave them untracked unless they correspond to an intentionally created tracked resource.
 
-- [ ] **Step 2: Run the full headless test suite**
+- [x] **Step 2: Run the full headless test suite**
 
 Run:
 
@@ -476,7 +476,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: exit 0 and output `TESTS PASSED: <N> assertions`.
 
-- [ ] **Step 3: Run syntax and scene validation**
+- [x] **Step 3: Run syntax and scene validation**
 
 Run:
 
