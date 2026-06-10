@@ -25,6 +25,27 @@ size = Vector3(1.5, 0.25, 1.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(5, 4, 5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_MainStreetRouteClearance"]
+size = Vector3(3, 2.4, 36)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_MarketRouteClearance"]
+size = Vector3(3, 2.4, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_InnEntranceClearance"]
+size = Vector3(2, 2.5, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_TavernEntranceClearance"]
+size = Vector3(2, 2.5, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_InnkeeperInteractionClearance"]
+size = Vector3(1.5, 2.4, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_TavernKeeperInteractionClearance"]
+size = Vector3(1.5, 2.4, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ReturnLandingClearance"]
+size = Vector3(2, 2.4, 2)
+
 [node name="Town" type="Node3D" unique_id=8724783]
 
 [node name="Inn" type="Node3D" parent="." unique_id=749930718]
@@ -401,6 +422,50 @@ mesh = SubResource("BoxMesh_1")
 [node name="FishingVillageMarker" type="MeshInstance3D" parent="NorthEastDistrict" unique_id=1382209369]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -18)
 mesh = SubResource("BoxMesh_1")
+
+[node name="TownFlowMarkers" type="Node3D" parent="."]
+
+[node name="MainStreetRouteClearance" type="Area3D" parent="TownFlowMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -8)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/MainStreetRouteClearance"]
+shape = SubResource("BoxShape3D_MainStreetRouteClearance")
+
+[node name="MarketRouteClearance" type="Area3D" parent="TownFlowMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 8)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/MarketRouteClearance"]
+shape = SubResource("BoxShape3D_MarketRouteClearance")
+
+[node name="InnEntranceClearance" type="Area3D" parent="TownFlowMarkers"]
+transform = Transform3D(0.9393727, 0, 0.3428978, 0, 1, 0, -0.3428978, 0, 0.9393727, -11.15, 1.25, 9.05)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/InnEntranceClearance"]
+shape = SubResource("BoxShape3D_InnEntranceClearance")
+
+[node name="TavernEntranceClearance" type="Area3D" parent="TownFlowMarkers"]
+transform = Transform3D(0.9393727, 0, -0.3428978, 0, 1, 0, 0.3428978, 0, 0.9393727, 9.15, 1.25, 15.05)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/TavernEntranceClearance"]
+shape = SubResource("BoxShape3D_TavernEntranceClearance")
+
+[node name="InnkeeperInteractionClearance" type="Area3D" parent="TownFlowMarkers"]
+transform = Transform3D(0.9393727, 0, 0.3428978, 0, 1, 0, -0.3428978, 0, 0.9393727, -9.45, 1.2, 7.85)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/InnkeeperInteractionClearance"]
+shape = SubResource("BoxShape3D_InnkeeperInteractionClearance")
+
+[node name="TavernKeeperInteractionClearance" type="Area3D" parent="TownFlowMarkers"]
+transform = Transform3D(0.9393727, 0, -0.3428978, 0, 1, 0, 0.3428978, 0, 0.9393727, 8.55, 1.2, 14.85)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/TavernKeeperInteractionClearance"]
+shape = SubResource("BoxShape3D_TavernKeeperInteractionClearance")
+
+[node name="ReturnLandingClearance" type="Area3D" parent="TownFlowMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3.2, 24)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/ReturnLandingClearance"]
+shape = SubResource("BoxShape3D_ReturnLandingClearance")
 
 [node name="ReturnToTownTrigger" type="Area3D" parent="." unique_id=58882631]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 24)
