@@ -10,6 +10,8 @@ func _init() -> void:
 		"res://tests/test_environment_controller.gd",
 		"res://tests/test_health_component.gd",
 		"res://tests/test_quest_state.gd",
+		"res://tests/test_main_flow_acceptance.gd",
+		"res://tests/test_completion_feedback.gd",
 		"res://tests/test_dialogue.gd",
 		"res://tests/test_town_npc.gd",
 		"res://tests/test_spell_caster.gd",

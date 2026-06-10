@@ -13,3 +13,5 @@ signal damage_received(target_id: String, amount: int, current_health: int, max_
 signal health_changed(target_id: String, current_health: int, max_health: int)
 signal enemy_defeated(enemy_id: String)
 signal player_health_changed(current_health: int, max_health: int)
+signal quest_completed()
+signal completion_feedback_requested(title: String, message: String)

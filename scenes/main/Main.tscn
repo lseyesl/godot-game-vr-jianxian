@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/Main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/town/Town.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/mountain/MountainTrial.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/ui/TaskHud.tscn" id="4"]
 [ext_resource type="Script" path="res://scripts/world/EnvironmentController.gd" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/ui/CompletionFeedback.tscn" id="6"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1"]
 size = Vector2(120, 120)
@@ -39,3 +40,5 @@ shape = SubResource("BoxShape3D_1")
 [node name="MountainTrial" parent="." instance=ExtResource("3")]
 
 [node name="TaskHud" parent="." instance=ExtResource("4")]
+
+[node name="CompletionFeedback" parent="." instance=ExtResource("6")]

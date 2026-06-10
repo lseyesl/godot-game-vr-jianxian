@@ -37,7 +37,7 @@
 - Create: `tests/test_main_flow_acceptance.gd`
 - Modify: `tests/test_runner.gd`
 
-- [ ] **Step 1: Write failing main-flow acceptance test**
+- [x] **Step 1: Write failing main-flow acceptance test**
 
 Create `tests/test_main_flow_acceptance.gd`:
 
@@ -115,7 +115,7 @@ func _test_main_scene_has_completion_feedback(t) -> void:
 	t.assert_true(scene_text.contains("[node name=\"CompletionFeedback\" parent=\".\" instance=ExtResource"), "Main scene instances CompletionFeedback")
 ```
 
-- [ ] **Step 2: Register failing test**
+- [x] **Step 2: Register failing test**
 
 Modify `tests/test_runner.gd` and add the test after `test_quest_state.gd`:
 
@@ -125,7 +125,7 @@ Modify `tests/test_runner.gd` and add the test after `test_quest_state.gd`:
 "res://tests/test_dialogue.gd",
 ```
 
-- [ ] **Step 3: Run tests and verify RED**
+- [x] **Step 3: Run tests and verify RED**
 
 Run:
 
@@ -142,7 +142,7 @@ Expected: FAIL because `EventBus` lacks `quest_completed` / `completion_feedback
 - Modify: `scripts/autoload/Game.gd`
 - Test: `tests/test_main_flow_acceptance.gd`
 
-- [ ] **Step 1: Add EventBus completion signals**
+- [x] **Step 1: Add EventBus completion signals**
 
 Add to `scripts/autoload/EventBus.gd`:
 
@@ -151,7 +151,7 @@ signal quest_completed()
 signal completion_feedback_requested(title: String, message: String)
 ```
 
-- [ ] **Step 2: Emit completion feedback from Game**
+- [x] **Step 2: Emit completion feedback from Game**
 
 Modify `scripts/autoload/Game.gd`:
 
@@ -188,7 +188,7 @@ func advance_quest(event_id: String) -> bool:
 	return advanced
 ```
 
-- [ ] **Step 3: Run tests and verify partial GREEN**
+- [x] **Step 3: Run tests and verify partial GREEN**
 
 Run:
 
@@ -204,7 +204,7 @@ Expected: main-flow signal assertions pass, but `Main.tscn` still fails until `C
 - Create: `tests/test_completion_feedback.gd`
 - Modify: `tests/test_runner.gd`
 
-- [ ] **Step 1: Write failing feedback UI test**
+- [x] **Step 1: Write failing feedback UI test**
 
 Create `tests/test_completion_feedback.gd`:
 
@@ -250,7 +250,7 @@ func _test_completion_feedback_updates_visible_text(t) -> void:
 	feedback.free()
 ```
 
-- [ ] **Step 2: Register failing feedback test**
+- [x] **Step 2: Register failing feedback test**
 
 Modify `tests/test_runner.gd` and add the test after `test_main_flow_acceptance.gd`:
 
@@ -260,7 +260,7 @@ Modify `tests/test_runner.gd` and add the test after `test_main_flow_acceptance.
 "res://tests/test_dialogue.gd",
 ```
 
-- [ ] **Step 3: Run tests and verify RED**
+- [x] **Step 3: Run tests and verify RED**
 
 Run:
 
@@ -278,7 +278,7 @@ Expected: FAIL because `CompletionFeedback.tscn` does not exist.
 - Modify: `scenes/main/Main.tscn`
 - Test: `tests/test_completion_feedback.gd`, `tests/test_main_flow_acceptance.gd`
 
-- [ ] **Step 1: Add CompletionFeedback script**
+- [x] **Step 1: Add CompletionFeedback script**
 
 Create `scripts/ui/CompletionFeedback.gd`:
 
@@ -318,7 +318,7 @@ func _set_panel_visible(visible: bool) -> void:
 		panel.visible = visible
 ```
 
-- [ ] **Step 2: Add CompletionFeedback scene**
+- [x] **Step 2: Add CompletionFeedback scene**
 
 Create `scenes/ui/CompletionFeedback.tscn`:
 
@@ -370,7 +370,7 @@ autowrap_mode = 2
 [node name="CompletionAudio" type="AudioStreamPlayer" parent="."]
 ```
 
-- [ ] **Step 3: Instance CompletionFeedback in Main**
+- [x] **Step 3: Instance CompletionFeedback in Main**
 
 Modify `scenes/main/Main.tscn`:
 
@@ -384,7 +384,7 @@ Modify `scenes/main/Main.tscn`:
 
 Keep existing ext_resource IDs intact; use the next available ID if `6` is already taken.
 
-- [ ] **Step 4: Run tests and verify GREEN**
+- [x] **Step 4: Run tests and verify GREEN**
 
 Run:
 
@@ -400,7 +400,7 @@ Expected: all tests pass.
 - Modify: `docs/testing/vr-demo-acceptance.md`
 - Modify: `docs/superpowers/plans/2026-06-11-main-flow-acceptance-feedback.md`
 
-- [ ] **Step 1: Update acceptance checklist**
+- [x] **Step 1: Update acceptance checklist**
 
 Modify `docs/testing/vr-demo-acceptance.md` automated section to include:
 
@@ -411,7 +411,7 @@ Modify `docs/testing/vr-demo-acceptance.md` automated section to include:
 
 Do not check manual or VR headset items in this pass.
 
-- [ ] **Step 2: Run full test suite**
+- [x] **Step 2: Run full test suite**
 
 Run:
 
@@ -421,7 +421,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: exit 0 with `TESTS PASSED: <N> assertions`.
 
-- [ ] **Step 3: Run Godot syntax and scene validation**
+- [x] **Step 3: Run Godot syntax and scene validation**
 
 Run:
 
@@ -431,7 +431,7 @@ godot --headless --xr-mode off --path . --check-only --quit
 
 Expected: exit 0.
 
-- [ ] **Step 4: Inspect git diff**
+- [x] **Step 4: Inspect git diff**
 
 Run:
 
@@ -447,7 +447,7 @@ Expected:
 - `Main.tscn` instances `CompletionFeedback`.
 - Tests cover full event sequence, completion events, and feedback UI.
 
-- [ ] **Step 5: Commit implementation**
+- [x] **Step 5: Commit implementation**
 
 Run:
 

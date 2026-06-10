@@ -4,6 +4,8 @@
 
 - [x] `godot --headless --xr-mode off --path . --script res://tests/test_runner.gd` passes.
 - [x] `godot --headless --xr-mode off --path . --check-only --quit` exits 0.
+- [x] Automated main-flow acceptance covers quest event sequence through completion.
+- [x] Completion feedback is covered by headless UI tests.
 - [ ] PCVR Windows export succeeds. Current machine is missing Godot Windows export templates.
 
 ## Main Flow
