@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://camuasfjl6afk"]
+[gd_scene load_steps=4 format=3 uid="uid://camuasfjl6afk"]
 
 [ext_resource type="Script" uid="uid://ccqxo03qndjlu" path="res://scripts/player/DesktopDebugPlayer.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/combat/HealthComponent.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/player/PlayerSpellController.gd" id="3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
 radius = 0.35
@@ -23,3 +24,6 @@ script = ExtResource("2")
 target_id = "player"
 max_health = 5
 current_health = 5
+
+[node name="PlayerSpellController" type="Node" parent="."]
+script = ExtResource("3")

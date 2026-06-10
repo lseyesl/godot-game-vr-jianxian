@@ -10,6 +10,10 @@ func run(t) -> void:
 	_test_camera_eye_height(t)
 	_test_mouse_capture_events(t)
 	_test_health_reception(t)
+	_test_spell_input_actions_exist(t)
+	_test_desktop_scene_has_spell_controller(t)
+	_test_desktop_spell_methods_delegate(t)
+	_test_spell_input_defaults(t)
 
 func _test_project_wasd_actions(t) -> void:
 	for action in ["move_forward", "move_back", "move_left", "move_right"]:
@@ -113,6 +117,53 @@ func _test_health_reception(t) -> void:
 		player.receive_damage(1, "lesser_demon")
 		t.assert_equal(health.current_health, before - 1, "desktop player damage reduces health")
 	player.free()
+
+func _test_spell_input_actions_exist(t) -> void:
+	for action in ["spell_primary", "spell_guard", "spell_seal"]:
+		t.assert_true(InputMap.has_action(action), "%s input action exists" % action)
+
+func _test_desktop_scene_has_spell_controller(t) -> void:
+	var scene_path := "res://scenes/player/DesktopDebugPlayer.tscn"
+	t.assert_true(ResourceLoader.exists(scene_path), "DesktopDebugPlayer scene exists")
+	if not ResourceLoader.exists(scene_path):
+		return
+	var scene = load(scene_path).instantiate()
+	t.assert_true(scene.get_node_or_null("PlayerSpellController") != null, "desktop player has PlayerSpellController")
+	if scene.get_node_or_null("PlayerSpellController") != null:
+		t.assert_equal(scene.get_node("PlayerSpellController").get_script(), load("res://scripts/player/PlayerSpellController.gd"), "desktop spell controller uses PlayerSpellController script")
+	scene.free()
+
+func _test_desktop_spell_methods_delegate(t) -> void:
+	var scene = load("res://scenes/player/DesktopDebugPlayer.tscn").instantiate()
+	var root := Node3D.new()
+	root.add_child(scene)
+	t.assert_true(scene.has_method("spell_id_for_action"), "desktop player maps spell actions")
+	if not scene.has_method("spell_id_for_action"):
+		root.free()
+		return
+	t.assert_equal(scene.spell_id_for_action("spell_primary"), "spirit_bolt", "primary action maps to spirit bolt")
+	t.assert_equal(scene.spell_id_for_action("spell_guard"), "guard_charm", "guard action maps to guard charm")
+	t.assert_equal(scene.spell_id_for_action("spell_seal"), "seal_break", "seal action maps to seal break")
+	t.assert_true(scene.cast_spell_id("spirit_bolt"), "desktop player casts spirit bolt through controller")
+	t.assert_true(not scene.cast_spell_id("spirit_bolt"), "desktop player respects controller cooldown")
+	root.free()
+
+func _test_spell_input_defaults(t) -> void:
+	t.assert_true(_action_has_mouse_button("spell_primary", MOUSE_BUTTON_LEFT), "spell_primary defaults to left mouse button")
+	t.assert_true(_action_has_key("spell_guard", KEY_Q), "spell_guard defaults to Q")
+	t.assert_true(_action_has_key("spell_seal", KEY_E), "spell_seal defaults to E")
+
+func _action_has_mouse_button(action_name: String, button_index: int) -> bool:
+	for event in InputMap.action_get_events(action_name):
+		if event is InputEventMouseButton and event.button_index == button_index:
+			return true
+	return false
+
+func _action_has_key(action_name: String, keycode: int) -> bool:
+	for event in InputMap.action_get_events(action_name):
+		if event is InputEventKey and event.keycode == keycode:
+			return true
+	return false
 
 func _instantiate_player(t):
 	t.assert_true(ResourceLoader.exists(DESKTOP_PLAYER_SCENE), "DesktopDebugPlayer scene exists")

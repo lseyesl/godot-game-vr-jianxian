@@ -13,6 +13,7 @@ func _init() -> void:
 		"res://tests/test_dialogue.gd",
 		"res://tests/test_town_npc.gd",
 		"res://tests/test_spell_caster.gd",
+		"res://tests/test_player_spell_controller.gd",
 		"res://tests/test_lesser_demon.gd",
 		"res://tests/test_lesser_demon_scene.gd",
 		"res://tests/test_seal_encounter.gd",

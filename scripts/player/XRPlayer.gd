@@ -11,6 +11,8 @@ const TURN_MODE_SMOOTH := 2
 @export var flight_provider_path: NodePath = ^"XROrigin3D/MovementFlight"
 @export var vignette_path: NodePath = ^"XROrigin3D/XRCamera3D/Vignette"
 @export var health_component_path: NodePath = ^"HealthComponent"
+@export var spell_controller_path: NodePath = ^"PlayerSpellController"
+@export var spell_emitter_path: NodePath = ^"XROrigin3D/RightHand/SpellEmitter"
 var flight_enabled := false
 
 func _ready() -> void:
@@ -25,6 +27,11 @@ func _ready() -> void:
 		event_bus.comfort_settings_changed.connect(_on_comfort_settings_changed)
 	apply_comfort_settings()
 	apply_flight_state()
+
+func _physics_process(delta: float) -> void:
+	var controller := get_spell_controller()
+	if controller != null and controller.has_method("tick_cooldowns"):
+		controller.tick_cooldowns(delta)
 
 func _on_flight_mode_changed(enabled: bool) -> void:
 	flight_enabled = enabled
@@ -81,3 +88,18 @@ func receive_damage(amount: int, source_id: String = "") -> int:
 		if event_bus != null and event_bus.has_signal("player_health_changed"):
 			event_bus.player_health_changed.emit(current, health.max_health)
 	return current
+
+func cast_spell_id(spell_id: String) -> bool:
+	return cast_spell_from_emitter(spell_id, spell_emitter_path)
+
+func cast_spell_from_emitter(spell_id: String, emitter_path: NodePath = spell_emitter_path) -> bool:
+	var controller := get_spell_controller()
+	var emitter := get_node_or_null(emitter_path) as Node3D
+	if controller == null or emitter == null:
+		return false
+	if controller.has_method("cast_spell_from_node"):
+		return controller.cast_spell_from_node(spell_id, emitter)
+	return false
+
+func get_spell_controller() -> Node:
+	return get_node_or_null(spell_controller_path)

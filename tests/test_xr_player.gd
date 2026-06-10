@@ -25,6 +25,7 @@ func run(t) -> void:
 	_test_immersive_mode_configures_provider_nodes(t)
 	_test_flight_state_controls_flight_provider_and_vignette(t)
 	_test_health_reception(t)
+	_test_xr_spell_interface(t)
 
 func _test_scene_wires_xr_tools_nodes(t) -> void:
 	var file := FileAccess.open("res://scenes/player/XRPlayer.tscn", FileAccess.READ)
@@ -96,6 +97,36 @@ func _test_health_reception(t) -> void:
 		t.assert_true(player.get_health_component() == health, "XR player returns HealthComponent")
 		player.receive_damage(1, "lesser_demon")
 		t.assert_equal(health.current_health, 4, "XR player damage reduces health")
+	player.free()
+
+func _test_xr_spell_interface(t) -> void:
+	var scene_path := "res://scenes/player/XRPlayer.tscn"
+	t.assert_true(ResourceLoader.exists(scene_path), "XRPlayer scene exists")
+	if not ResourceLoader.exists(scene_path):
+		return
+	var file := FileAccess.open(scene_path, FileAccess.READ)
+	t.assert_true(file != null, "XRPlayer scene file opens for spell wiring")
+	if file != null:
+		var scene_text := file.get_as_text()
+		t.assert_true(scene_text.contains("[node name=\"PlayerSpellController\" type=\"Node\" parent=\".\"]"), "XRPlayer has PlayerSpellController")
+		t.assert_true(scene_text.contains("[node name=\"SpellEmitter\" type=\"Node3D\" parent=\"XROrigin3D/RightHand\"]"), "XRPlayer has right hand spell emitter")
+	var player = XRPlayerScript.new()
+	var controller_script := load("res://scripts/player/PlayerSpellController.gd")
+	var controller = controller_script.new()
+	controller.name = "PlayerSpellController"
+	player.add_child(controller)
+	var origin := Node3D.new()
+	origin.name = "XROrigin3D"
+	player.add_child(origin)
+	var right := Node3D.new()
+	right.name = "RightHand"
+	origin.add_child(right)
+	var emitter := Node3D.new()
+	emitter.name = "SpellEmitter"
+	right.add_child(emitter)
+	t.assert_true(player.has_method("cast_spell_id"), "XRPlayer exposes cast_spell_id")
+	if player.has_method("cast_spell_id"):
+		t.assert_true(player.cast_spell_id("spirit_bolt"), "XRPlayer can cast spirit bolt through shared controller")
 	player.free()
 
 func _make_player_with_mock_providers():

@@ -39,7 +39,7 @@
 - Create: `tests/test_player_spell_controller.gd`
 - Modify: `tests/test_runner.gd`
 
-- [ ] **Step 1: Write failing controller tests**
+- [x] **Step 1: Write failing controller tests**
 
 Create `tests/test_player_spell_controller.gd`:
 
@@ -106,7 +106,7 @@ func _test_cast_spell_from_node_uses_emitter_transform(t, Controller: Script) ->
 	root.free()
 ```
 
-- [ ] **Step 2: Register failing controller tests**
+- [x] **Step 2: Register failing controller tests**
 
 Modify `tests/test_runner.gd` and insert the new test after `test_spell_caster.gd`:
 
@@ -116,7 +116,7 @@ Modify `tests/test_runner.gd` and insert the new test after `test_spell_caster.g
 "res://tests/test_lesser_demon.gd",
 ```
 
-- [ ] **Step 3: Run tests and verify RED**
+- [x] **Step 3: Run tests and verify RED**
 
 Run:
 
@@ -132,7 +132,7 @@ Expected: FAIL with `PlayerSpellController script exists`.
 - Create: `scripts/player/PlayerSpellController.gd`
 - Test: `tests/test_player_spell_controller.gd`
 
-- [ ] **Step 1: Add controller implementation**
+- [x] **Step 1: Add controller implementation**
 
 Create `scripts/player/PlayerSpellController.gd`:
 
@@ -209,7 +209,7 @@ func _spawn_projectile(spell_id: String, origin: Vector3, forward: Vector3) -> N
 	return projectile
 ```
 
-- [ ] **Step 2: Run tests and verify GREEN**
+- [x] **Step 2: Run tests and verify GREEN**
 
 Run:
 
@@ -226,7 +226,7 @@ Expected: all tests pass, including `test_player_spell_controller.gd`.
 - Modify: `scripts/player/DesktopDebugPlayer.gd`
 - Modify: `scenes/player/DesktopDebugPlayer.tscn`
 
-- [ ] **Step 1: Write failing desktop spell tests**
+- [x] **Step 1: Write failing desktop spell tests**
 
 Append these calls inside `tests/test_desktop_debug_player.gd` `run(t)` after existing setup checks:
 
@@ -267,7 +267,7 @@ func _test_desktop_spell_methods_delegate(t) -> void:
 	root.free()
 ```
 
-- [ ] **Step 2: Run tests and verify RED**
+- [x] **Step 2: Run tests and verify RED**
 
 Run:
 
@@ -277,7 +277,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: FAIL because `DesktopDebugPlayer` lacks `PlayerSpellController` and spell mapping methods.
 
-- [ ] **Step 3: Add desktop spell methods**
+- [x] **Step 3: Add desktop spell methods**
 
 Modify `scripts/player/DesktopDebugPlayer.gd`:
 
@@ -342,7 +342,7 @@ func get_spell_emitter() -> Node3D:
 	return get_node_or_null(spell_emitter_path) as Node3D
 ```
 
-- [ ] **Step 4: Add desktop scene controller**
+- [x] **Step 4: Add desktop scene controller**
 
 Modify `scenes/player/DesktopDebugPlayer.tscn`:
 
@@ -353,7 +353,7 @@ Modify `scenes/player/DesktopDebugPlayer.tscn`:
 script = ExtResource("3")
 ```
 
-- [ ] **Step 5: Run tests and verify GREEN**
+- [x] **Step 5: Run tests and verify GREEN**
 
 Run:
 
@@ -370,7 +370,7 @@ Expected: all tests pass.
 - Modify: `scripts/player/XRPlayer.gd`
 - Modify: `scenes/player/XRPlayer.tscn`
 
-- [ ] **Step 1: Write failing XR spell tests**
+- [x] **Step 1: Write failing XR spell tests**
 
 Append this call inside `tests/test_xr_player.gd` `run(t)`:
 
@@ -396,7 +396,7 @@ func _test_xr_spell_interface(t) -> void:
 	root.free()
 ```
 
-- [ ] **Step 2: Run tests and verify RED**
+- [x] **Step 2: Run tests and verify RED**
 
 Run:
 
@@ -406,7 +406,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: FAIL because XR scene lacks `PlayerSpellController`, `SpellEmitter`, and spell interface methods.
 
-- [ ] **Step 3: Add XR spell methods**
+- [x] **Step 3: Add XR spell methods**
 
 Modify `scripts/player/XRPlayer.gd`:
 
@@ -443,7 +443,7 @@ func get_spell_controller() -> Node:
 	return get_node_or_null(spell_controller_path)
 ```
 
-- [ ] **Step 4: Add XR scene controller and emitter**
+- [x] **Step 4: Add XR scene controller and emitter**
 
 Modify `scenes/player/XRPlayer.tscn`:
 
@@ -457,7 +457,7 @@ script = ExtResource("9")
 position = Vector3(0, 0, -0.08)
 ```
 
-- [ ] **Step 5: Run tests and verify GREEN**
+- [x] **Step 5: Run tests and verify GREEN**
 
 Run:
 
@@ -473,7 +473,7 @@ Expected: all tests pass.
 - Modify: `project.godot`
 - Modify: `tests/test_desktop_debug_player.gd`
 
-- [ ] **Step 1: Add failing default input event tests**
+- [x] **Step 1: Add failing default input event tests**
 
 Add this helper call to `tests/test_desktop_debug_player.gd` `run(t)`:
 
@@ -502,7 +502,7 @@ func _action_has_key(action_name: String, keycode: int) -> bool:
 	return false
 ```
 
-- [ ] **Step 2: Run tests and verify RED**
+- [x] **Step 2: Run tests and verify RED**
 
 Run:
 
@@ -512,7 +512,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: FAIL because spell input actions currently have empty event arrays.
 
-- [ ] **Step 3: Add default input events**
+- [x] **Step 3: Add default input events**
 
 Modify the existing spell input blocks in `project.godot`:
 
@@ -534,7 +534,7 @@ spell_seal={
 }
 ```
 
-- [ ] **Step 4: Run tests and verify GREEN**
+- [x] **Step 4: Run tests and verify GREEN**
 
 Run:
 
@@ -549,7 +549,7 @@ Expected: all tests pass.
 **Files:**
 - Review all touched files.
 
-- [ ] **Step 1: Run full test suite**
+- [x] **Step 1: Run full test suite**
 
 Run:
 
@@ -559,7 +559,7 @@ godot --headless --xr-mode off --path . --script res://tests/test_runner.gd
 
 Expected: exit 0 with `TESTS PASSED: <N> assertions`.
 
-- [ ] **Step 2: Run Godot syntax and scene validation**
+- [x] **Step 2: Run Godot syntax and scene validation**
 
 Run:
 
@@ -569,7 +569,7 @@ godot --headless --xr-mode off --path . --check-only --quit
 
 Expected: exit 0.
 
-- [ ] **Step 3: Inspect git diff**
+- [x] **Step 3: Inspect git diff**
 
 Run:
 
@@ -585,7 +585,7 @@ Expected:
 - Player scenes include controller and emitter nodes.
 - No changes to `SealEncounter`, `LesserDemon`, `SpellCaster`, or `SpellProjectile` unless a test failure exposed a necessary compatibility fix.
 
-- [ ] **Step 4: Commit implementation**
+- [x] **Step 4: Commit implementation**
 
 Run:
 

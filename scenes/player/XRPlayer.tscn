@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/XRPlayer.gd" id="1"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/player/player_body.tscn" id="2"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/functions/movement_flight.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/effects/vignette.tscn" id="7"]
 [ext_resource type="Script" path="res://scripts/combat/HealthComponent.gd" id="8"]
+[ext_resource type="Script" path="res://scripts/player/PlayerSpellController.gd" id="9"]
 
 [node name="XRPlayer" type="Node3D"]
 script = ExtResource("1")
@@ -17,6 +18,9 @@ script = ExtResource("8")
 target_id = "player"
 max_health = 5
 current_health = 5
+
+[node name="PlayerSpellController" type="Node" parent="."]
+script = ExtResource("9")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 
@@ -35,6 +39,9 @@ tracker = &"right_hand"
 [node name="MovementDirect" parent="XROrigin3D/RightHand" instance=ExtResource("4")]
 
 [node name="MovementTurn" parent="XROrigin3D/RightHand" instance=ExtResource("5")]
+
+[node name="SpellEmitter" type="Node3D" parent="XROrigin3D/RightHand"]
+position = Vector3(0, 0, -0.08)
 
 [node name="PlayerBody" parent="XROrigin3D" groups=["player"] instance=ExtResource("2")]
 
