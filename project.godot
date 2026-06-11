@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="VR Xianxia Demo"
-run/main_scene="res://scenes/menu/MainMenu.tscn"
+run/main_scene="res://scenes/debug/PlayerTestArena.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [autoload]
@@ -20,6 +20,8 @@ EventBus="*res://scripts/autoload/EventBus.gd"
 Game="*res://scripts/autoload/Game.gd"
 XRToolsUserSettings="*uid://bqgb8i74tm0t"
 XRToolsRumbleManager="*uid://by853dk86g1qw"
+BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
+BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
 
 [display]
 
