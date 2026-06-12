@@ -54,7 +54,5 @@ func _cleanse() -> void:
 		game.advance_quest("seal_cleansed")
 
 func _on_hit_area_area_entered(area: Area3D) -> void:
-	if area.has_method("_on_body_entered"):
-		area._on_body_entered(self)
-	elif "spell_id" in area:
+	if "spell_id" in area:
 		receive_spell(area.spell_id)

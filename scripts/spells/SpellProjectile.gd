@@ -20,6 +20,12 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_body_entered(body: Node) -> void:
-	if body.has_method("receive_spell"):
-		body.receive_spell(spell_id)
+	_hit_target(body)
+
+func _on_area_entered(area: Area3D) -> void:
+	_hit_target(area)
+
+func _hit_target(target: Node) -> void:
+	if target.has_method("receive_spell"):
+		target.receive_spell(spell_id)
 	queue_free()

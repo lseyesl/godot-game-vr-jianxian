@@ -152,6 +152,8 @@ func _test_spell_input_defaults(t) -> void:
 	t.assert_true(_action_has_mouse_button("spell_primary", MOUSE_BUTTON_LEFT), "spell_primary defaults to left mouse button")
 	t.assert_true(_action_has_key("spell_guard", KEY_Q), "spell_guard defaults to Q")
 	t.assert_true(_action_has_key("spell_seal", KEY_E), "spell_seal defaults to E")
+	t.assert_true(_action_has_key("interact", KEY_F), "interact defaults to F")
+	t.assert_true(_action_has_key("flight_toggle", KEY_V), "flight_toggle defaults to V")
 
 func _action_has_mouse_button(action_name: String, button_index: int) -> bool:
 	for event in InputMap.action_get_events(action_name):

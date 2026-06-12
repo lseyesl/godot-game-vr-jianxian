@@ -6,6 +6,8 @@ var unlocked := false
 var flight_enabled := false
 
 func collect() -> void:
+	if unlocked:
+		return
 	unlocked = true
 	set_flight_enabled(true)
 	if not is_inside_tree():

@@ -33,12 +33,17 @@ func instantiate_player_for_mode(mode: String) -> Node:
 
 func spawn_player() -> Node:
 	if player_node != null:
-		player_node.queue_free()
+		if player_node.get_parent() != null:
+			player_node.get_parent().remove_child(player_node)
+		player_node.free()
 	player_node = instantiate_player_for_mode(player_mode)
 	if player_node == null:
 		return null
+	add_child(player_node)
 	var spawn := get_node_or_null("PlayerSpawn") as Node3D
 	if player_node is Node3D and spawn != null:
-		player_node.global_position = spawn.global_position
-	add_child(player_node)
+		if player_node.is_inside_tree() and spawn.is_inside_tree():
+			player_node.global_position = spawn.global_position
+		else:
+			player_node.position = spawn.position
 	return player_node

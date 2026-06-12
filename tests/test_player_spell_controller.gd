@@ -13,6 +13,7 @@ func run(t) -> void:
 	_test_non_projectile_spell_uses_cooldown_without_projectile(t, Controller)
 	_test_unknown_spell_does_not_cast(t, Controller)
 	_test_cast_spell_from_node_uses_emitter_transform(t, Controller)
+	_test_projectile_hits_area_target(t)
 
 func _test_projectile_spell_spawns_projectile(t, Controller: Script) -> void:
 	var root := _make_tree_root()
@@ -58,6 +59,28 @@ func _test_cast_spell_from_node_uses_emitter_transform(t, Controller: Script) ->
 	t.assert_equal(controller.get_spawned_projectile_count(), 1, "seal_break spawns projectile")
 	t.assert_equal(controller.last_spawned_projectile.position, emitter.position, "projectile uses emitter position")
 	root.free()
+
+func _test_projectile_hits_area_target(t) -> void:
+	var projectile_scene := load("res://scenes/spells/SpellProjectile.tscn")
+	t.assert_true(projectile_scene is PackedScene, "SpellProjectile scene loads")
+	if not projectile_scene is PackedScene:
+		return
+	var projectile = projectile_scene.instantiate()
+	var target := AreaSpellTarget.new()
+	projectile.spell_id = "seal_break"
+	projectile._on_area_entered(target)
+	t.assert_equal(target.received_spell_id, "seal_break", "projectile can deliver spell to Area3D targets")
+	t.assert_true(projectile.is_queued_for_deletion(), "projectile queues free after area hit")
+	projectile.free()
+	target.free()
+
+class AreaSpellTarget:
+	extends Area3D
+
+	var received_spell_id := ""
+
+	func receive_spell(spell_id: String) -> void:
+		received_spell_id = spell_id
 
 func _make_tree_root() -> Node3D:
 	var root := Node3D.new()
