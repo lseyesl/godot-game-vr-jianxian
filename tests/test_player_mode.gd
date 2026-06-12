@@ -20,3 +20,20 @@ func run(t) -> void:
 		desktop_player.free()
 	t.assert_true(ResourceLoader.exists(main.resolve_player_scene_path("vr")), "vr player scene exists")
 	main.free()
+
+	var live_main = MainScript.new()
+	t.root.add_child(live_main)
+	live_main.player_spawn_position = Vector3(3, 0, 4)
+	live_main.spawn_player()
+	var spawned_player := live_main.player_node as Node3D
+	t.assert_true(spawned_player != null, "Main spawns a player")
+	if spawned_player != null:
+		if spawned_player.is_inside_tree() and live_main.is_inside_tree():
+			t.assert_true(spawned_player.global_position.is_equal_approx(live_main.player_spawn_position), "Main spawns player at configured global position")
+		else:
+			t.assert_true(spawned_player.position.is_equal_approx(live_main.player_spawn_position), "Main spawns player at configured local position in offline tests")
+	var first_player: Node = live_main.player_node
+	live_main.spawn_player()
+	t.assert_true(first_player != live_main.player_node, "Main respawn replaces the player node")
+	t.assert_true(not is_instance_valid(first_player), "Main respawn frees old player immediately")
+	live_main.free()

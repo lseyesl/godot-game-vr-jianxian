@@ -17,5 +17,24 @@ func run(t) -> void:
 	tavern.npc_id = "tavern_keeper"
 	t.assert_true(tavern.line_for_step("ask_tavern").contains("山谷"), "tavern keeper points to mountain")
 	t.assert_equal(tavern.quest_event_for_step("ask_tavern"), "talked_to_tavern_keeper", "tavern advances ask_tavern")
+	_test_explicit_interact_required(t, NpcDialogue)
 	inn.free()
 	tavern.free()
+
+func _test_explicit_interact_required(t, NpcDialogue: Script) -> void:
+	var npc = NpcDialogue.new()
+	npc.npc_id = "innkeeper"
+	var player := Node3D.new()
+	player.add_to_group("player")
+	npc._on_interact_area_body_entered(player)
+	t.assert_true(npc.has_nearby_player(), "entering interact area stores nearby player")
+	t.assert_equal(npc.last_line, "", "entering interact area does not auto-run dialogue")
+	var interact_event := InputEventAction.new()
+	interact_event.action = "interact"
+	interact_event.pressed = true
+	npc._unhandled_input(interact_event)
+	t.assert_true(npc.last_line.contains("飞剑"), "pressing interact runs dialogue for nearby player")
+	npc._on_interact_area_body_exited(player)
+	t.assert_true(not npc.has_nearby_player(), "exiting interact area clears nearby player")
+	npc.free()
+	player.free()

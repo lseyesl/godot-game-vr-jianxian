@@ -3,6 +3,7 @@ class_name NpcDialogue
 
 @export var npc_id := "townsperson"
 var last_line := ""
+var nearby_player: Node3D
 
 const LINES := {
 	"innkeeper": {
@@ -36,17 +37,39 @@ func quest_event_for_step(step: String) -> String:
 func interact(current_step: String) -> String:
 	var event_id := quest_event_for_step(current_step)
 	if event_id != "":
-		var game := get_node_or_null("/root/Game")
+		var game := _get_game()
 		if game != null and game.has_method("advance_quest"):
 			game.advance_quest(event_id)
 	last_line = line_for_step(current_step)
 	return last_line
 
-func _on_interact_area_body_entered(body: Node3D) -> void:
-	if not body.is_in_group("player"):
-		return
-	var game := get_node_or_null("/root/Game")
+func has_nearby_player() -> bool:
+	return nearby_player != null and is_instance_valid(nearby_player)
+
+func interact_with_current_step() -> String:
+	var game := _get_game()
 	var step := "start"
 	if game != null:
 		step = game.quest_state.current_step
-	interact(step)
+	return interact(step)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact") and has_nearby_player():
+		interact_with_current_step()
+
+func _on_interact_area_body_entered(body: Node3D) -> void:
+	if not body.is_in_group("player"):
+		return
+	nearby_player = body
+
+func _on_interact_area_body_exited(body: Node3D) -> void:
+	if body == nearby_player:
+		nearby_player = null
+
+func _get_game() -> Node:
+	var local_game := get_parent().get_node_or_null("Game") if get_parent() != null else null
+	if local_game != null:
+		return local_game
+	if is_inside_tree():
+		return get_node_or_null("/root/Game")
+	return null

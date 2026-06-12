@@ -38,6 +38,7 @@ func apply_damage(amount: int, source_id: String = "") -> int:
 	if previous_health > minimum_health and current_health <= minimum_health and not dead:
 		dead = true
 		died.emit(source_id)
+		_emit_event_bus_died(source_id)
 	return current_health
 
 func heal(amount: int) -> int:
@@ -51,15 +52,26 @@ func heal(amount: int) -> int:
 	return current_health
 
 func _emit_event_bus_damage_received(amount: int) -> void:
-	if not is_inside_tree():
-		return
-	var event_bus := get_node_or_null("/root/EventBus")
+	var event_bus := _get_event_bus()
 	if event_bus != null and event_bus.has_signal("damage_received"):
 		event_bus.damage_received.emit(target_id, amount, current_health, max_health)
 
 func _emit_event_bus_health_changed() -> void:
-	if not is_inside_tree():
-		return
-	var event_bus := get_node_or_null("/root/EventBus")
+	var event_bus := _get_event_bus()
 	if event_bus != null and event_bus.has_signal("health_changed"):
 		event_bus.health_changed.emit(target_id, current_health, max_health)
+
+func _emit_event_bus_died(source_id: String) -> void:
+	var event_bus := _get_event_bus()
+	if event_bus == null:
+		return
+	if target_id == "player" and event_bus.has_signal("player_defeated"):
+		event_bus.player_defeated.emit(source_id)
+
+func _get_event_bus() -> Node:
+	var local_bus := get_parent().get_node_or_null("EventBus") if get_parent() != null else null
+	if local_bus != null:
+		return local_bus
+	if is_inside_tree():
+		return get_node_or_null("/root/EventBus")
+	return null

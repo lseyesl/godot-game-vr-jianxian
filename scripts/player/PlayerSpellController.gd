@@ -18,13 +18,20 @@ func _physics_process(delta: float) -> void:
 
 func cast_spell(spell_id: String, origin: Vector3, forward: Vector3) -> bool:
 	_ensure_spell_caster()
-	if spell_caster == null or not spell_caster.cast(spell_id):
+	if spell_caster == null:
 		return false
-	last_cast_spell_id = spell_id
+	var projectile: Node = null
 	if is_projectile_spell(spell_id):
-		var projectile := _spawn_projectile(spell_id, origin, forward)
+		projectile = _instantiate_projectile(spell_id)
 		if projectile == null:
 			return false
+	if not spell_caster.cast(spell_id):
+		if projectile != null:
+			projectile.free()
+		return false
+	last_cast_spell_id = spell_id
+	if projectile != null:
+		return _add_projectile(projectile, origin, forward)
 	return true
 
 func cast_spell_from_node(spell_id: String, emitter: Node3D) -> bool:
@@ -50,20 +57,26 @@ func _ensure_spell_caster() -> void:
 		spell_caster = SpellCasterScript.new()
 		add_child(spell_caster)
 
-func _spawn_projectile(spell_id: String, origin: Vector3, forward: Vector3) -> Node:
+func _instantiate_projectile(spell_id: String) -> Node:
+	if not ResourceLoader.exists(projectile_scene_path):
+		return null
 	var packed_scene := load(projectile_scene_path)
 	if packed_scene == null or not packed_scene is PackedScene:
 		return null
 	var projectile = packed_scene.instantiate()
 	if "spell_id" in projectile:
 		projectile.spell_id = spell_id
+	return projectile
+
+func _add_projectile(projectile: Node, origin: Vector3, forward: Vector3) -> bool:
 	var parent: Node = null
 	if is_inside_tree():
 		parent = get_tree().current_scene
 	if parent == null:
 		parent = get_parent()
 	if parent == null:
-		return null
+		projectile.free()
+		return false
 	parent.add_child(projectile)
 	if projectile.has_method("launch") and projectile.is_inside_tree():
 		projectile.launch(origin, forward)
@@ -76,4 +89,4 @@ func _spawn_projectile(spell_id: String, origin: Vector3, forward: Vector3) -> N
 			projectile.age = 0.0
 	last_spawned_projectile = projectile
 	spawned_projectiles.append(projectile)
-	return projectile
+	return true

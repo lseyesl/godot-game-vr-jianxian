@@ -14,6 +14,7 @@ func run(t) -> void:
 	_test_unknown_spell_does_not_cast(t, Controller)
 	_test_cast_spell_from_node_uses_emitter_transform(t, Controller)
 	_test_projectile_hits_area_target(t)
+	_test_projectile_failure_does_not_consume_cooldown(t, Controller)
 
 func _test_projectile_spell_spawns_projectile(t, Controller: Script) -> void:
 	var root := _make_tree_root()
@@ -73,6 +74,15 @@ func _test_projectile_hits_area_target(t) -> void:
 	t.assert_true(projectile.is_queued_for_deletion(), "projectile queues free after area hit")
 	projectile.free()
 	target.free()
+
+func _test_projectile_failure_does_not_consume_cooldown(t, Controller: Script) -> void:
+	var root := _make_tree_root()
+	var controller = Controller.new()
+	controller.projectile_scene_path = "res://missing/projectile.tscn"
+	root.add_child(controller)
+	t.assert_true(not controller.cast_spell("spirit_bolt", Vector3.ZERO, Vector3.FORWARD), "missing projectile scene prevents cast")
+	t.assert_true(controller.spell_caster.can_cast("spirit_bolt"), "failed projectile cast does not consume cooldown")
+	root.free()
 
 class AreaSpellTarget:
 	extends Area3D
