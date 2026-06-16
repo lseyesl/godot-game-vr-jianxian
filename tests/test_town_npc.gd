@@ -47,6 +47,7 @@ func run(t) -> void:
 	t.assert_true(not walker.tick_wait(walker.wait_duration_s), "wait completes after duration")
 
 	_test_town_npc_scene(t)
+	_test_beehave_tree_ticks(t)
 
 	vendor.free()
 	inn_owner.free()
@@ -72,3 +73,51 @@ func _test_town_npc_scene(t) -> void:
 	t.assert_true(scene.get_node_or_null("SenseArea") is Area3D, "TownNpc has sense area")
 	t.assert_true(scene.get_node_or_null("BehaviorTree") != null, "TownNpc has Beehave tree")
 	scene.free()
+
+
+func _test_beehave_tree_ticks(t) -> void:
+	var scene_path = "res://scenes/npc/TownNpc.tscn"
+	if not ResourceLoader.exists(scene_path):
+		return
+	var packed = load(scene_path)
+	if not packed is PackedScene:
+		return
+	var town_npc = packed.instantiate()
+	if town_npc == null:
+		return
+
+	var root = Node.new()
+	root.add_child(town_npc)
+
+	var tree = town_npc.get_node_or_null("BehaviorTree")
+	t.assert_true(tree != null, "TownNpc has BehaviorTree node")
+	if tree == null:
+		root.free()
+		return
+
+	# Use duck typing to avoid compile-time dependency on BeehaveTree class_name
+	t.assert_true(tree.get("enabled"), "BehaviorTree is enabled")
+	var thread_value = tree.get("process_thread")
+	t.assert_equal(thread_value, 0, "BehaviorTree default process_thread is PHYSICS (0)")
+
+	# After _ready(), process_thread should be MANUAL (2)
+	tree.call("_ready")
+	var thread_after = tree.get("process_thread")
+	t.assert_equal(thread_after, 2, "BehaviorTree switched to MANUAL (2) after _ready")
+
+	var bb = tree.get("blackboard")
+	t.assert_true(bb != null, "BehaviorTree has blackboard")
+
+	# Initial state: unticked
+	var initial_status = tree.get("status")
+	t.assert_equal(initial_status, -1, "Tree status is -1 (unticked) before first tick")
+
+	# Tick once via physics_process (writes delta to blackboard and calls tree.tick())
+	var actor_id = str(town_npc.get_instance_id())
+	town_npc._physics_process(0.016)
+
+	var after_status = tree.get("status")
+	t.assert_true(after_status != -1, "Tree status is valid after one tick (not -1)")
+	t.assert_true(bb.has_value("delta", actor_id), "Blackboard has delta value after physics_process tick")
+
+	root.free()

@@ -5,12 +5,27 @@ class_name TownNpc
 @export var move_speed_mps := 1.0
 @export var player_sense_radius_m := 2.5
 @export var wait_duration_s := 1.5
-@export var waypoints: Array = []
+@export var waypoints: Array[Vector3] = []
 
 var current_waypoint_index := 0
 var last_spoken_line := ""
 var nearby_player: Node3D
 var wait_remaining_s := 0.0
+
+
+func _ready() -> void:
+	var tree := $BehaviorTree as BeehaveTree
+	if tree != null:
+		tree.process_thread = BeehaveTree.ProcessThread.MANUAL
+	if waypoints.is_empty():
+		waypoints = [Vector3.ZERO]
+
+
+func _physics_process(delta: float) -> void:
+	var tree := $BehaviorTree as BeehaveTree
+	if tree != null and tree.enabled:
+		tree.blackboard.set_value("delta", delta, str(get_instance_id()))
+		tree.tick()
 
 const LINES := {
 	"vendor": [
