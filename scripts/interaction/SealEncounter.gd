@@ -23,9 +23,8 @@ func receive_spell(spell_id: String) -> void:
 			event_bus.seal_weakened.emit(remaining_hits)
 	if remaining_hits == 0:
 		outcome = "cleanse"
-	_emit_combat_feedback(spell_id, outcome)
-	if remaining_hits == 0:
 		_cleanse()
+	_emit_combat_feedback(spell_id, outcome)
 
 func _emit_combat_feedback(spell_id: String, outcome: String) -> void:
 	var event_bus := _get_event_bus()
