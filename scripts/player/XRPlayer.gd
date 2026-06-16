@@ -4,7 +4,7 @@ class_name XRPlayer
 const TURN_MODE_SNAP := 1
 const TURN_MODE_SMOOTH := 2
 
-@export var comfort_settings: Resource
+@export var comfort_settings: ComfortSettings
 @export var direct_movement_path: NodePath = ^"XROrigin3D/RightHand/MovementDirect"
 @export var teleport_path: NodePath = ^"XROrigin3D/LeftHand/FunctionTeleport"
 @export var turn_provider_path: NodePath = ^"XROrigin3D/RightHand/MovementTurn"

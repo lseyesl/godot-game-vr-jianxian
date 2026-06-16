@@ -13,9 +13,6 @@ var spawned_projectiles: Array[Node] = []
 func _ready() -> void:
 	_ensure_spell_caster()
 
-func _physics_process(delta: float) -> void:
-	tick_cooldowns(delta)
-
 func cast_spell(spell_id: String, origin: Vector3, forward: Vector3) -> bool:
 	_ensure_spell_caster()
 	if spell_caster == null:
@@ -33,6 +30,9 @@ func cast_spell(spell_id: String, origin: Vector3, forward: Vector3) -> bool:
 	if projectile != null:
 		return _add_projectile(projectile, origin, forward)
 	return true
+
+func _on_projectile_freed(proj: Node) -> void:
+	spawned_projectiles.erase(proj)
 
 func cast_spell_from_node(spell_id: String, emitter: Node3D) -> bool:
 	if emitter == null:
@@ -89,4 +89,5 @@ func _add_projectile(projectile: Node, origin: Vector3, forward: Vector3) -> boo
 			projectile.age = 0.0
 	last_spawned_projectile = projectile
 	spawned_projectiles.append(projectile)
+	projectile.tree_exited.connect(_on_projectile_freed.bind(projectile))
 	return true

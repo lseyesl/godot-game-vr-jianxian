@@ -42,7 +42,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed(action):
 			if action == "spell_primary" and not mouse_capture_requested:
 				request_mouse_capture()
-				return
 			cast_spell_action(action)
 			return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
