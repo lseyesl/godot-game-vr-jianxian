@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3]
+
+[sub_resource type="BoxShape3D" id="Wall_N_collision"]
+size = Vector3(120, 60, 1)
+
+[sub_resource type="BoxShape3D" id="Wall_S_collision"]
+size = Vector3(120, 60, 1)
+
+[sub_resource type="BoxShape3D" id="Wall_W_collision"]
+size = Vector3(1, 60, 120)
+
+[sub_resource type="BoxShape3D" id="Wall_E_collision"]
+size = Vector3(1, 60, 120)
+
+[node name="WorldBoundary" type="StaticBody3D"]
+
+[node name="NorthWall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, -60.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NorthWall"]
+shape = SubResource("Wall_N_collision")
+
+[node name="SouthWall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 60.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SouthWall"]
+shape = SubResource("Wall_S_collision")
+
+[node name="WestWall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.5, 30, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WestWall"]
+shape = SubResource("Wall_W_collision")
+
+[node name="EastWall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.5, 30, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EastWall"]
+shape = SubResource("Wall_E_collision")
