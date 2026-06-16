@@ -43,8 +43,6 @@ func receive_damage(amount: int, source_id: String = "") -> int:
 	if health == null or not health.has_method("apply_damage"):
 		return 0
 	var current: int = health.apply_damage(amount, source_id)
-	if current <= 0:
-		_on_health_died(source_id)
 	return current
 
 func set_target(new_target: Node3D) -> void:
