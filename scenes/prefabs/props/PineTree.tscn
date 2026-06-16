@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3]
+
+[sub_resource type="CylinderMesh" id="Trunk_mesh"]
+top_radius = 0.08
+bottom_radius = 0.08
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="Canopy_mesh"]
+top_radius = 0.0
+bottom_radius = 1.2
+height = 2.5
+
+[sub_resource type="BoxShape3D" id="Trunk_col"]
+size = Vector3(0.16, 1.5, 0.16)
+
+[node name="PineTree" type="StaticBody3D"]
+
+[node name="Trunk" type="MeshInstance3D" parent="."]
+mesh = SubResource("Trunk_mesh")
+
+[node name="Canopy" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, 0)
+mesh = SubResource("Canopy_mesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("Trunk_col")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
