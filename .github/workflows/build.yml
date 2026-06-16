@@ -1,0 +1,61 @@
+name: Build PCVR Demo
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v1
+        with:
+          version: 4.6.3
+          use-global-templates: true
+
+      - name: Import assets
+        run: |
+          godot --headless --xr-mode off --path . --import
+
+      - name: Run tests
+        run: |
+          godot --headless --xr-mode off --path . \
+            --script res://tests/test_runner.gd
+
+      - name: Export PCVR Demo
+        run: |
+          mkdir -p builds/pcvr
+          godot --headless --path . \
+            --export-release "PCVR Demo" builds/pcvr/VRXianxiaDemo.exe
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: VRXianxiaDemo-${{ github.ref_name }}
+          path: builds/pcvr/
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: VRXianxiaDemo-${{ github.ref_name }}
+          path: builds/pcvr/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: builds/pcvr/VRXianxiaDemo.exe
+          generate_release_notes: true
+          make_latest: true
