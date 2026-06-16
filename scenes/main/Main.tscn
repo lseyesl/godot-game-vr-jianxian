@@ -6,12 +6,10 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/TaskHud.tscn" id="4"]
 [ext_resource type="Script" path="res://scripts/world/EnvironmentController.gd" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/ui/CompletionFeedback.tscn" id="6"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_1"]
-size = Vector2(120, 120)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
-size = Vector3(120, 0.2, 120)
+[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/TownGround.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/SuburbGround.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/MountainGround.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/WorldBoundary.tscn" id="10"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1")
@@ -26,14 +24,15 @@ script = ExtResource("5")
 directional_light_path = NodePath("../DirectionalLight3D")
 world_environment_path = NodePath("../WorldEnvironment")
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="TerrainContainer" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("PlaneMesh_1")
+[node name="TownGround" parent="TerrainContainer" instance=ExtResource("7")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-position = Vector3(0, -0.1, 0)
-shape = SubResource("BoxShape3D_1")
+[node name="SuburbGround" parent="TerrainContainer" instance=ExtResource("8")]
+
+[node name="MountainGround" parent="TerrainContainer" instance=ExtResource("9")]
+
+[node name="WorldBoundary" parent="TerrainContainer" instance=ExtResource("10")]
 
 [node name="Town" parent="." instance=ExtResource("2")]
 
