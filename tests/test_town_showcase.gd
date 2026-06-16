@@ -19,6 +19,8 @@ func run(t) -> void:
 	_test_visible_town_landmarks(t, town)
 	_test_npc_logic_nodes(t, town)
 	_test_town_npc_ai_nodes(t, town)
+	_test_street_props(t, town)
+	_test_distant_building_lod(t, town)
 	town.free()
 
 func _test_showcase_models(t, town: Node) -> void:
@@ -96,36 +98,23 @@ func _source_model_path(node: Node) -> String:
 	return metadata if metadata is String else ""
 
 func _test_visible_town_landmarks(t, town: Node) -> void:
-	var marker_paths := [
-		"WestDistrict/CanalMarker",
-		"WestDistrict/WaterwheelMarker",
-		"WestDistrict/FarmlandWestMarker",
-		"WestDistrict/FarmlandNorthWestMarker",
-		"WestDistrict/FarmlandSouthWestMarker",
-		"EastDistrict/YamenMarker",
-		"EastDistrict/DockMarker",
-		"SouthEastDistrict/TempleMarker",
-		"NorthEastDistrict/GranaryMarker",
-		"NorthEastDistrict/BlacksmithMarker",
-		"NorthEastDistrict/ForestryMarker",
-		"NorthEastDistrict/FishingVillageMarker",
-	]
-	for marker_path in marker_paths:
-		t.assert_true(town.has_node(marker_path), "%s exists as a visible greybox marker" % marker_path)
-		var marker = town.get_node_or_null(marker_path)
-		t.assert_true(marker is MeshInstance3D, "%s is a MeshInstance3D" % marker_path)
-	_assert_marker_position(t, town, "WestDistrict/CanalMarker", Vector3(-10, 0, 8), "Canal runs through west-center town")
-	_assert_marker_position(t, town, "WestDistrict/WaterwheelMarker", Vector3(-18, 0, 10), "Waterwheel sits near the west gate canal")
-	_assert_marker_position(t, town, "WestDistrict/FarmlandWestMarker", Vector3(-20, 0, 2), "West farmland fills the west edge near the canal")
-	_assert_marker_position(t, town, "WestDistrict/FarmlandNorthWestMarker", Vector3(-22, 0, -14), "Northwest farmland matches concept map")
-	_assert_marker_position(t, town, "WestDistrict/FarmlandSouthWestMarker", Vector3(-24, 0, 20), "Southwest farmland matches concept map")
-	_assert_marker_position(t, town, "EastDistrict/YamenMarker", Vector3(16, 0, 2), "Yamen sits east-center near water access")
-	_assert_marker_position(t, town, "EastDistrict/DockMarker", Vector3(22, 0, 10), "Dock sits on the east/southeast water edge")
-	_assert_marker_position(t, town, "SouthEastDistrict/TempleMarker", Vector3(12, 0, 18), "Temple sits southeast near water")
-	_assert_marker_position(t, town, "NorthEastDistrict/GranaryMarker", Vector3(8, 0, -16), "Granary sits northeast of the main road")
-	_assert_marker_position(t, town, "NorthEastDistrict/BlacksmithMarker", Vector3(14, 0, -12), "Blacksmith sits northeast of the main road")
-	_assert_marker_position(t, town, "NorthEastDistrict/ForestryMarker", Vector3(18, 0, -24), "Forestry sits in the northeast")
-	_assert_marker_position(t, town, "NorthEastDistrict/FishingVillageMarker", Vector3(24, 0, -18), "Fishing village sits on the northeast/east waterfront")
+	var building_paths := {
+		"WestDistrict/WaterwheelBuilding": Vector3(-18, 0, 10),
+		"WestDistrict/Farmhouse_01": Vector3(-20, 0, 4),
+		"WestDistrict/Farmhouse_02": Vector3(-22, 0, 2),
+		"EastDistrict/YamenBuilding": Vector3(16, 0, 2),
+		"EastDistrict/DockBuilding": Vector3(22, 0, 10),
+		"SouthEastDistrict/TempleBuilding": Vector3(12, 0, 18),
+		"NorthEastDistrict/GranaryBuilding": Vector3(8, 0, -16),
+		"NorthEastDistrict/BlacksmithBuilding": Vector3(14, 0, -12),
+		"NorthEastDistrict/FishingHut_01": Vector3(24, 0, -16),
+	}
+	for building_path in building_paths.keys():
+		t.assert_true(town.has_node(building_path), "%s exists as a building shell" % building_path)
+		var building = town.get_node(building_path)
+		t.assert_true(building is StaticBody3D, "%s is a StaticBody3D" % building_path)
+		_assert_marker_position(t, town, building_path, building_paths[building_path], "%s sits at expected position" % building_path)
+	t.assert_true(town.has_node("WestDistrict/CanalMarkerPlaceholder"), "CanalMarkerPlaceholder exists as a canal marker")
 
 func _assert_marker_position(t, town: Node, marker_path: String, expected_position: Vector3, message: String) -> void:
 	var marker = town.get_node_or_null(marker_path)
@@ -167,3 +156,32 @@ func _test_town_npc_ai_nodes(t, town: Node) -> void:
 			t.assert_equal(npc.npc_role, expected_roles[npc_path], "%s has expected role" % npc_path)
 	t.assert_equal(town.get_node("Inn/Innkeeper").npc_id, "innkeeper", "Innkeeper quest id remains intact after town AI placement")
 	t.assert_equal(town.get_node("Tavern/TavernKeeper").npc_id, "tavern_keeper", "TavernKeeper quest id remains intact after town AI placement")
+
+func _test_distant_building_lod(t, town: Node) -> void:
+	t.assert_true(town.has_node("DistantTownShells"), "DistantTownShells exists")
+	var lod_group = town.get_node_or_null("DistantTownShells")
+	t.assert_true(lod_group != null, "DistantTownShells node exists")
+	if lod_group != null:
+		t.assert_true(lod_group.has_method("update_for_camera_position"), "DistantTownShells has SceneLodGroup methods")
+		t.assert_true(lod_group.has_node("Near"), "SceneLodGroup has Near LOD")
+		t.assert_true(lod_group.has_node("Mid"), "SceneLodGroup has Mid LOD")
+		t.assert_true(lod_group.has_node("Far"), "SceneLodGroup has Far LOD")
+		var near_node := lod_group.get_node_or_null("Near")
+		if near_node != null:
+			t.assert_true(near_node.get_child_count() == 12, "Near LOD has 12 distant shells")
+		var mid_node := lod_group.get_node_or_null("Mid")
+		if mid_node != null:
+			t.assert_true(mid_node.get_child_count() == 0, "Mid LOD is empty (can be populated later)")
+
+func _test_street_props(t, town: Node) -> void:
+	t.assert_true(town.has_node("TownProps"), "TownProps node exists")
+	t.assert_true(town.has_node("TownProps/StreetLanterns"), "Street lanterns exist")
+	t.assert_true(town.has_node("TownProps/MarketProps"), "Market props exist")
+	t.assert_true(town.has_node("TownProps/InnProps"), "Inn props exist")
+	t.assert_true(town.has_node("TownProps/TavernProps"), "Tavern props exist")
+	t.assert_true(town.has_node("TownProps/TownTrees"), "Town trees exist")
+	var street_lanterns := town.get_node("TownProps/StreetLanterns")
+	t.assert_true(street_lanterns.get_child_count() > 0, "StreetLanterns has at least 1 child")
+	t.assert_true(town.has_node("TownProps/TownTrees/Tree_01"), "Tree_01 exists")
+	t.assert_true(town.has_node("TownProps/MarketProps/Box_01"), "MarketBox_01 exists")
+	t.assert_true(town.has_node("TownProps/MarketProps/Jar_01"), "MarketJar_01 exists")

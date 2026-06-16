@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" path="res://assets/models/Inn/Inn.glb" id="1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
-size = Vector3(0.99428, 0.762061, 0.566659)
+size = Vector3(14, 6, 10)
 
 [node name="Inn" type="Node3D"]
 metadata/source_model_path = "res://assets/models/Inn/Inn.glb"
@@ -13,5 +13,5 @@ metadata/source_model_path = "res://assets/models/Inn/Inn.glb"
 [node name="CollisionBody" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1e-05, 0.3712335, -0.0066555)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 shape = SubResource("BoxShape3D_collision")

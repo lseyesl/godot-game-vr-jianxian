@@ -18,6 +18,16 @@
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof09.tscn" id="17"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof10.tscn" id="18"]
 [ext_resource type="PackedScene" path="res://scenes/npc/TownNpc.tscn" id="19"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/buildings/SmallBuildingShell.tscn" id="20"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/buildings/MediumBuildingShell.tscn" id="21"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/buildings/LargeBuildingShell.tscn" id="22"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/buildings/DistantBuildingShell.tscn" id="23"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/props/Lantern.tscn" id="24"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/props/WoodenBox.tscn" id="25"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/props/WineJar.tscn" id="26"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/props/Tree.tscn" id="27"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/props/PineTree.tscn" id="28"]
+[ext_resource type="Script" path="res://scripts/world/SceneLodGroup.gd" id="29"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(1.5, 0.25, 1.5)
@@ -369,59 +379,65 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
 
 [node name="WestDistrict" type="Node3D" parent="." unique_id=112917967]
 
-[node name="CanalMarker" type="MeshInstance3D" parent="WestDistrict" unique_id=913695453]
+[node name="CanalMarkerPlaceholder" type="Node3D" parent="WestDistrict"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 8)
-mesh = SubResource("BoxMesh_1")
 
-[node name="WaterwheelMarker" type="MeshInstance3D" parent="WestDistrict" unique_id=2079420079]
+[node name="WaterwheelBuilding" parent="WestDistrict" instance=ExtResource("21")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 10)
-mesh = SubResource("BoxMesh_1")
 
-[node name="FarmlandWestMarker" type="MeshInstance3D" parent="WestDistrict" unique_id=815567161]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 2)
-mesh = SubResource("BoxMesh_1")
+[node name="Farmhouse_01" parent="WestDistrict" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 4)
 
-[node name="FarmlandNorthWestMarker" type="MeshInstance3D" parent="WestDistrict" unique_id=92475732]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -14)
-mesh = SubResource("BoxMesh_1")
+[node name="Farmhouse_02" parent="WestDistrict" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 2)
 
-[node name="FarmlandSouthWestMarker" type="MeshInstance3D" parent="WestDistrict" unique_id=1303902062]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 20)
-mesh = SubResource("BoxMesh_1")
+[node name="Farmhouse_03" parent="WestDistrict" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 0)
+
+[node name="Farmhouse_NW_01" parent="WestDistrict" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -12)
+
+[node name="Farmhouse_NW_02" parent="WestDistrict" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -14)
+
+[node name="Farmhouse_SW_01" parent="WestDistrict" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 22)
+
+[node name="Farmhouse_SW_02" parent="WestDistrict" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 20)
 
 [node name="EastDistrict" type="Node3D" parent="." unique_id=735152332]
 
-[node name="YamenMarker" type="MeshInstance3D" parent="EastDistrict" unique_id=1916240085]
+[node name="YamenBuilding" parent="EastDistrict" instance=ExtResource("21")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 2)
-mesh = SubResource("BoxMesh_1")
 
-[node name="DockMarker" type="MeshInstance3D" parent="EastDistrict" unique_id=1226343930]
+[node name="DockBuilding" parent="EastDistrict" instance=ExtResource("20")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 10)
-mesh = SubResource("BoxMesh_1")
 
 [node name="SouthEastDistrict" type="Node3D" parent="." unique_id=1380221737]
 
-[node name="TempleMarker" type="MeshInstance3D" parent="SouthEastDistrict" unique_id=336240732]
+[node name="TempleBuilding" parent="SouthEastDistrict" instance=ExtResource("22")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 18)
-mesh = SubResource("BoxMesh_1")
 
 [node name="NorthEastDistrict" type="Node3D" parent="." unique_id=1625841343]
 
-[node name="GranaryMarker" type="MeshInstance3D" parent="NorthEastDistrict" unique_id=1414675900]
+[node name="GranaryBuilding" parent="NorthEastDistrict" instance=ExtResource("20")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -16)
-mesh = SubResource("BoxMesh_1")
 
-[node name="BlacksmithMarker" type="MeshInstance3D" parent="NorthEastDistrict" unique_id=1106625875]
+[node name="BlacksmithBuilding" parent="NorthEastDistrict" instance=ExtResource("20")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -12)
-mesh = SubResource("BoxMesh_1")
 
-[node name="ForestryMarker" type="MeshInstance3D" parent="NorthEastDistrict" unique_id=1781945542]
+[node name="ForestryTreeCluster" type="Node3D" parent="NorthEastDistrict"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -24)
-mesh = SubResource("BoxMesh_1")
 
-[node name="FishingVillageMarker" type="MeshInstance3D" parent="NorthEastDistrict" unique_id=1382209369]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -18)
-mesh = SubResource("BoxMesh_1")
+[node name="FishingHut_01" parent="NorthEastDistrict" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -16)
+
+[node name="FishingHut_02" parent="NorthEastDistrict" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -18)
+
+[node name="FishingHut_03" parent="NorthEastDistrict" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -20)
 
 [node name="TownFlowMarkers" type="Node3D" parent="."]
 
@@ -474,13 +490,243 @@ script = ExtResource("2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ReturnToTownTrigger" unique_id=863962893]
 shape = SubResource("BoxShape3D_1")
 
-[node name="DistantTownShells" type="Node3D" parent="." unique_id=397495801]
+[node name="CoreBuildingShells" type="Node3D" parent="."]
 
-[node name="ShellA" type="MeshInstance3D" parent="DistantTownShells" unique_id=687719714]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -10)
+[node name="Core_01" parent="CoreBuildingShells" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2)
 
-[node name="ShellB" type="MeshInstance3D" parent="DistantTownShells" unique_id=1685753158]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -12)
+[node name="Core_02" parent="CoreBuildingShells" instance=ExtResource("21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="Core_03" parent="CoreBuildingShells" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -12)
+
+[node name="Core_04" parent="CoreBuildingShells" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
+
+[node name="Core_05" parent="CoreBuildingShells" instance=ExtResource("21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 14)
+
+[node name="Core_06" parent="CoreBuildingShells" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 4)
+
+[node name="DistantTownShells" type="Node3D" parent="."]
+script = ExtResource("29")
+near_lod_path = NodePath("Near")
+mid_lod_path = NodePath("Mid")
+far_lod_path = NodePath("Far")
+mid_distance_m = 35.0
+far_distance_m = 75.0
+
+[node name="Near" type="Node3D" parent="DistantTownShells"]
+
+[node name="D_01" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -38)
+
+[node name="D_02" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -38)
+
+[node name="D_03" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -38)
+
+[node name="D_04" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 0)
+
+[node name="D_05" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 10)
+
+[node name="D_06" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 20)
+
+[node name="D_07" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -5)
+
+[node name="D_08" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 5)
+
+[node name="D_09" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 15)
+
+[node name="D_10" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 32)
+
+[node name="D_11" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 32)
+
+[node name="D_12" parent="DistantTownShells/Near" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 32)
+
+[node name="Mid" type="Node3D" parent="DistantTownShells"]
+
+[node name="Far" type="Node3D" parent="DistantTownShells"]
+
+[node name="TownProps" type="Node3D" parent="."]
+
+[node name="StreetLanterns" type="Node3D" parent="TownProps"]
+
+[node name="L_W_01" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -28)
+
+[node name="L_E_01" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -28)
+
+[node name="L_W_02" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -24)
+
+[node name="L_E_02" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -24)
+
+[node name="L_W_03" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -20)
+
+[node name="L_E_03" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -20)
+
+[node name="L_W_04" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -16)
+
+[node name="L_E_04" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -16)
+
+[node name="L_W_05" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -12)
+
+[node name="L_E_05" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -12)
+
+[node name="L_W_06" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -8)
+
+[node name="L_E_06" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -8)
+
+[node name="L_W_07" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -4)
+
+[node name="L_E_07" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -4)
+
+[node name="L_W_08" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 0)
+
+[node name="L_E_08" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 0)
+
+[node name="L_W_09" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 4)
+
+[node name="L_E_09" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 4)
+
+[node name="L_W_10" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 8)
+
+[node name="L_E_10" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 8)
+
+[node name="L_W_11" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 12)
+
+[node name="L_E_11" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 12)
+
+[node name="L_W_12" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 16)
+
+[node name="L_E_12" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 16)
+
+[node name="L_W_13" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 20)
+
+[node name="L_E_13" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 20)
+
+[node name="L_W_14" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 24)
+
+[node name="L_E_14" parent="TownProps/StreetLanterns" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 24)
+
+[node name="MarketProps" type="Node3D" parent="TownProps"]
+
+[node name="Box_01" parent="TownProps/MarketProps" instance=ExtResource("25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.3, 7)
+
+[node name="Box_02" parent="TownProps/MarketProps" instance=ExtResource("25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.3, 9)
+
+[node name="Box_03" parent="TownProps/MarketProps" instance=ExtResource("25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.3, 10)
+
+[node name="Jar_01" parent="TownProps/MarketProps" instance=ExtResource("26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.2, 7)
+
+[node name="Jar_02" parent="TownProps/MarketProps" instance=ExtResource("26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 10)
+
+[node name="InnProps" type="Node3D" parent="TownProps"]
+
+[node name="Lantern_L" parent="TownProps/InnProps" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 2.5, 7.5)
+
+[node name="Lantern_R" parent="TownProps/InnProps" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 2.5, 7.5)
+
+[node name="Box_Rear" parent="TownProps/InnProps" instance=ExtResource("25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.3, 4)
+
+[node name="TavernProps" type="Node3D" parent="TownProps"]
+
+[node name="Lantern_L" parent="TownProps/TavernProps" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2.5, 13.5)
+
+[node name="Lantern_R" parent="TownProps/TavernProps" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 2.5, 13.5)
+
+[node name="Jar_01" parent="TownProps/TavernProps" instance=ExtResource("26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.2, 15)
+
+[node name="Jar_02" parent="TownProps/TavernProps" instance=ExtResource("26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.2, 15)
+
+[node name="TownTrees" type="Node3D" parent="TownProps"]
+
+[node name="Tree_01" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -24)
+
+[node name="Tree_02" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -16)
+
+[node name="Tree_03" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -8)
+
+[node name="Tree_04" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, 0)
+
+[node name="Tree_05" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -20)
+
+[node name="Tree_06" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -12)
+
+[node name="Tree_07" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -4)
+
+[node name="Tree_08" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 6)
+
+[node name="Tree_09" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, 10)
+
+[node name="Tree_10" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, 18)
+
+[node name="Tree_11" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 18)
+
+[node name="Tree_12" parent="TownProps/TownTrees" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 26)
 
 [node name="TownNpcGroup" type="Node3D" parent="."]
 

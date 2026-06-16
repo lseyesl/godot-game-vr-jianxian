@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/Main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/town/Town.tscn" id="2"]
@@ -10,11 +10,44 @@
 [ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/SuburbGround.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/MountainGround.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/WorldBoundary.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/PathSegment_3x6m.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/CliffWall_4x6m.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/water/Waterfall.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/water/RiverStraight.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/water/Lake.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/water/RiverBend.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/flight/RouteRing.tscn" id="17"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/flight/AerialLantern.tscn" id="18"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/flight/CloudWisp.tscn" id="19"]
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 0
+background_color = Color(0.48, 0.58, 0.68, 1)
+ambient_light_source = 1
+ambient_light_color = Color(0.6, 0.68, 0.8, 1)
+ambient_light_energy = 0.55
+fog_enabled = true
+fog_light_color = Color(0.7, 0.75, 0.8, 1)
+fog_density = 0.003
+fog_height = 10.0
+fog_height_density = 0.4
+
+[sub_resource type="FogMaterial" id="FogMaterial_valley"]
+density = 0.01
+height = 8.0
+emission_color = Color(0.6, 0.7, 0.8, 0.3)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_main")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+shape = 0
+size = Vector3(60, 15, 60)
+position = Vector3(0, 10, 8)
+material = SubResource("FogMaterial_valley")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 rotation = Vector3(-0.8, 0.4, 0.0)
@@ -33,6 +66,120 @@ world_environment_path = NodePath("../WorldEnvironment")
 [node name="MountainGround" parent="TerrainContainer" instance=ExtResource("9")]
 
 [node name="WorldBoundary" parent="TerrainContainer" instance=ExtResource("10")]
+
+[node name="ConnectionCorridor" type="Node3D" parent="."]
+
+[node name="Path_01" parent="ConnectionCorridor" instance=ExtResource("11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, -38)
+
+[node name="Path_02" parent="ConnectionCorridor" instance=ExtResource("11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, -44)
+
+[node name="Path_03" parent="ConnectionCorridor" instance=ExtResource("11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.15, -50)
+
+[node name="Path_04" parent="ConnectionCorridor" instance=ExtResource("11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.15, -56)
+
+[node name="Path_05" parent="ConnectionCorridor" instance=ExtResource("11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.15, -62)
+
+[node name="Path_06" parent="ConnectionCorridor" instance=ExtResource("11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.15, -68)
+
+[node name="CliffWalls" type="Node3D" parent="ConnectionCorridor"]
+
+[node name="Left_01" parent="ConnectionCorridor/CliffWalls" instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 6, -44)
+
+[node name="Left_02" parent="ConnectionCorridor/CliffWalls" instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9, -53)
+
+[node name="Left_03" parent="ConnectionCorridor/CliffWalls" instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 12, -62)
+
+[node name="Right_01" parent="ConnectionCorridor/CliffWalls" instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 6, -44)
+
+[node name="Right_02" parent="ConnectionCorridor/CliffWalls" instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 9, -53)
+
+[node name="Right_03" parent="ConnectionCorridor/CliffWalls" instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 12, -62)
+
+[node name="WaterfallVista" parent="ConnectionCorridor" instance=ExtResource("13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 12, -50)
+
+[node name="WaterFeatures" type="Node3D" parent="."]
+
+[node name="TownCanal" parent="WaterFeatures" instance=ExtResource("14")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 8)
+
+[node name="TownLake" parent="WaterFeatures" instance=ExtResource("15")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 4)
+
+[node name="MountainStream" parent="WaterFeatures" instance=ExtResource("16")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 12, -55)
+
+[node name="FlightRoute" type="Node3D" parent="."]
+
+[node name="Ring_01" parent="FlightRoute" instance=ExtResource("17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, -40)
+
+[node name="Ring_02" parent="FlightRoute" instance=ExtResource("17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 23, -30)
+
+[node name="Ring_03" parent="FlightRoute" instance=ExtResource("17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 21, -20)
+
+[node name="Ring_04" parent="FlightRoute" instance=ExtResource("17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 18, -10)
+
+[node name="Ring_05" parent="FlightRoute" instance=ExtResource("17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 15, 0)
+
+[node name="Ring_06" parent="FlightRoute" instance=ExtResource("17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 15, 10)
+
+[node name="Ring_07" parent="FlightRoute" instance=ExtResource("17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 15, 20)
+
+[node name="AerialLanterns" type="Node3D" parent="FlightRoute"]
+
+[node name="AltL_01" parent="FlightRoute/AerialLanterns" instance=ExtResource("18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 26, -35)
+
+[node name="AltL_02" parent="FlightRoute/AerialLanterns" instance=ExtResource("18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 24, -25)
+
+[node name="AltL_03" parent="FlightRoute/AerialLanterns" instance=ExtResource("18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 22, -15)
+
+[node name="AltL_04" parent="FlightRoute/AerialLanterns" instance=ExtResource("18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 18, -5)
+
+[node name="AltL_05" parent="FlightRoute/AerialLanterns" instance=ExtResource("18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 16, 5)
+
+[node name="AltL_06" parent="FlightRoute/AerialLanterns" instance=ExtResource("18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 14, 15)
+
+[node name="CloudWisps" type="Node3D" parent="FlightRoute"]
+
+[node name="Cloud_01" parent="FlightRoute/CloudWisps" instance=ExtResource("19")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 22, -25)
+
+[node name="Cloud_02" parent="FlightRoute/CloudWisps" instance=ExtResource("19")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 20, -18)
+
+[node name="Cloud_03" parent="FlightRoute/CloudWisps" instance=ExtResource("19")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 19, -8)
+
+[node name="Cloud_04" parent="FlightRoute/CloudWisps" instance=ExtResource("19")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 2)
+
+[node name="Cloud_05" parent="FlightRoute/CloudWisps" instance=ExtResource("19")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 16, 12)
 
 [node name="Town" parent="." instance=ExtResource("2")]
 
