@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="CylinderMesh" id="Ring_disc"]
+top_radius = 2.5
+bottom_radius = 2.5
+height = 0.15
+
+[node name="RouteRing" type="Node3D"]
+
+[node name="Disc" type="MeshInstance3D" parent="."]
+mesh = SubResource("Ring_disc")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="SphereMesh" id="Body_mesh"]
+radius = 0.25
+height = 0.5
+
+[node name="AerialLantern" type="Node3D"]
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("Body_mesh")
