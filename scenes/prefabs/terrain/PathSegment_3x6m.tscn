@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="BoxMesh" id="Surface_mesh"]
+size = Vector3(3, 0.15, 6)
+
+[sub_resource type="BoxShape3D" id="Surface_col"]
+size = Vector3(3, 0.15, 6)
+
+[node name="PathSegment_3x6m" type="StaticBody3D"]
+
+[node name="Surface" type="MeshInstance3D" parent="."]
+mesh = SubResource("Surface_mesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("Surface_col")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.075, 0)
