@@ -6,11 +6,12 @@ func run(t) -> void:
 	if scene == null:
 		return
 
-	var ground := scene.get_node_or_null("Ground")
-	t.assert_true(ground != null, "Main scene has direct Ground child")
-	if ground != null:
-		t.assert_true(ground is StaticBody3D, "Ground is StaticBody3D")
-		t.assert_true(ground.get_node_or_null("MeshInstance3D") != null, "Ground has MeshInstance3D child")
-		t.assert_true(ground.get_node_or_null("CollisionShape3D") != null, "Ground has CollisionShape3D child")
+	var container := scene.get_node_or_null("TerrainContainer")
+	t.assert_true(container != null, "Main scene has TerrainContainer child")
+	if container != null:
+		t.assert_true(container.get_node_or_null("TownGround") != null, "TerrainContainer has TownGround")
+		t.assert_true(container.get_node_or_null("SuburbGround") != null, "TerrainContainer has SuburbGround")
+		t.assert_true(container.get_node_or_null("MountainGround") != null, "TerrainContainer has MountainGround")
+		t.assert_true(container.get_node_or_null("WorldBoundary") != null, "TerrainContainer has WorldBoundary")
 
 	scene.free()
