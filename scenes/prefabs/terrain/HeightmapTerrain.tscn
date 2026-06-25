@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/HeightmapTerrain.gd" id="1_heightmap_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_heightmap"]
+albedo_color = Color(0.45, 0.52, 0.42, 1)
+roughness = 0.9
+
+[node name="HeightmapTerrain" type="StaticBody3D"]
+script = ExtResource("1_heightmap_script")
+world_size = Vector2(120, 80)
+sample_columns = 129
+sample_rows = 129
+height_scale_m = 32.0
+base_gray_level = 0.5
+generate_collision = false
+terrain_material = SubResource("StandardMaterial3D_heightmap")
+
+[node name="TerrainMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_heightmap")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+disabled = true

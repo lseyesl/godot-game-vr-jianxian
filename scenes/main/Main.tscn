@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/Main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/town/Town.tscn" id="2"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" path="res://scenes/prefabs/flight/RouteRing.tscn" id="17"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/flight/AerialLantern.tscn" id="18"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/flight/CloudWisp.tscn" id="19"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/HeightmapTerrain.tscn" id="20"]
 
 [sub_resource type="Environment" id="Environment_main"]
 background_mode = 0
@@ -58,6 +59,8 @@ directional_light_path = NodePath("../DirectionalLight3D")
 world_environment_path = NodePath("../WorldEnvironment")
 
 [node name="TerrainContainer" type="Node3D" parent="."]
+
+[node name="HeightmapTerrain" parent="TerrainContainer" instance=ExtResource("20")]
 
 [node name="TownGround" parent="TerrainContainer" instance=ExtResource("7")]
 

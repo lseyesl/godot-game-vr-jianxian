@@ -6,6 +6,21 @@ func run(t) -> void:
 	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/SuburbGround.tscn"), "SuburbGround should exist")
 	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/MountainGround.tscn"), "MountainGround should exist")
 	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/WorldBoundary.tscn"), "WorldBoundary should exist")
+	t.assert_true(ResourceLoader.exists("res://assets/textures/terrain/heightmaps/terrain_heightmap.png"), "Heightmap texture should exist")
+	t.assert_true(ResourceLoader.exists("res://scripts/world/HeightmapTerrain.gd"), "HeightmapTerrain script should exist")
+	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/HeightmapTerrain.tscn"), "HeightmapTerrain prefab should exist")
+
+	var heightmap_scene := preload("res://scenes/prefabs/terrain/HeightmapTerrain.tscn").instantiate()
+	t.assert_true(heightmap_scene != null, "HeightmapTerrain scene should instantiate")
+	if heightmap_scene != null:
+		t.assert_true(heightmap_scene.has_method("generate_from_heightmap"), "HeightmapTerrain exposes generation method")
+		var generated: bool = heightmap_scene.generate_from_heightmap()
+		t.assert_true(generated, "HeightmapTerrain generates mesh from heightmap")
+		var terrain_mesh := heightmap_scene.get_node_or_null("TerrainMesh")
+		t.assert_true(terrain_mesh != null, "HeightmapTerrain has TerrainMesh child")
+		if terrain_mesh != null:
+			t.assert_true(terrain_mesh.mesh != null, "HeightmapTerrain generated mesh is assigned")
+		heightmap_scene.free()
 
 	# 验证 Phase 2 路径预置体可加载
 	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/PathSegment_3x6m.tscn"), "PathSegment should exist")
@@ -59,6 +74,7 @@ func run(t) -> void:
 	var container := scene.get_node_or_null("TerrainContainer")
 	t.assert_true(container != null, "Main scene has TerrainContainer child")
 	if container != null:
+		t.assert_true(container.get_node_or_null("HeightmapTerrain") != null, "TerrainContainer has HeightmapTerrain")
 		t.assert_true(container.get_node_or_null("TownGround") != null, "TerrainContainer has TownGround")
 		t.assert_true(container.get_node_or_null("SuburbGround") != null, "TerrainContainer has SuburbGround")
 		t.assert_true(container.get_node_or_null("MountainGround") != null, "TerrainContainer has MountainGround")
