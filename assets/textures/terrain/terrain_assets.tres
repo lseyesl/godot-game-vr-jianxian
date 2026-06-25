@@ -1,13 +1,13 @@
 [gd_resource type="Terrain3DAssets" load_steps=11 format=3]
 
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/草地/rocky_terrain/rocky_terrain_alb_ht.png" id="1_grass_alb"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/草地/rocky_terrain/rocky_terrain_nrm_rgh.png" id="2_grass_nrm"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/岩石/marble_cliff_03/marble_cliff_03_alb_ht.png" id="3_rock_alb"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/岩石/marble_cliff_03/marble_cliff_03_nrm_rgh.png" id="4_rock_nrm"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/泥土/gravel_road/gravel_road_alb_ht.png" id="5_dirt_alb"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/泥土/gravel_road/gravel_road_nrm_rgh.png" id="6_dirt_nrm"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/石板/medieval_blocks_05/medieval_blocks_05_alb_ht.png" id="7_stone_alb"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/石板/medieval_blocks_05/medieval_blocks_05_nrm_rgh.png" id="8_stone_nrm"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/grassland/rocky_terrain/rocky_terrain_alb_ht.png" id="1_grass_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/grassland/rocky_terrain/rocky_terrain_nrm_rgh.png" id="2_grass_nrm"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/rock/marble_cliff_03/marble_cliff_03_alb_ht.png" id="3_rock_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/rock/marble_cliff_03/marble_cliff_03_nrm_rgh.png" id="4_rock_nrm"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/soil/gravel_road/gravel_road_alb_ht.png" id="5_dirt_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/soil/gravel_road/gravel_road_nrm_rgh.png" id="6_dirt_nrm"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/stone_slab/medieval_blocks_05/medieval_blocks_05_alb_ht.png" id="7_stone_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/stone_slab/medieval_blocks_05/medieval_blocks_05_nrm_rgh.png" id="8_stone_nrm"]
 
 [sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_grass"]
 name = "草地"
