@@ -7,3 +7,6 @@ assets/**/*.{png,jpg,jpeg,tga,exr,hdr,psd} filter=lfs diff=lfs merge=lfs -text
 addons/**/*.{png,jpg,jpeg,tga,exr,hdr,psd} filter=lfs diff=lfs merge=lfs -text
 *.gltf filter=lfs diff=lfs merge=lfs -text
 addons/**/*.{dll,so,dylib} filter=lfs diff=lfs merge=lfs -text
+assets/textures/terrain/**/*.exr filter=lfs diff=lfs merge=lfs -text
+assets/textures/terrain/**/*.png filter=lfs diff=lfs merge=lfs -text
+assets/textures/terrain/**/*.jpg filter=lfs diff=lfs merge=lfs -text

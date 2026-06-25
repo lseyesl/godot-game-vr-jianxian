@@ -1,0 +1,48 @@
+[gd_resource type="Terrain3DAssets" load_steps=11 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/草地/rocky_terrain/rocky_terrain_alb_ht.png" id="1_grass_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/草地/rocky_terrain/rocky_terrain_nrm_rgh.png" id="2_grass_nrm"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/岩石/marble_cliff_03/marble_cliff_03_alb_ht.png" id="3_rock_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/岩石/marble_cliff_03/marble_cliff_03_nrm_rgh.png" id="4_rock_nrm"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/泥土/gravel_road/gravel_road_alb_ht.png" id="5_dirt_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/泥土/gravel_road/gravel_road_nrm_rgh.png" id="6_dirt_nrm"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/石板/medieval_blocks_05/medieval_blocks_05_alb_ht.png" id="7_stone_alb"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/石板/medieval_blocks_05/medieval_blocks_05_nrm_rgh.png" id="8_stone_nrm"]
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_grass"]
+name = "草地"
+albedo_texture = ExtResource("1_grass_alb")
+normal_texture = ExtResource("2_grass_nrm")
+normal_depth = 1.0
+ao_strength = 1.0
+uv_scale = 0.3
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_rock"]
+name = "岩石"
+id = 1
+albedo_texture = ExtResource("3_rock_alb")
+normal_texture = ExtResource("4_rock_nrm")
+normal_depth = 1.5
+ao_strength = 2.0
+uv_scale = 0.5
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_dirt"]
+name = "泥土"
+id = 2
+albedo_texture = ExtResource("5_dirt_alb")
+normal_texture = ExtResource("6_dirt_nrm")
+normal_depth = 0.8
+ao_strength = 1.5
+uv_scale = 0.4
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_stone"]
+name = "石板"
+id = 3
+albedo_texture = ExtResource("7_stone_alb")
+normal_texture = ExtResource("8_stone_nrm")
+normal_depth = 0.6
+ao_strength = 1.0
+uv_scale = 0.5
+
+[resource]
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_grass"), SubResource("Terrain3DTextureAsset_rock"), SubResource("Terrain3DTextureAsset_dirt"), SubResource("Terrain3DTextureAsset_stone")])
