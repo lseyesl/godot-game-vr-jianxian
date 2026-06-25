@@ -48,6 +48,20 @@ func generate_from_heightmap() -> bool:
 	return true
 
 
+func get_height_at_world_position(world_position: Vector3) -> float:
+	var image: Image = _load_heightmap_image()
+	if image == null or image.is_empty():
+		return world_position.y
+	image.convert(Image.FORMAT_RGB8)
+	var local_position: Vector3 = global_transform.affine_inverse() * world_position if is_inside_tree() else world_position
+	var u: float = local_position.x / world_size.x + 0.5
+	var v: float = local_position.z / world_size.y + 0.5
+	var local_height := _sample_height(image, u, v)
+	if is_inside_tree():
+		return (global_transform * Vector3(local_position.x, local_height, local_position.z)).y
+	return local_height
+
+
 func _load_heightmap_image() -> Image:
 	var texture: Texture2D = ResourceLoader.load(heightmap_path) as Texture2D
 	if texture != null:

@@ -13,6 +13,7 @@ func run(t) -> void:
 	var heightmap_scene := preload("res://scenes/prefabs/terrain/HeightmapTerrain.tscn").instantiate()
 	t.assert_true(heightmap_scene != null, "HeightmapTerrain scene should instantiate")
 	if heightmap_scene != null:
+		t.assert_equal(heightmap_scene.world_size, Vector2(900, 600), "HeightmapTerrain maps full heightmap to 900x600m")
 		t.assert_true(heightmap_scene.has_method("generate_from_heightmap"), "HeightmapTerrain exposes generation method")
 		var generated: bool = heightmap_scene.generate_from_heightmap()
 		t.assert_true(generated, "HeightmapTerrain generates mesh from heightmap")
@@ -20,6 +21,19 @@ func run(t) -> void:
 		t.assert_true(terrain_mesh != null, "HeightmapTerrain has TerrainMesh child")
 		if terrain_mesh != null:
 			t.assert_true(terrain_mesh.mesh != null, "HeightmapTerrain generated mesh is assigned")
+			if terrain_mesh.mesh != null:
+				var mesh_aabb: AABB = terrain_mesh.mesh.get_aabb()
+				t.assert_true(is_equal_approx(mesh_aabb.size.x, 900.0), "HeightmapTerrain mesh spans 900m on X")
+				t.assert_true(is_equal_approx(mesh_aabb.size.z, 600.0), "HeightmapTerrain mesh spans 600m on Z")
+		var collision_shape := heightmap_scene.get_node_or_null("CollisionShape3D") as CollisionShape3D
+		t.assert_true(collision_shape != null, "HeightmapTerrain has CollisionShape3D child")
+		if collision_shape != null:
+			t.assert_true(not collision_shape.disabled, "HeightmapTerrain collision is enabled")
+			t.assert_true(collision_shape.shape != null, "HeightmapTerrain collision shape is generated")
+		t.assert_true(heightmap_scene.has_method("get_height_at_world_position"), "HeightmapTerrain exposes world height lookup")
+		if heightmap_scene.has_method("get_height_at_world_position"):
+			var spawn_height: float = heightmap_scene.get_height_at_world_position(Vector3(0, 0, 6))
+			t.assert_true(spawn_height > 1.0, "HeightmapTerrain reports raised terrain at default spawn XZ")
 		heightmap_scene.free()
 
 	# 验证 Phase 2 路径预置体可加载
@@ -79,6 +93,15 @@ func run(t) -> void:
 		t.assert_true(container.get_node_or_null("SuburbGround") != null, "TerrainContainer has SuburbGround")
 		t.assert_true(container.get_node_or_null("MountainGround") != null, "TerrainContainer has MountainGround")
 		t.assert_true(container.get_node_or_null("WorldBoundary") != null, "TerrainContainer has WorldBoundary")
+		var main_heightmap := container.get_node_or_null("HeightmapTerrain")
+		if main_heightmap != null:
+			t.assert_equal(main_heightmap.world_size, Vector2(900, 600), "Main uses 900x600m heightmap terrain")
+		var boundary := container.get_node_or_null("WorldBoundary")
+		if boundary != null:
+			_assert_boundary_wall(t, boundary, "NorthWall", Vector3(0, 30, -300.5), Vector3(900, 60, 1), "north boundary covers terrain width")
+			_assert_boundary_wall(t, boundary, "SouthWall", Vector3(0, 30, 300.5), Vector3(900, 60, 1), "south boundary covers terrain width")
+			_assert_boundary_wall(t, boundary, "WestWall", Vector3(-450.5, 30, 0), Vector3(1, 60, 600), "west boundary covers terrain depth")
+			_assert_boundary_wall(t, boundary, "EastWall", Vector3(450.5, 30, 0), Vector3(1, 60, 600), "east boundary covers terrain depth")
 
 	# 验证 ConnectionCorridor 存在且包含路径和崖壁
 	var corridor := scene.get_node_or_null("ConnectionCorridor")
@@ -104,11 +127,15 @@ func run(t) -> void:
 		t.assert_true(flight.get_node_or_null("AerialLanterns") != null, "FlightRoute has AerialLanterns")
 		t.assert_true(flight.get_node_or_null("CloudWisps") != null, "FlightRoute has CloudWisps")
 
-	# 验证环境雾
+	# 验证当前主场景暂时不启用雾
+	var world_environment := scene.get_node_or_null("WorldEnvironment") as WorldEnvironment
+	t.assert_true(world_environment != null, "Main scene has WorldEnvironment")
+	if world_environment != null and world_environment.environment != null:
+		t.assert_true(not world_environment.environment.fog_enabled, "Main scene global fog is disabled")
 	var fog_volume := scene.get_node_or_null("FogVolume")
 	t.assert_true(fog_volume != null, "Main scene has FogVolume")
 	if fog_volume != null:
-		t.assert_true(fog_volume.size == Vector3(60, 15, 60), "FogVolume size should be 60x15x60")
+		t.assert_true(not fog_volume.visible, "Main scene FogVolume is hidden while fog is disabled")
 
 	# 验证旧 Ground 节点已移除
 	var old_ground := scene.get_node_or_null("Ground")
@@ -130,3 +157,19 @@ func run(t) -> void:
 	t.assert_true(ResourceLoader.exists("res://scenes/interaction/SealEncounter.tscn"), "SealEncounter should still exist")
 	t.assert_true(ResourceLoader.exists("res://scenes/items/FlyingSword.tscn"), "FlyingSword should still exist")
 	t.assert_true(ResourceLoader.exists("res://scenes/player/DesktopDebugPlayer.tscn"), "DesktopDebugPlayer should still exist")
+
+
+func _assert_boundary_wall(t, boundary: Node, wall_name: String, expected_position: Vector3, expected_size: Vector3, message: String) -> void:
+	var wall := boundary.get_node_or_null(wall_name) as Node3D
+	t.assert_true(wall != null, "%s exists" % wall_name)
+	if wall == null:
+		return
+	t.assert_equal(wall.position, expected_position, "%s position matches expanded terrain" % wall_name)
+	var collision_shape := wall.get_node_or_null("CollisionShape3D") as CollisionShape3D
+	t.assert_true(collision_shape != null, "%s has collision shape" % wall_name)
+	if collision_shape == null:
+		return
+	var box_shape := collision_shape.shape as BoxShape3D
+	t.assert_true(box_shape != null, "%s uses BoxShape3D" % wall_name)
+	if box_shape != null:
+		t.assert_equal(box_shape.size, expected_size, message)

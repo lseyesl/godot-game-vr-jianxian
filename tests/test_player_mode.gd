@@ -37,3 +37,23 @@ func run(t) -> void:
 	t.assert_true(first_player != live_main.player_node, "Main respawn replaces the player node")
 	t.assert_true(not is_instance_valid(first_player), "Main respawn frees old player immediately")
 	live_main.free()
+
+	var terrain_main = MainScript.new()
+	terrain_main.player_spawn_position = Vector3(0, 0, 6)
+	var terrain_container := Node3D.new()
+	terrain_container.name = "TerrainContainer"
+	terrain_main.add_child(terrain_container)
+	var heightmap = preload("res://scenes/prefabs/terrain/HeightmapTerrain.tscn").instantiate()
+	terrain_container.add_child(heightmap)
+	t.root.add_child(terrain_main)
+	terrain_main.spawn_player()
+	t.assert_true(heightmap.has_method("get_height_at_world_position"), "HeightmapTerrain can report terrain height for player spawn")
+	if heightmap.has_method("get_height_at_world_position"):
+		var terrain_height: float = heightmap.get_height_at_world_position(terrain_main.player_spawn_position)
+		var terrain_player := terrain_main.player_node as Node3D
+		t.assert_true(terrain_player != null, "Main spawns player with terrain present")
+		if terrain_player != null:
+			var actual_position := terrain_player.global_position if terrain_player.is_inside_tree() else terrain_player.position
+			t.assert_true(actual_position.y > terrain_main.player_spawn_position.y, "Main raises player above configured Y when terrain is higher")
+			t.assert_true(actual_position.y >= terrain_height - 0.3, "Main does not spawn desktop player inside terrain collision")
+	terrain_main.free()

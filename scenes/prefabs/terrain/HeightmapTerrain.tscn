@@ -8,16 +8,15 @@ roughness = 0.9
 
 [node name="HeightmapTerrain" type="StaticBody3D"]
 script = ExtResource("1_heightmap_script")
-world_size = Vector2(120, 80)
+world_size = Vector2(900, 600)
 sample_columns = 129
 sample_rows = 129
 height_scale_m = 32.0
 base_gray_level = 0.5
-generate_collision = false
+generate_collision = true
 terrain_material = SubResource("StandardMaterial3D_heightmap")
 
 [node name="TerrainMesh" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_heightmap")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-disabled = true
