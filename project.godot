@@ -31,7 +31,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/beehave/plugin.cfg")
+enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [input]
 
