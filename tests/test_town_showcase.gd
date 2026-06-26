@@ -5,6 +5,7 @@ func run(t) -> void:
 	t.assert_true(ResourceLoader.exists(path), "Town scene exists")
 	if not ResourceLoader.exists(path):
 		return
+	_test_town_wall_scene_does_not_serialize_generated_nodes(t, path)
 	var town_scene := load(path)
 	t.assert_true(town_scene is PackedScene, "Town scene loads as PackedScene")
 	if not town_scene is PackedScene:
@@ -51,6 +52,11 @@ func _test_showcase_models(t, town: Node) -> void:
 	t.assert_true(town.has_node("NorthEastDistrict"), "NorthEastDistrict visual anchor exists")
 	t.assert_equal(town.get_node("ReturnToTownTrigger").position, Vector3(12, 3, 24), "Return trigger sits near the southeast return edge")
 
+func _test_town_wall_scene_does_not_serialize_generated_nodes(t, path: String) -> void:
+	var scene_text := FileAccess.get_file_as_string(path)
+	t.assert_true(not scene_text.contains("parent=\"TownWall/GeneratedWalls\""), "Town scene does not serialize generated wall segment instances")
+	t.assert_true(not scene_text.contains("[node name=\"GeneratedWalls\""), "Town scene does not serialize generated wall preview container")
+
 func _test_roof_showcase_models(t, town: Node) -> void:
 	t.assert_true(town.has_node("RoofShowcase"), "Roof showcase anchor exists")
 	for roof_index in range(1, 11):
@@ -62,25 +68,49 @@ func _test_roof_showcase_models(t, town: Node) -> void:
 		t.assert_equal(_source_model_path(roof), "res://assets/models/Roof/%s.glb" % roof_name, "%s uses the matching Roof source asset" % roof_name)
 
 func _test_town_wall_models(t, town: Node) -> void:
-	t.assert_true(town.has_node("TownWalls"), "Town wall anchor exists")
-	var wall_paths := [
-		"TownWalls/NorthWallWest",
-		"TownWalls/NorthWallEast",
-		"TownWalls/SouthWallWest",
-		"TownWalls/SouthWallEast",
-		"TownWalls/WestWallNorth",
-		"TownWalls/WestWallSouth",
-		"TownWalls/EastWallNorth",
-		"TownWalls/EastWallSouth",
-	]
-	for wall_path in wall_paths:
-		t.assert_true(town.has_node(wall_path), "%s exists as a wall segment" % wall_path)
-		var wall = town.get_node_or_null(wall_path)
-		t.assert_true(wall is Node3D, "%s is a 3D wall node" % wall_path)
-		var scene_path := ""
-		if wall != null:
-			scene_path = _source_model_path(wall)
-		t.assert_equal(scene_path, "res://assets/models/Wall/Wall_2x3.glb", "%s uses the Wall_2x3 model" % wall_path)
+	t.assert_true(town.has_node("TownWall"), "Town wall path anchor exists")
+	var wall_generator := town.get_node_or_null("TownWall")
+	t.assert_true(wall_generator != null and wall_generator.has_method("generate_walls"), "TownWall can generate wall segments from paths")
+	if wall_generator == null or not wall_generator.has_method("generate_walls"):
+		return
+
+	var path_count := 0
+	var expected_wall_count := 0
+	var expected_lengths := {}
+	for child in wall_generator.get_children():
+		if child is Path3D and child.curve != null:
+			var length: float = child.curve.get_baked_length()
+			if length > 0.0:
+				path_count += 1
+				expected_lengths[child.name] = length
+				expected_wall_count += ceili(length / 2.0)
+	t.assert_true(path_count >= 1, "TownWall has editable Path3D wall routes")
+
+	wall_generator.generate_walls()
+	var generated := wall_generator.get_node_or_null("GeneratedWalls")
+	t.assert_true(generated != null, "TownWall creates GeneratedWalls container")
+	if generated == null:
+		return
+	t.assert_equal(generated.owner, null, "GeneratedWalls remains unsaved runtime/editor preview data")
+	t.assert_equal(generated.get_child_count(), expected_wall_count, "Generated wall count covers all path lengths")
+
+	var covered_lengths := {}
+	for path_name in expected_lengths.keys():
+		covered_lengths[path_name] = 0.0
+	for wall in generated.get_children():
+		t.assert_true(wall is Node3D, "%s is a generated 3D wall segment" % wall.name)
+		t.assert_equal(wall.owner, null, "%s remains unsaved runtime/editor preview data" % wall.name)
+		t.assert_equal(_source_model_path(wall), "res://assets/models/Wall/Wall_2x3.glb", "%s uses the Wall_2x3 model" % wall.name)
+		var path_name: String = wall.get_meta("path_name", "")
+		t.assert_true(expected_lengths.has(path_name), "%s records a source path name" % wall.name)
+		t.assert_true(wall.has_meta("segment_length_m"), "%s records segment length" % wall.name)
+		t.assert_true(wall.has_meta("segment_index"), "%s records segment index" % wall.name)
+		t.assert_true(wall.has_meta("segment_count"), "%s records segment count" % wall.name)
+		if expected_lengths.has(path_name):
+			covered_lengths[path_name] += float(wall.get_meta("segment_length_m", 0.0))
+	for path_name in expected_lengths.keys():
+		var gap: float = abs(float(expected_lengths[path_name]) - float(covered_lengths[path_name]))
+		t.assert_true(gap <= 0.01, "%s generated wall lengths leave no measurable gap" % path_name)
 
 func _source_model_path(node: Node) -> String:
 	if node == null:

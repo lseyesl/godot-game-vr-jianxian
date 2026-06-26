@@ -144,6 +144,25 @@ func run(t) -> void:
 
 	# 验证其他关键场景仍可加载
 	t.assert_true(ResourceLoader.exists("res://scenes/town/Town.tscn"), "Town scene should still exist")
+	var town_scene := preload("res://scenes/town/Town.tscn").instantiate()
+	t.assert_true(town_scene != null, "Town scene should instantiate")
+	if town_scene != null:
+		var layout_reference := town_scene.get_node_or_null("LayoutReference") as MeshInstance3D
+		t.assert_true(layout_reference != null, "Town has layout reference plane")
+		if layout_reference != null:
+			t.assert_equal(layout_reference.position, Vector3(0, 0.05, 0), "Layout reference aligns to terrain center and sits above ground")
+			t.assert_equal(layout_reference.cast_shadow, GeometryInstance3D.SHADOW_CASTING_SETTING_OFF, "Layout reference casts no shadows")
+			var reference_mesh := layout_reference.mesh as PlaneMesh
+			t.assert_true(reference_mesh != null, "Layout reference uses PlaneMesh")
+			if reference_mesh != null:
+				t.assert_equal(reference_mesh.size, Vector2(900, 600), "Layout reference matches Main terrain footprint")
+			var reference_material := layout_reference.material_override as StandardMaterial3D
+			t.assert_true(reference_material != null, "Layout reference has StandardMaterial3D override")
+			if reference_material != null:
+				t.assert_true(reference_material.albedo_texture != null, "Layout reference material uses concept texture")
+				if reference_material.albedo_texture != null:
+					t.assert_equal(reference_material.albedo_texture.resource_path, "res://docs/concept-art/布局.png", "Layout reference uses concept layout image")
+		town_scene.free()
 	t.assert_true(ResourceLoader.exists("res://scenes/mountain/MountainTrial.tscn"), "MountainTrial should still exist")
 	t.assert_true(ResourceLoader.exists("res://scenes/npc/Npc.tscn"), "Npc scene should still exist")
 	t.assert_true(ResourceLoader.exists("res://scenes/npc/TownNpc.tscn"), "TownNpc scene should still exist")

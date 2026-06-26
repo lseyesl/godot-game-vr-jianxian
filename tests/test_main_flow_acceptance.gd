@@ -79,4 +79,10 @@ func _test_main_scene_has_completion_feedback(t) -> void:
 		return
 	var scene_text := file.get_as_text()
 	t.assert_true(scene_text.contains("res://scenes/ui/CompletionFeedback.tscn"), "Main scene references CompletionFeedback scene")
-	t.assert_true(scene_text.contains("[node name=\"CompletionFeedback\" parent=\".\" instance=ExtResource"), "Main scene instances CompletionFeedback")
+	var scene := load(path) as PackedScene
+	t.assert_true(scene != null, "Main scene loads as PackedScene")
+	if scene == null:
+		return
+	var main := scene.instantiate()
+	t.assert_true(main.get_node_or_null("CompletionFeedback") != null, "Main scene instances CompletionFeedback")
+	main.free()
