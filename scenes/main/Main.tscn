@@ -188,4 +188,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 16, 12)
 
 [node name="TaskHud" parent="." unique_id=855641511 instance=ExtResource("4")]
 
-[node name="CompletionFeedback" parent="." unique_id=781427907 instance=ExtResource("6")]
+[node name="CompletionFeedback" parent="." unique_id=1020300710 instance=ExtResource("6")]
