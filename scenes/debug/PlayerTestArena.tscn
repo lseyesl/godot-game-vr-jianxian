@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene format=3 uid="uid://dscpkfdb7tgxf"]
 
-[ext_resource type="Script" path="res://scripts/debug/PlayerTestArena.gd" id="1"]
+[ext_resource type="Script" uid="uid://c4ujtl47iabgt" path="res://scripts/debug/PlayerTestArena.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/interaction/SealEncounter.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/items/FlyingSword.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/LesserDemon.tscn" id="4"]
@@ -8,38 +8,39 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_1"]
 size = Vector2(32, 32)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.25, 0.33, 0.29, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(32, 0.2, 32)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(0.1, 1, 0.1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
-albedo_color = Color(0.25, 0.33, 0.29, 1)
-
-[node name="PlayerTestArena" type="Node3D"]
+[node name="PlayerTestArena" type="Node3D" unique_id=704048495]
 script = ExtResource("1")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2131919621]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-rotation = Vector3(-0.9, 0.35, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=596850242]
+transform = Transform3D(0.9393727, -0.2686011, 0.2131487, 0, 0.62161, 0.7833269, -0.3428978, -0.73583597, 0.58392346, 0, 0, 0)
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="Ground" type="StaticBody3D" parent="." unique_id=468314735]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=455650816]
 mesh = SubResource("PlaneMesh_1")
 surface_material_override/0 = SubResource("StandardMaterial3D_1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-position = Vector3(0, -0.1, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=2043093494]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_1")
 
-[node name="PlayerSpawn" type="Marker3D" parent="."]
-position = Vector3(0, 0, 6)
+[node name="PlayerSpawn" type="Marker3D" parent="." unique_id=455833150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
-[node name="DebugLabel" type="Label3D" parent="."]
-position = Vector3(-4, 2.2, 4)
+[node name="DebugLabel" type="Label3D" parent="." unique_id=745629384]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.2, 4)
+billboard = 1
 text = "玩家测试场景
 WASD移动，鼠标观察
 靠近飞剑自动拾取并测试飞行
@@ -47,30 +48,28 @@ WASD移动，鼠标观察
 F交互，V飞行切换
 前方封印用于技能命中调试
 小妖用于生命值与战斗交互测试"
-font_size = 32
-billboard = 1
 
-[node name="TestFixtures" type="Node3D" parent="."]
+[node name="TestFixtures" type="Node3D" parent="." unique_id=1814603459]
 
-[node name="SealEncounter" parent="TestFixtures" instance=ExtResource("2")]
-position = Vector3(0, 0, -8)
+[node name="SealEncounter" parent="TestFixtures" unique_id=838062299 instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
-[node name="FlyingSword" parent="TestFixtures" instance=ExtResource("3")]
-position = Vector3(2, 1.2, 3)
+[node name="FlyingSword" parent="TestFixtures" unique_id=150474452 instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.2, 3)
 
-[node name="LesserDemon" parent="TestFixtures" instance=ExtResource("4")]
-position = Vector3(-2.5, 0, -5)
+[node name="LesserDemon" parent="TestFixtures" unique_id=410950359 instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -5)
 
-[node name="DistanceMarkers" type="Node3D" parent="TestFixtures"]
+[node name="DistanceMarkers" type="Node3D" parent="TestFixtures" unique_id=1960425348]
 
-[node name="Marker5m" type="MeshInstance3D" parent="TestFixtures/DistanceMarkers"]
-position = Vector3(-3, 0.5, 1)
+[node name="Marker5m" type="MeshInstance3D" parent="TestFixtures/DistanceMarkers" unique_id=362806209]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 1)
 mesh = SubResource("BoxMesh_1")
 
-[node name="Marker10m" type="MeshInstance3D" parent="TestFixtures/DistanceMarkers"]
-position = Vector3(-3, 0.5, -4)
+[node name="Marker10m" type="MeshInstance3D" parent="TestFixtures/DistanceMarkers" unique_id=2073788732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -4)
 mesh = SubResource("BoxMesh_1")
 
-[node name="Marker15m" type="MeshInstance3D" parent="TestFixtures/DistanceMarkers"]
-position = Vector3(-3, 0.5, -9)
+[node name="Marker15m" type="MeshInstance3D" parent="TestFixtures/DistanceMarkers" unique_id=216604827]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -9)
 mesh = SubResource("BoxMesh_1")

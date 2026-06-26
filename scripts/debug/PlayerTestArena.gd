@@ -11,7 +11,15 @@ const VR_PLAYER_SCENE_PATH := "res://scenes/player/XRPlayer.tscn"
 var player_node: Node
 
 func _ready() -> void:
+	if player_mode == PLAYER_MODE_DESKTOP_SIMULATION:
+		_disable_openxr()
 	spawn_player()
+
+func _disable_openxr() -> void:
+	var xr_interface := XRServer.find_interface("OpenXR")
+	if xr_interface != null and xr_interface.is_initialized():
+		xr_interface.uninitialize()
+		print("OpenXR disabled for desktop simulation mode")
 
 func normalize_player_mode(mode: String) -> String:
 	if mode == PLAYER_MODE_VR:

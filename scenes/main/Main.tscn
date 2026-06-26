@@ -15,8 +15,8 @@
 [ext_resource type="PackedScene" path="res://scenes/prefabs/flight/AerialLantern.tscn" id="18"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/flight/CloudWisp.tscn" id="19"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/layout/LayoutBoxPlaceholder.tscn" id="21"]
-[ext_resource type="Terrain3DAssets" path="res://assets/textures/terrain/terrain_assets.tres" id="22"]
-[ext_resource type="Material" path="res://assets/materials/terrain3d_material.tres" id="23"]
+[ext_resource type="Terrain3DAssets" uid="uid://cp8lyy5f7q5oo" path="res://assets/textures/terrain/terrain_assets.tres" id="22"]
+[ext_resource type="Terrain3DMaterial" uid="uid://b43dor6ii3a14" path="res://assets/materials/terrain3d_material.tres" id="23"]
 
 [sub_resource type="Environment" id="Environment_main"]
 background_color = Color(0.48, 0.58, 0.68, 1)
@@ -54,95 +54,95 @@ world_environment_path = NodePath("../WorldEnvironment")
 
 [node name="TerrainContainer" type="Node3D" parent="." unique_id=1322107783]
 
-[node name="Terrain3D" type="Terrain3D" parent="TerrainContainer"]
+[node name="Terrain3D" type="Terrain3D" parent="TerrainContainer" unique_id=81990452]
 data_directory = "res://assets/terrain3d/data/"
 material = ExtResource("23")
 assets = ExtResource("22")
-collision_mask = 1
 top_level = true
+metadata/_edit_lock_ = true
 
 [node name="WorldBoundary" parent="TerrainContainer" unique_id=1253287212 instance=ExtResource("10")]
 
-[node name="ConceptLayout" type="Node3D" parent="."]
+[node name="ConceptLayout" type="Node3D" parent="." unique_id=2090387710]
 
-[node name="TownWallPlaceholders" type="Node3D" parent="ConceptLayout"]
+[node name="TownWallPlaceholders" type="Node3D" parent="ConceptLayout" unique_id=733951120]
 
-[node name="NorthWallRun" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+[node name="NorthWallRun" parent="ConceptLayout/TownWallPlaceholders" unique_id=1380141237 instance=ExtResource("21")]
 transform = Transform3D(125, 0, 0, 0, 7, 0, 0, 0, 3, 0, 3.5, -78)
 
-[node name="SouthWallRun" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+[node name="SouthWallRun" parent="ConceptLayout/TownWallPlaceholders" unique_id=2104653003 instance=ExtResource("21")]
 transform = Transform3D(115, 0, 0, 0, 7, 0, 0, 0, 3, -6, 3.5, 80)
 
-[node name="WestWallRun" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+[node name="WestWallRun" parent="ConceptLayout/TownWallPlaceholders" unique_id=69997441 instance=ExtResource("21")]
 transform = Transform3D(3, 0, 0, 0, 7, 0, 0, 0, 145, -66, 3.5, 0)
 
-[node name="EastCanalWallRun" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+[node name="EastCanalWallRun" parent="ConceptLayout/TownWallPlaceholders" unique_id=104776469 instance=ExtResource("21")]
 transform = Transform3D(3, 0, 0, 0, 7, 0, 0, 0, 105, 68, 3.5, 8)
 
-[node name="NorthGate" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+[node name="NorthGate" parent="ConceptLayout/TownWallPlaceholders" unique_id=1313638273 instance=ExtResource("21")]
 transform = Transform3D(15, 0, 0, 0, 14, 0, 0, 0, 6, 0, 7, -78)
 
-[node name="SouthGate" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+[node name="SouthGate" parent="ConceptLayout/TownWallPlaceholders" unique_id=442756363 instance=ExtResource("21")]
 transform = Transform3D(15, 0, 0, 0, 14, 0, 0, 0, 6, 0, 7, 80)
 
-[node name="TownDistrictPlaceholders" type="Node3D" parent="ConceptLayout"]
+[node name="TownDistrictPlaceholders" type="Node3D" parent="ConceptLayout" unique_id=426298685]
 
-[node name="CentralMarketBlocks" parent="ConceptLayout/TownDistrictPlaceholders" instance=ExtResource("21")]
+[node name="CentralMarketBlocks" parent="ConceptLayout/TownDistrictPlaceholders" unique_id=1582736205 instance=ExtResource("21")]
 transform = Transform3D(36, 0, 0, 0, 5, 0, 0, 0, 30, 0, 2.5, 6)
 
-[node name="InnDistrictBlocks" parent="ConceptLayout/TownDistrictPlaceholders" instance=ExtResource("21")]
+[node name="InnDistrictBlocks" parent="ConceptLayout/TownDistrictPlaceholders" unique_id=1151689476 instance=ExtResource("21")]
 transform = Transform3D(32, 0, 0, 0, 5, 0, 0, 0, 28, -34, 2.5, 12)
 
-[node name="TavernDistrictBlocks" parent="ConceptLayout/TownDistrictPlaceholders" instance=ExtResource("21")]
+[node name="TavernDistrictBlocks" parent="ConceptLayout/TownDistrictPlaceholders" unique_id=1482364314 instance=ExtResource("21")]
 transform = Transform3D(30, 0, 0, 0, 5, 0, 0, 0, 28, 34, 2.5, 2)
 
-[node name="TempleCourtyardBlocks" parent="ConceptLayout/TownDistrictPlaceholders" instance=ExtResource("21")]
+[node name="TempleCourtyardBlocks" parent="ConceptLayout/TownDistrictPlaceholders" unique_id=1153099593 instance=ExtResource("21")]
 transform = Transform3D(34, 0, 0, 0, 5, 0, 0, 0, 24, 26, 2.5, 44)
 
-[node name="FieldPlaceholders" type="Node3D" parent="ConceptLayout"]
+[node name="FieldPlaceholders" type="Node3D" parent="ConceptLayout" unique_id=433494125]
 
-[node name="NorthwestTerracedFields" parent="ConceptLayout/FieldPlaceholders" instance=ExtResource("21")]
+[node name="NorthwestTerracedFields" parent="ConceptLayout/FieldPlaceholders" unique_id=1793567316 instance=ExtResource("21")]
 transform = Transform3D(52, 0, 0, 0, 0.3, 0, 0, 0, 42, -118, 0.16, -60)
 
-[node name="SouthwestRiceFields" parent="ConceptLayout/FieldPlaceholders" instance=ExtResource("21")]
+[node name="SouthwestRiceFields" parent="ConceptLayout/FieldPlaceholders" unique_id=2035713835 instance=ExtResource("21")]
 transform = Transform3D(64, 0, 0, 0, 0.3, 0, 0, 0, 48, -118, 0.16, 92)
 
-[node name="WaterfrontPlaceholders" type="Node3D" parent="ConceptLayout"]
+[node name="WaterfrontPlaceholders" type="Node3D" parent="ConceptLayout" unique_id=1970818981]
 
-[node name="EastHarborDocks" parent="ConceptLayout/WaterfrontPlaceholders" instance=ExtResource("21")]
+[node name="EastHarborDocks" parent="ConceptLayout/WaterfrontPlaceholders" unique_id=883376486 instance=ExtResource("21")]
 transform = Transform3D(54, 0, 0, 0, 2, 0, 0, 0, 26, 122, 1, 8)
 
-[node name="SouthDock" parent="ConceptLayout/WaterfrontPlaceholders" instance=ExtResource("21")]
+[node name="SouthDock" parent="ConceptLayout/WaterfrontPlaceholders" unique_id=1680377037 instance=ExtResource("21")]
 transform = Transform3D(30, 0, 0, 0, 2, 0, 0, 0, 12, 84, 1, 78)
 
-[node name="RiverbankAndBedPlaceholders" type="Node3D" parent="ConceptLayout"]
+[node name="RiverbankAndBedPlaceholders" type="Node3D" parent="ConceptLayout" unique_id=429825935]
 
-[node name="EastRiverBed" parent="ConceptLayout/RiverbankAndBedPlaceholders" instance=ExtResource("21")]
+[node name="EastRiverBed" parent="ConceptLayout/RiverbankAndBedPlaceholders" unique_id=297307151 instance=ExtResource("21")]
 transform = Transform3D(72, 0, 0, 0, 0.25, 0, 0, 0, 190, 160, -0.35, 15)
 
-[node name="SouthCanalBed" parent="ConceptLayout/RiverbankAndBedPlaceholders" instance=ExtResource("21")]
+[node name="SouthCanalBed" parent="ConceptLayout/RiverbankAndBedPlaceholders" unique_id=518874981 instance=ExtResource("21")]
 transform = Transform3D(132, 0, 0, 0, 0.25, 0, 0, 0, 28, 12, -0.35, 98)
 
-[node name="MountainBackdropPlaceholders" type="Node3D" parent="ConceptLayout"]
+[node name="MountainBackdropPlaceholders" type="Node3D" parent="ConceptLayout" unique_id=329134444]
 
-[node name="WestMountainMass" parent="ConceptLayout/MountainBackdropPlaceholders" instance=ExtResource("21")]
+[node name="WestMountainMass" parent="ConceptLayout/MountainBackdropPlaceholders" unique_id=2061256754 instance=ExtResource("21")]
 transform = Transform3D(90, 0, 0, 0, 58, 0, 0, 0, 240, -270, 29, -30)
 
-[node name="NorthMountainMass" parent="ConceptLayout/MountainBackdropPlaceholders" instance=ExtResource("21")]
+[node name="NorthMountainMass" parent="ConceptLayout/MountainBackdropPlaceholders" unique_id=1855838130 instance=ExtResource("21")]
 transform = Transform3D(260, 0, 0, 0, 52, 0, 0, 0, 82, -70, 26, -230)
 
-[node name="SoutheastMountainMass" parent="ConceptLayout/MountainBackdropPlaceholders" instance=ExtResource("21")]
+[node name="SoutheastMountainMass" parent="ConceptLayout/MountainBackdropPlaceholders" unique_id=40303723 instance=ExtResource("21")]
 transform = Transform3D(120, 0, 0, 0, 50, 0, 0, 0, 120, 270, 25, 185)
 
-[node name="TrialRoutePlaceholders" type="Node3D" parent="ConceptLayout"]
+[node name="TrialRoutePlaceholders" type="Node3D" parent="ConceptLayout" unique_id=135888556]
 
-[node name="MountainGateRoute" parent="ConceptLayout/TrialRoutePlaceholders" instance=ExtResource("21")]
-transform = Transform3D(12, 0, 0, 0, 1.2, 0, 0, 0, 118, 0, 1.0, -140)
+[node name="MountainGateRoute" parent="ConceptLayout/TrialRoutePlaceholders" unique_id=713496749 instance=ExtResource("21")]
+transform = Transform3D(12, 0, 0, 0, 1.2, 0, 0, 0, 118, 0, 1, -140)
 
-[node name="TrialApproachBridge" parent="ConceptLayout/TrialRoutePlaceholders" instance=ExtResource("21")]
-transform = Transform3D(10, 0, 0, 0, 1.2, 0, 0, 0, 42, 0, 1.0, -92)
+[node name="TrialApproachBridge" parent="ConceptLayout/TrialRoutePlaceholders" unique_id=729581362 instance=ExtResource("21")]
+transform = Transform3D(10, 0, 0, 0, 1.2, 0, 0, 0, 42, 0, 1, -92)
 
-[node name="WaterfallVista" parent="ConceptLayout/TrialRoutePlaceholders" instance=ExtResource("13")]
+[node name="WaterfallVista" parent="ConceptLayout/TrialRoutePlaceholders" unique_id=1032439355 instance=ExtResource("13")]
 transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, -120, 18, -112)
 
 [node name="WaterFeatures" type="Node3D" parent="." unique_id=185436200]
@@ -222,4 +222,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 16, 12)
 
 [node name="TaskHud" parent="." unique_id=855641511 instance=ExtResource("4")]
 
-[node name="CompletionFeedback" parent="." instance=ExtResource("6")]
+[node name="CompletionFeedback" parent="." unique_id=860908688 instance=ExtResource("6")]
