@@ -1,40 +1,17 @@
 extends RefCounted
 
 func run(t) -> void:
-	# 验证地形预置体可加载
-	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/TownGround.tscn"), "TownGround should exist")
-	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/SuburbGround.tscn"), "SuburbGround should exist")
-	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/MountainGround.tscn"), "MountainGround should exist")
-	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/WorldBoundary.tscn"), "WorldBoundary should exist")
+	# 验证 Terrain3D 所需资源可加载
+	t.assert_true(ResourceLoader.exists("res://assets/textures/terrain/terrain_assets.tres"), "Terrain3DAssets should exist")
+	t.assert_true(ResourceLoader.exists("res://assets/materials/terrain3d_material.tres"), "Terrain3DMaterial should exist")
 	t.assert_true(ResourceLoader.exists("res://assets/textures/terrain/heightmaps/terrain_heightmap.png"), "Heightmap texture should exist")
-	t.assert_true(ResourceLoader.exists("res://scripts/world/HeightmapTerrain.gd"), "HeightmapTerrain script should exist")
-	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/HeightmapTerrain.tscn"), "HeightmapTerrain prefab should exist")
+	t.assert_true(ResourceLoader.exists("res://assets/textures/terrain/grassland/rocky_terrain/rocky_terrain_alb_ht.png"), "Grass albedo texture should exist")
+	t.assert_true(ResourceLoader.exists("res://assets/textures/terrain/grassland/rocky_terrain/rocky_terrain_nrm_rgh.png"), "Grass normal texture should exist")
 
-	var heightmap_scene := preload("res://scenes/prefabs/terrain/HeightmapTerrain.tscn").instantiate()
-	t.assert_true(heightmap_scene != null, "HeightmapTerrain scene should instantiate")
-	if heightmap_scene != null:
-		t.assert_equal(heightmap_scene.world_size, Vector2(900, 600), "HeightmapTerrain maps full heightmap to 900x600m")
-		t.assert_true(heightmap_scene.has_method("generate_from_heightmap"), "HeightmapTerrain exposes generation method")
-		var generated: bool = heightmap_scene.generate_from_heightmap()
-		t.assert_true(generated, "HeightmapTerrain generates mesh from heightmap")
-		var terrain_mesh := heightmap_scene.get_node_or_null("TerrainMesh")
-		t.assert_true(terrain_mesh != null, "HeightmapTerrain has TerrainMesh child")
-		if terrain_mesh != null:
-			t.assert_true(terrain_mesh.mesh != null, "HeightmapTerrain generated mesh is assigned")
-			if terrain_mesh.mesh != null:
-				var mesh_aabb: AABB = terrain_mesh.mesh.get_aabb()
-				t.assert_true(is_equal_approx(mesh_aabb.size.x, 900.0), "HeightmapTerrain mesh spans 900m on X")
-				t.assert_true(is_equal_approx(mesh_aabb.size.z, 600.0), "HeightmapTerrain mesh spans 600m on Z")
-		var collision_shape := heightmap_scene.get_node_or_null("CollisionShape3D") as CollisionShape3D
-		t.assert_true(collision_shape != null, "HeightmapTerrain has CollisionShape3D child")
-		if collision_shape != null:
-			t.assert_true(not collision_shape.disabled, "HeightmapTerrain collision is enabled")
-			t.assert_true(collision_shape.shape != null, "HeightmapTerrain collision shape is generated")
-		t.assert_true(heightmap_scene.has_method("get_height_at_world_position"), "HeightmapTerrain exposes world height lookup")
-		if heightmap_scene.has_method("get_height_at_world_position"):
-			var spawn_height: float = heightmap_scene.get_height_at_world_position(Vector3(0, 0, 6))
-			t.assert_true(spawn_height > 1.0, "HeightmapTerrain reports raised terrain at default spawn XZ")
-		heightmap_scene.free()
+	# 验证 Terrain3D 区域文件存在
+	t.assert_true(ResourceLoader.exists("res://assets/terrain3d/data/terrain3d_00_00.res"), "Terrain3D region 00_00 should exist")
+	t.assert_true(ResourceLoader.exists("res://assets/terrain3d/data/terrain3d-01_00.res"), "Terrain3D region -1_0 should exist")
+	t.assert_true(ResourceLoader.exists("res://assets/terrain3d/data/terrain3d-02_00.res"), "Terrain3D region -2_0 should exist")
 
 	# 验证 Phase 2 路径预置体可加载
 	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/PathSegment_3x6m.tscn"), "PathSegment should exist")
@@ -45,7 +22,6 @@ func run(t) -> void:
 	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/SealPlatform_8x8m.tscn"), "SealPlatform should exist")
 	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/terrain/SwordAltar_2x2m.tscn"), "SwordAltar should exist")
 
-	# 验证 Main 场景可加载且包含新地形结构
 	# 验证 Phase 4 建筑壳体预置体可加载
 	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/buildings/SmallBuildingShell.tscn"), "SmallBuildingShell should exist")
 	t.assert_true(ResourceLoader.exists("res://scenes/prefabs/buildings/MediumBuildingShell.tscn"), "MediumBuildingShell should exist")
@@ -80,6 +56,7 @@ func run(t) -> void:
 			t.assert_true(sword.position.y > 24.0, "FlyingSword should be above Y=24")
 	mt_scene.free()
 
+	# 验证 Main 场景加载和地形结构
 	var scene := preload("res://scenes/main/Main.tscn").instantiate()
 	t.assert_true(scene != null, "Main scene should instantiate")
 	if scene == null:
@@ -88,14 +65,23 @@ func run(t) -> void:
 	var container := scene.get_node_or_null("TerrainContainer")
 	t.assert_true(container != null, "Main scene has TerrainContainer child")
 	if container != null:
-		t.assert_true(container.get_node_or_null("HeightmapTerrain") != null, "TerrainContainer has HeightmapTerrain")
-		t.assert_true(container.get_node_or_null("TownGround") != null, "TerrainContainer has TownGround")
-		t.assert_true(container.get_node_or_null("SuburbGround") != null, "TerrainContainer has SuburbGround")
-		t.assert_true(container.get_node_or_null("MountainGround") != null, "TerrainContainer has MountainGround")
+		# Terrain3D 替代了 HeightmapTerrain
+		var terrain3d := container.get_node_or_null("Terrain3D")
+		t.assert_true(terrain3d != null, "TerrainContainer has Terrain3D")
+		if terrain3d != null:
+			t.assert_true(terrain3d is Terrain3D, "Terrain3D node is of type Terrain3D")
+			t.assert_true(terrain3d.assets != null, "Terrain3D has assets assigned")
+			t.assert_true(terrain3d.material != null, "Terrain3D has material assigned")
+			t.assert_equal(terrain3d.data_directory, "res://assets/terrain3d/data/", "Terrain3D data_directory is set")
+
+		# WorldBoundary 保留
 		t.assert_true(container.get_node_or_null("WorldBoundary") != null, "TerrainContainer has WorldBoundary")
-		var main_heightmap := container.get_node_or_null("HeightmapTerrain")
-		if main_heightmap != null:
-			t.assert_equal(main_heightmap.world_size, Vector2(900, 600), "Main uses 900x600m heightmap terrain")
+
+		# 旧地面预置体已被移除
+		t.assert_true(container.get_node_or_null("TownGround") == null, "TerrainContainer does not instance old TownGround")
+		t.assert_true(container.get_node_or_null("SuburbGround") == null, "TerrainContainer does not instance old SuburbGround")
+		t.assert_true(container.get_node_or_null("MountainGround") == null, "TerrainContainer does not instance old MountainGround")
+
 		var boundary := container.get_node_or_null("WorldBoundary")
 		if boundary != null:
 			_assert_boundary_wall(t, boundary, "NorthWall", Vector3(0, 30, -300.5), Vector3(900, 60, 1), "north boundary covers terrain width")
@@ -103,13 +89,20 @@ func run(t) -> void:
 			_assert_boundary_wall(t, boundary, "WestWall", Vector3(-450.5, 30, 0), Vector3(1, 60, 600), "west boundary covers terrain depth")
 			_assert_boundary_wall(t, boundary, "EastWall", Vector3(450.5, 30, 0), Vector3(1, 60, 600), "east boundary covers terrain depth")
 
-	# 验证 ConnectionCorridor 存在且包含路径和崖壁
+	# 验证概念图布局占位组存在
+	var concept_layout := scene.get_node_or_null("ConceptLayout")
+	t.assert_true(concept_layout != null, "Main scene has ConceptLayout")
+	if concept_layout != null:
+		t.assert_true(concept_layout.get_node_or_null("TownWallPlaceholders/NorthWallRun") != null, "ConceptLayout has town wall placeholders")
+		t.assert_true(concept_layout.get_node_or_null("TownDistrictPlaceholders/CentralMarketBlocks") != null, "ConceptLayout has town district placeholders")
+		t.assert_true(concept_layout.get_node_or_null("FieldPlaceholders/NorthwestTerracedFields") != null, "ConceptLayout has field placeholders")
+		t.assert_true(concept_layout.get_node_or_null("WaterfrontPlaceholders/EastHarborDocks") != null, "ConceptLayout has waterfront placeholders")
+		t.assert_true(concept_layout.get_node_or_null("RiverbankAndBedPlaceholders/EastRiverBed") != null, "ConceptLayout has riverbed placeholders")
+		t.assert_true(concept_layout.get_node_or_null("MountainBackdropPlaceholders/WestMountainMass") != null, "ConceptLayout has mountain backdrop placeholders")
+		t.assert_true(concept_layout.get_node_or_null("TrialRoutePlaceholders/MountainGateRoute") != null, "ConceptLayout has trial route placeholders")
+		t.assert_true(concept_layout.get_node_or_null("TrialRoutePlaceholders/WaterfallVista") != null, "ConceptLayout has waterfall vista")
 	var corridor := scene.get_node_or_null("ConnectionCorridor")
-	t.assert_true(corridor != null, "Main scene has ConnectionCorridor")
-	if corridor != null:
-		t.assert_true(corridor.get_node_or_null("Path_01") != null, "ConnectionCorridor has path segments")
-		t.assert_true(corridor.get_node_or_null("CliffWalls") != null, "ConnectionCorridor has cliff walls")
-		t.assert_true(corridor.get_node_or_null("WaterfallVista") != null, "ConnectionCorridor has waterfall vista")
+	t.assert_true(corridor == null, "Main scene does not keep old ConnectionCorridor")
 
 	# 验证 WaterFeatures 存在且包含水体实例
 	var water := scene.get_node_or_null("WaterFeatures")

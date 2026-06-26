@@ -6,12 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/TaskHud.tscn" id="4"]
 [ext_resource type="Script" uid="uid://bcl0cpl3sxsiy" path="res://scripts/world/EnvironmentController.gd" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/ui/CompletionFeedback.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/TownGround.tscn" id="7"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/SuburbGround.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/MountainGround.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/WorldBoundary.tscn" id="10"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/PathSegment_3x6m.tscn" id="11"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/CliffWall_4x6m.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/water/Waterfall.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/water/RiverStraight.tscn" id="14"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/water/Lake.tscn" id="15"]
@@ -19,7 +14,9 @@
 [ext_resource type="PackedScene" path="res://scenes/prefabs/flight/RouteRing.tscn" id="17"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/flight/AerialLantern.tscn" id="18"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/flight/CloudWisp.tscn" id="19"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/terrain/HeightmapTerrain.tscn" id="20"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/layout/LayoutBoxPlaceholder.tscn" id="21"]
+[ext_resource type="Terrain3DAssets" path="res://assets/textures/terrain/terrain_assets.tres" id="22"]
+[ext_resource type="Material" path="res://assets/materials/terrain3d_material.tres" id="23"]
 
 [sub_resource type="Environment" id="Environment_main"]
 background_color = Color(0.48, 0.58, 0.68, 1)
@@ -57,70 +54,107 @@ world_environment_path = NodePath("../WorldEnvironment")
 
 [node name="TerrainContainer" type="Node3D" parent="." unique_id=1322107783]
 
-[node name="HeightmapTerrain" parent="TerrainContainer" unique_id=518095455 instance=ExtResource("20")]
-
-[node name="TownGround" parent="TerrainContainer" unique_id=535143042 instance=ExtResource("7")]
-physics_material_override = null
-
-[node name="SuburbGround" parent="TerrainContainer" unique_id=1937535953 instance=ExtResource("8")]
-
-[node name="MountainGround" parent="TerrainContainer" unique_id=6217560 instance=ExtResource("9")]
+[node name="Terrain3D" type="Terrain3D" parent="TerrainContainer"]
+data_directory = "res://assets/terrain3d/data/"
+material = ExtResource("23")
+assets = ExtResource("22")
+collision_mask = 1
+top_level = true
 
 [node name="WorldBoundary" parent="TerrainContainer" unique_id=1253287212 instance=ExtResource("10")]
 
-[node name="ConnectionCorridor" type="Node3D" parent="." unique_id=1307973250]
+[node name="ConceptLayout" type="Node3D" parent="."]
 
-[node name="Path_01" parent="ConnectionCorridor" unique_id=1512928034 instance=ExtResource("11")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, -38)
+[node name="TownWallPlaceholders" type="Node3D" parent="ConceptLayout"]
 
-[node name="Path_02" parent="ConnectionCorridor" unique_id=1888024614 instance=ExtResource("11")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, -44)
+[node name="NorthWallRun" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(125, 0, 0, 0, 7, 0, 0, 0, 3, 0, 3.5, -78)
 
-[node name="Path_03" parent="ConnectionCorridor" unique_id=1828421624 instance=ExtResource("11")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.15, -50)
+[node name="SouthWallRun" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(115, 0, 0, 0, 7, 0, 0, 0, 3, -6, 3.5, 80)
 
-[node name="Path_04" parent="ConnectionCorridor" unique_id=118456001 instance=ExtResource("11")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.15, -56)
+[node name="WestWallRun" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(3, 0, 0, 0, 7, 0, 0, 0, 145, -66, 3.5, 0)
 
-[node name="Path_05" parent="ConnectionCorridor" unique_id=1008423902 instance=ExtResource("11")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.15, -62)
+[node name="EastCanalWallRun" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(3, 0, 0, 0, 7, 0, 0, 0, 105, 68, 3.5, 8)
 
-[node name="Path_06" parent="ConnectionCorridor" unique_id=316046248 instance=ExtResource("11")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.15, -68)
+[node name="NorthGate" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(15, 0, 0, 0, 14, 0, 0, 0, 6, 0, 7, -78)
 
-[node name="CliffWalls" type="Node3D" parent="ConnectionCorridor" unique_id=1820800530]
+[node name="SouthGate" parent="ConceptLayout/TownWallPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(15, 0, 0, 0, 14, 0, 0, 0, 6, 0, 7, 80)
 
-[node name="Left_01" parent="ConnectionCorridor/CliffWalls" unique_id=1532018265 instance=ExtResource("12")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 6, -44)
+[node name="TownDistrictPlaceholders" type="Node3D" parent="ConceptLayout"]
 
-[node name="Left_02" parent="ConnectionCorridor/CliffWalls" unique_id=1819211885 instance=ExtResource("12")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 9, -53)
+[node name="CentralMarketBlocks" parent="ConceptLayout/TownDistrictPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(36, 0, 0, 0, 5, 0, 0, 0, 30, 0, 2.5, 6)
 
-[node name="Left_03" parent="ConnectionCorridor/CliffWalls" unique_id=1696431174 instance=ExtResource("12")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 12, -62)
+[node name="InnDistrictBlocks" parent="ConceptLayout/TownDistrictPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(32, 0, 0, 0, 5, 0, 0, 0, 28, -34, 2.5, 12)
 
-[node name="Right_01" parent="ConnectionCorridor/CliffWalls" unique_id=416721958 instance=ExtResource("12")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 6, -44)
+[node name="TavernDistrictBlocks" parent="ConceptLayout/TownDistrictPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(30, 0, 0, 0, 5, 0, 0, 0, 28, 34, 2.5, 2)
 
-[node name="Right_02" parent="ConnectionCorridor/CliffWalls" unique_id=1557821072 instance=ExtResource("12")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 9, -53)
+[node name="TempleCourtyardBlocks" parent="ConceptLayout/TownDistrictPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(34, 0, 0, 0, 5, 0, 0, 0, 24, 26, 2.5, 44)
 
-[node name="Right_03" parent="ConnectionCorridor/CliffWalls" unique_id=1305163595 instance=ExtResource("12")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 12, -62)
+[node name="FieldPlaceholders" type="Node3D" parent="ConceptLayout"]
 
-[node name="WaterfallVista" parent="ConnectionCorridor" unique_id=500544112 instance=ExtResource("13")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 12, -50)
+[node name="NorthwestTerracedFields" parent="ConceptLayout/FieldPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(52, 0, 0, 0, 0.3, 0, 0, 0, 42, -118, 0.16, -60)
+
+[node name="SouthwestRiceFields" parent="ConceptLayout/FieldPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(64, 0, 0, 0, 0.3, 0, 0, 0, 48, -118, 0.16, 92)
+
+[node name="WaterfrontPlaceholders" type="Node3D" parent="ConceptLayout"]
+
+[node name="EastHarborDocks" parent="ConceptLayout/WaterfrontPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(54, 0, 0, 0, 2, 0, 0, 0, 26, 122, 1, 8)
+
+[node name="SouthDock" parent="ConceptLayout/WaterfrontPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(30, 0, 0, 0, 2, 0, 0, 0, 12, 84, 1, 78)
+
+[node name="RiverbankAndBedPlaceholders" type="Node3D" parent="ConceptLayout"]
+
+[node name="EastRiverBed" parent="ConceptLayout/RiverbankAndBedPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(72, 0, 0, 0, 0.25, 0, 0, 0, 190, 160, -0.35, 15)
+
+[node name="SouthCanalBed" parent="ConceptLayout/RiverbankAndBedPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(132, 0, 0, 0, 0.25, 0, 0, 0, 28, 12, -0.35, 98)
+
+[node name="MountainBackdropPlaceholders" type="Node3D" parent="ConceptLayout"]
+
+[node name="WestMountainMass" parent="ConceptLayout/MountainBackdropPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(90, 0, 0, 0, 58, 0, 0, 0, 240, -270, 29, -30)
+
+[node name="NorthMountainMass" parent="ConceptLayout/MountainBackdropPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(260, 0, 0, 0, 52, 0, 0, 0, 82, -70, 26, -230)
+
+[node name="SoutheastMountainMass" parent="ConceptLayout/MountainBackdropPlaceholders" instance=ExtResource("21")]
+transform = Transform3D(120, 0, 0, 0, 50, 0, 0, 0, 120, 270, 25, 185)
+
+[node name="TrialRoutePlaceholders" type="Node3D" parent="ConceptLayout"]
+
+[node name="MountainGateRoute" parent="ConceptLayout/TrialRoutePlaceholders" instance=ExtResource("21")]
+transform = Transform3D(12, 0, 0, 0, 1.2, 0, 0, 0, 118, 0, 1.0, -140)
+
+[node name="TrialApproachBridge" parent="ConceptLayout/TrialRoutePlaceholders" instance=ExtResource("21")]
+transform = Transform3D(10, 0, 0, 0, 1.2, 0, 0, 0, 42, 0, 1.0, -92)
+
+[node name="WaterfallVista" parent="ConceptLayout/TrialRoutePlaceholders" instance=ExtResource("13")]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, -120, 18, -112)
 
 [node name="WaterFeatures" type="Node3D" parent="." unique_id=185436200]
 
 [node name="TownCanal" parent="WaterFeatures" unique_id=1398341860 instance=ExtResource("14")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 8)
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 5.5, 2, 0, 70)
 
 [node name="TownLake" parent="WaterFeatures" unique_id=400139109 instance=ExtResource("15")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 4)
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 2.7, 140, 0, 18)
 
 [node name="MountainStream" parent="WaterFeatures" unique_id=1565684862 instance=ExtResource("16")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 12, -55)
+transform = Transform3D(1.8, 0, 0, 0, 1, 0, 0, 0, 2.4, -80, 4, -126)
 
 [node name="FlightRoute" type="Node3D" parent="." unique_id=785522066]
 
@@ -188,4 +222,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 16, 12)
 
 [node name="TaskHud" parent="." unique_id=855641511 instance=ExtResource("4")]
 
-[node name="CompletionFeedback" parent="." unique_id=1020300710 instance=ExtResource("6")]
+[node name="CompletionFeedback" parent="." instance=ExtResource("6")]
