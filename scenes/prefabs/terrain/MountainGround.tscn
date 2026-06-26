@@ -1,4 +1,6 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=23 format=3]
+
+[ext_resource type="Material" path="res://assets/materials/mat_terrain_rock.tres" id="1_rock"]
 
 [sub_resource type="BoxMesh" id="Path_01_mesh"]
 size = Vector3(3, 0.2, 6)
@@ -60,6 +62,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -65)
 
 [node name="Mesh" type="MeshInstance3D" parent="Path_01"]
 mesh = SubResource("Path_01_mesh")
+material_override = ExtResource("1_rock")
 
 [node name="Collision" type="CollisionShape3D" parent="Path_01"]
 shape = SubResource("Path_01_col")
@@ -70,6 +73,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -71)
 
 [node name="Mesh" type="MeshInstance3D" parent="Path_02"]
 mesh = SubResource("Path_02_mesh")
+material_override = ExtResource("1_rock")
 
 [node name="Collision" type="CollisionShape3D" parent="Path_02"]
 shape = SubResource("Path_02_col")
@@ -80,6 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, -74)
 
 [node name="Mesh" type="MeshInstance3D" parent="RestPlatform_01"]
 mesh = SubResource("RestPlatform_mesh")
+material_override = ExtResource("1_rock")
 
 [node name="Collision" type="CollisionShape3D" parent="RestPlatform_01"]
 shape = SubResource("RestPlatform_col")
@@ -90,6 +95,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, -77)
 
 [node name="Mesh" type="MeshInstance3D" parent="Path_03"]
 mesh = SubResource("Path_03_mesh")
+material_override = ExtResource("1_rock")
 
 [node name="Collision" type="CollisionShape3D" parent="Path_03"]
 shape = SubResource("Path_03_col")
@@ -100,6 +106,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, -83)
 
 [node name="Mesh" type="MeshInstance3D" parent="Path_04"]
 mesh = SubResource("Path_04_mesh")
+material_override = ExtResource("1_rock")
 
 [node name="Collision" type="CollisionShape3D" parent="Path_04"]
 shape = SubResource("Path_04_col")
@@ -110,6 +117,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, -89)
 
 [node name="Mesh" type="MeshInstance3D" parent="Path_05"]
 mesh = SubResource("Path_05_mesh")
+material_override = ExtResource("1_rock")
 
 [node name="Collision" type="CollisionShape3D" parent="Path_05"]
 shape = SubResource("Path_05_col")
@@ -120,6 +128,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, -92)
 
 [node name="Mesh" type="MeshInstance3D" parent="RestPlatform_02"]
 mesh = SubResource("RestPlatform_mesh")
+material_override = ExtResource("1_rock")
 
 [node name="Collision" type="CollisionShape3D" parent="RestPlatform_02"]
 shape = SubResource("RestPlatform_col")
@@ -130,6 +139,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, -48)
 
 [node name="Mesh" type="MeshInstance3D" parent="ValleyPlatform"]
 mesh = SubResource("ValleyPlatform_mesh")
+material_override = ExtResource("1_rock")
 
 [node name="Collision" type="CollisionShape3D" parent="ValleyPlatform"]
 shape = SubResource("ValleyPlatform_col")
@@ -141,6 +151,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, -48)
 [node name="Mesh" type="MeshInstance3D" parent="SealPlatform"]
 mesh = SubResource("SealPlatform_mesh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = ExtResource("1_rock")
 
 [node name="Collision" type="CollisionShape3D" parent="SealPlatform"]
 shape = SubResource("SealPlatform_col")

@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Material" path="res://assets/materials/mat_terrain_rock.tres" id="1_rock"]
 
 [sub_resource type="BoxMesh" id="Platform_mesh"]
 size = Vector3(12, 0.2, 12)
@@ -10,6 +12,7 @@ size = Vector3(12, 0.2, 12)
 
 [node name="Surface" type="MeshInstance3D" parent="."]
 mesh = SubResource("Platform_mesh")
+material_override = ExtResource("1_rock")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("Platform_col")
