@@ -1,4 +1,6 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Material" path="res://assets/materials/mat_terrain_dirt.tres" id="1_dirt"]
 
 [sub_resource type="BoxMesh" id="Seg_01_mesh"]
 size = Vector3(20, 0.2, 6)
@@ -43,6 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35)
 
 [node name="Mesh" type="MeshInstance3D" parent="Segment_01"]
 mesh = SubResource("Seg_01_mesh")
+material_override = ExtResource("1_dirt")
 
 [node name="Collision" type="CollisionShape3D" parent="Segment_01"]
 shape = SubResource("Seg_01_collision")
@@ -53,6 +56,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -41)
 
 [node name="Mesh" type="MeshInstance3D" parent="Segment_02"]
 mesh = SubResource("Seg_02_mesh")
+material_override = ExtResource("1_dirt")
 
 [node name="Collision" type="CollisionShape3D" parent="Segment_02"]
 shape = SubResource("Seg_02_collision")
@@ -63,6 +67,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -47)
 
 [node name="Mesh" type="MeshInstance3D" parent="Segment_03"]
 mesh = SubResource("Seg_03_mesh")
+material_override = ExtResource("1_dirt")
 
 [node name="Collision" type="CollisionShape3D" parent="Segment_03"]
 shape = SubResource("Seg_03_collision")
@@ -73,6 +78,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -53)
 
 [node name="Mesh" type="MeshInstance3D" parent="Segment_04"]
 mesh = SubResource("Seg_04_mesh")
+material_override = ExtResource("1_dirt")
 
 [node name="Collision" type="CollisionShape3D" parent="Segment_04"]
 shape = SubResource("Seg_04_collision")
@@ -83,6 +89,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -59)
 
 [node name="Mesh" type="MeshInstance3D" parent="Segment_05"]
 mesh = SubResource("Seg_05_mesh")
+material_override = ExtResource("1_dirt")
 
 [node name="Collision" type="CollisionShape3D" parent="Segment_05"]
 shape = SubResource("Seg_05_collision")

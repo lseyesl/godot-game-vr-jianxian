@@ -1,4 +1,6 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Material" path="res://assets/materials/mat_terrain_stone.tres" id="1_stone"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_01"]
 size = Vector2(30, 25)
@@ -37,6 +39,7 @@ physics_material_override = SubResource("PhysicsMaterial_ground")
 [node name="Mesh_01" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -12.5)
 mesh = SubResource("PlaneMesh_01")
+material_override = ExtResource("1_stone")
 
 [node name="Collision_01" type="CollisionShape3D" parent="Mesh_01"]
 shape = SubResource("BoxShape3D_collision_02")
@@ -45,6 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 [node name="Mesh_02" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -12.5)
 mesh = SubResource("PlaneMesh_02")
+material_override = ExtResource("1_stone")
 
 [node name="Collision_02" type="CollisionShape3D" parent="Mesh_02"]
 shape = SubResource("BoxShape3D_collision_03")
@@ -53,6 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 [node name="Mesh_03" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 12.5)
 mesh = SubResource("PlaneMesh_03")
+material_override = ExtResource("1_stone")
 
 [node name="Collision_03" type="CollisionShape3D" parent="Mesh_03"]
 shape = SubResource("BoxShape3D_collision_04")
@@ -61,6 +66,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 [node name="Mesh_04" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 12.5)
 mesh = SubResource("PlaneMesh_04")
+material_override = ExtResource("1_stone")
 
 [node name="Collision_04" type="CollisionShape3D" parent="Mesh_04"]
 shape = SubResource("BoxShape3D_collision_05")
