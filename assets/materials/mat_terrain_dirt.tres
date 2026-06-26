@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/soil/gravel_road/gravel_road_alb_ht.png" id="1_albedo"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/soil/gravel_road/gravel_road_nrm_rgh.png" id="2_normal"]
+
+[resource]
+albedo_texture = ExtResource("1_albedo")
+normal_enabled = true
+normal_texture = ExtResource("2_normal")
+normal_scale = 0.8
+roughness = 0.9
