@@ -13,6 +13,7 @@ func run(t) -> void:
 	t.assert_equal(main.resolve_player_scene_path("desktop_simulation"), "res://scenes/player/DesktopDebugPlayer.tscn", "desktop simulation resolves desktop player scene")
 	t.assert_equal(main.resolve_player_scene_path("vr"), "res://scenes/player/XRPlayer.tscn", "vr resolves XR player scene")
 	t.assert_equal(main.normalize_player_mode("unknown"), "desktop_simulation", "unknown mode falls back to desktop simulation")
+	t.assert_equal(main.player_spawn_path, NodePath("PlayerSpawn"), "Main resolves player spawn from PlayerSpawn by default")
 	t.assert_equal(main.terrain_spawn_path, NodePath("TerrainContainer/Terrain3D"), "Main resolves spawn height from the Terrain3D node by default")
 	var desktop_player = main.instantiate_player_for_mode("desktop_simulation")
 	t.assert_true(desktop_player != null, "desktop player instantiates")
@@ -21,6 +22,10 @@ func run(t) -> void:
 		desktop_player.free()
 	t.assert_true(ResourceLoader.exists(main.resolve_player_scene_path("vr")), "vr player scene exists")
 	main.free()
+
+	var main_scene = preload("res://scenes/main/Main.tscn").instantiate()
+	t.assert_true(main_scene.get_node_or_null("PlayerSpawn") is Node3D, "Main scene has PlayerSpawn node")
+	main_scene.free()
 
 	var live_main = MainScript.new()
 	t.root.add_child(live_main)
@@ -38,6 +43,21 @@ func run(t) -> void:
 	t.assert_true(first_player != live_main.player_node, "Main respawn replaces the player node")
 	t.assert_true(not is_instance_valid(first_player), "Main respawn frees old player immediately")
 	live_main.free()
+
+	var node_spawn_main = MainScript.new()
+	var spawn_marker := Node3D.new()
+	spawn_marker.name = "PlayerSpawn"
+	spawn_marker.position = Vector3(8, 0, -3)
+	node_spawn_main.add_child(spawn_marker)
+	t.root.add_child(node_spawn_main)
+	node_spawn_main.player_spawn_position = Vector3(1, 0, 1)
+	node_spawn_main.spawn_player()
+	var node_spawn_player := node_spawn_main.player_node as Node3D
+	t.assert_true(node_spawn_player != null, "Main spawns a player from PlayerSpawn")
+	if node_spawn_player != null:
+		var node_spawn_position := node_spawn_player.global_position if node_spawn_player.is_inside_tree() else node_spawn_player.position
+		t.assert_true(node_spawn_position.is_equal_approx(Vector3(8, 0, -3)), "Main uses PlayerSpawn position before fallback spawn position")
+	node_spawn_main.free()
 
 	var terrain_main = MainScript.new()
 	terrain_main.player_spawn_position = Vector3(0, 0, 6)

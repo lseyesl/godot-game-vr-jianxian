@@ -7,6 +7,7 @@ const DESKTOP_PLAYER_SCENE_PATH := "res://scenes/player/DesktopDebugPlayer.tscn"
 const VR_PLAYER_SCENE_PATH := "res://scenes/player/XRPlayer.tscn"
 
 @export_enum("desktop_simulation", "vr") var player_mode := PLAYER_MODE_DESKTOP_SIMULATION
+@export var player_spawn_path: NodePath = ^"PlayerSpawn"
 @export var player_spawn_position := Vector3(0, 0, 6)
 @export var terrain_spawn_path: NodePath = ^"TerrainContainer/Terrain3D"
 @export var player_spawn_surface_clearance_m := 0.05
@@ -52,7 +53,7 @@ func spawn_player() -> Node:
 	return player_node
 
 func resolve_player_spawn_position(player: Node = player_node) -> Vector3:
-	var spawn_position := player_spawn_position
+	var spawn_position := resolve_base_player_spawn_position()
 	var terrain := get_node_or_null(terrain_spawn_path)
 	var terrain_height := get_terrain_height_at_world_position(terrain, spawn_position)
 	if is_nan(terrain_height):
@@ -62,6 +63,14 @@ func resolve_player_spawn_position(player: Node = player_node) -> Vector3:
 	if minimum_root_y > spawn_position.y:
 		spawn_position.y = minimum_root_y
 	return spawn_position
+
+func resolve_base_player_spawn_position() -> Vector3:
+	var spawn_node := get_node_or_null(player_spawn_path) as Node3D
+	if spawn_node == null:
+		return player_spawn_position
+	if spawn_node.is_inside_tree() and is_inside_tree():
+		return spawn_node.global_position
+	return spawn_node.position
 
 func get_terrain_height_at_world_position(terrain: Node, world_position: Vector3) -> float:
 	if terrain == null:

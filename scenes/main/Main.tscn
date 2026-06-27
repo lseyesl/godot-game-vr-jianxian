@@ -34,6 +34,9 @@ density = 0.01
 [node name="Main" type="Node3D" unique_id=1958681121]
 script = ExtResource("1")
 
+[node name="PlayerSpawn" type="Node3D" parent="." unique_id=673747839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -445.27463)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=145173673]
 environment = SubResource("Environment_main")
 
