@@ -8,7 +8,7 @@ const VR_PLAYER_SCENE_PATH := "res://scenes/player/XRPlayer.tscn"
 
 @export_enum("desktop_simulation", "vr") var player_mode := PLAYER_MODE_DESKTOP_SIMULATION
 @export var player_spawn_position := Vector3(0, 0, 6)
-@export var terrain_spawn_path: NodePath = ^"TerrainContainer/HeightmapTerrain"
+@export var terrain_spawn_path: NodePath = ^"TerrainContainer/Terrain3D"
 @export var player_spawn_surface_clearance_m := 0.05
 
 var player_node: Node
@@ -54,14 +54,26 @@ func spawn_player() -> Node:
 func resolve_player_spawn_position(player: Node = player_node) -> Vector3:
 	var spawn_position := player_spawn_position
 	var terrain := get_node_or_null(terrain_spawn_path)
-	if terrain == null or not terrain.has_method("get_height_at_world_position"):
+	var terrain_height := get_terrain_height_at_world_position(terrain, spawn_position)
+	if is_nan(terrain_height):
 		return spawn_position
-	var terrain_height: float = terrain.get_height_at_world_position(spawn_position)
 	var lowest_collision_offset := get_lowest_collision_offset(player)
 	var minimum_root_y := terrain_height - lowest_collision_offset + player_spawn_surface_clearance_m
 	if minimum_root_y > spawn_position.y:
 		spawn_position.y = minimum_root_y
 	return spawn_position
+
+func get_terrain_height_at_world_position(terrain: Node, world_position: Vector3) -> float:
+	if terrain == null:
+		return NAN
+	if terrain.has_method("get_height_at_world_position"):
+		return terrain.get_height_at_world_position(world_position)
+	if terrain is Terrain3D:
+		var terrain3d := terrain as Terrain3D
+		if terrain3d.data == null:
+			return NAN
+		return terrain3d.data.get_height(world_position)
+	return NAN
 
 func get_lowest_collision_offset(player: Node) -> float:
 	var player_3d := player as Node3D

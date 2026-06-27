@@ -1,13 +1,13 @@
 [gd_resource type="Terrain3DAssets" format=3 uid="uid://cp8lyy5f7q5oo"]
 
-[ext_resource type="Texture2D" uid="uid://bcb1qpyhvabvn" path="res://assets/textures/terrain/grassland/rocky_terrain/rocky_terrain_alb_ht.png" id="1_grass_alb"]
-[ext_resource type="Texture2D" uid="uid://cwmdoffyphga5" path="res://assets/textures/terrain/grassland/rocky_terrain/rocky_terrain_nrm_rgh.png" id="2_grass_nrm"]
-[ext_resource type="Texture2D" uid="uid://bm6boi6do8gvn" path="res://assets/textures/terrain/rock/marble_cliff_03/marble_cliff_03_alb_ht.png" id="3_rock_alb"]
-[ext_resource type="Texture2D" uid="uid://dis5kjohr8omi" path="res://assets/textures/terrain/rock/marble_cliff_03/marble_cliff_03_nrm_rgh.png" id="4_rock_nrm"]
-[ext_resource type="Texture2D" uid="uid://dpyvmosn1onw8" path="res://assets/textures/terrain/soil/gravel_road/gravel_road_alb_ht.png" id="5_dirt_alb"]
-[ext_resource type="Texture2D" uid="uid://c7ldrs74l1k2u" path="res://assets/textures/terrain/soil/gravel_road/gravel_road_nrm_rgh.png" id="6_dirt_nrm"]
-[ext_resource type="Texture2D" uid="uid://fg5shm1ormbc" path="res://assets/textures/terrain/stone_slab/medieval_blocks_05/medieval_blocks_05_alb_ht.png" id="7_stone_alb"]
-[ext_resource type="Texture2D" uid="uid://bukidh62j461d" path="res://assets/textures/terrain/stone_slab/medieval_blocks_05/medieval_blocks_05_nrm_rgh.png" id="8_stone_nrm"]
+[ext_resource type="Texture2D" uid="uid://beiyhi76rqsb4" path="res://assets/textures/terrain/grassland/aerial_rocks_02/aerial_rocks_02_alb_ht.png" id="1_grass_alb"]
+[ext_resource type="Texture2D" uid="uid://b41xqg8exgqgd" path="res://assets/textures/terrain/grassland/aerial_rocks_02/aerial_rocks_02_nrm_rgh.png" id="2_grass_nrm"]
+[ext_resource type="Texture2D" uid="uid://dweugsc3mtuqt" path="res://assets/textures/terrain/rock/dry_riverbed_rock/dry_riverbed_rock_alb_ht.png" id="3_rock_alb"]
+[ext_resource type="Texture2D" uid="uid://bp55swm472hjr" path="res://assets/textures/terrain/rock/dry_riverbed_rock/dry_riverbed_rock_nrm_rgh.png" id="4_rock_nrm"]
+[ext_resource type="Texture2D" uid="uid://dg7fwlqghpsj1" path="res://assets/textures/terrain/soil/terrain_red_01/terrain_red_01_alb_ht.png" id="5_dirt_alb"]
+[ext_resource type="Texture2D" uid="uid://dkt2nvmdotbv1" path="res://assets/textures/terrain/soil/terrain_red_01/terrain_red_01_nrm_rgh.png" id="6_dirt_nrm"]
+[ext_resource type="Texture2D" uid="uid://d2qbc0j6rwq5w" path="res://assets/textures/terrain/stone_slab/rock_tile_floor/rock_tile_floor_alb_ht.png" id="7_stone_alb"]
+[ext_resource type="Texture2D" uid="uid://b2em8f2aobbpq" path="res://assets/textures/terrain/stone_slab/rock_tile_floor/rock_tile_floor_nrm_rgh.png" id="8_stone_nrm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p4fc4"]
 transparency = 4

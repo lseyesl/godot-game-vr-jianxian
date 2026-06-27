@@ -62,6 +62,7 @@ top_level = true
 metadata/_edit_lock_ = true
 
 [node name="WorldBoundary" parent="TerrainContainer" unique_id=1253287212 instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.340576, 0)
 
 [node name="ConceptLayout" type="Node3D" parent="." unique_id=2090387710]
 
@@ -217,6 +218,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 16, 12)
 
 [node name="Town" parent="." unique_id=1269432249 instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -233.587, 18, 40.605)
 
 [node name="MountainTrial" parent="." unique_id=69657 instance=ExtResource("3")]
 

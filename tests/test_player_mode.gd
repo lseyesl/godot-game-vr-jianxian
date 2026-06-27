@@ -13,6 +13,7 @@ func run(t) -> void:
 	t.assert_equal(main.resolve_player_scene_path("desktop_simulation"), "res://scenes/player/DesktopDebugPlayer.tscn", "desktop simulation resolves desktop player scene")
 	t.assert_equal(main.resolve_player_scene_path("vr"), "res://scenes/player/XRPlayer.tscn", "vr resolves XR player scene")
 	t.assert_equal(main.normalize_player_mode("unknown"), "desktop_simulation", "unknown mode falls back to desktop simulation")
+	t.assert_equal(main.terrain_spawn_path, NodePath("TerrainContainer/Terrain3D"), "Main resolves spawn height from the Terrain3D node by default")
 	var desktop_player = main.instantiate_player_for_mode("desktop_simulation")
 	t.assert_true(desktop_player != null, "desktop player instantiates")
 	if desktop_player != null:
@@ -40,6 +41,7 @@ func run(t) -> void:
 
 	var terrain_main = MainScript.new()
 	terrain_main.player_spawn_position = Vector3(0, 0, 6)
+	terrain_main.terrain_spawn_path = NodePath("TerrainContainer/HeightmapTerrain")
 	var terrain_container := Node3D.new()
 	terrain_container.name = "TerrainContainer"
 	terrain_main.add_child(terrain_container)

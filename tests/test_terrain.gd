@@ -73,6 +73,7 @@ func run(t) -> void:
 			t.assert_true(terrain3d.assets != null, "Terrain3D has assets assigned")
 			t.assert_true(terrain3d.material != null, "Terrain3D has material assigned")
 			t.assert_equal(terrain3d.data_directory, "res://assets/terrain3d/data/", "Terrain3D data_directory is set")
+			_assert_terrain3d_texture_formats_match(t, terrain3d.assets)
 
 		# WorldBoundary 保留
 		t.assert_true(container.get_node_or_null("WorldBoundary") != null, "TerrainContainer has WorldBoundary")
@@ -84,10 +85,10 @@ func run(t) -> void:
 
 		var boundary := container.get_node_or_null("WorldBoundary")
 		if boundary != null:
-			_assert_boundary_wall(t, boundary, "NorthWall", Vector3(0, 30, -300.5), Vector3(900, 60, 1), "north boundary covers terrain width")
-			_assert_boundary_wall(t, boundary, "SouthWall", Vector3(0, 30, 300.5), Vector3(900, 60, 1), "south boundary covers terrain width")
-			_assert_boundary_wall(t, boundary, "WestWall", Vector3(-450.5, 30, 0), Vector3(1, 60, 600), "west boundary covers terrain depth")
-			_assert_boundary_wall(t, boundary, "EastWall", Vector3(450.5, 30, 0), Vector3(1, 60, 600), "east boundary covers terrain depth")
+			_assert_boundary_wall(t, boundary, "NorthWall", Vector3(0, 30, -512.5), Vector3(1536, 60, 1), "north boundary covers Terrain3D width")
+			_assert_boundary_wall(t, boundary, "SouthWall", Vector3(0, 30, 512.5), Vector3(1536, 60, 1), "south boundary covers Terrain3D width")
+			_assert_boundary_wall(t, boundary, "WestWall", Vector3(-768.5, 30, 0), Vector3(1, 60, 1024), "west boundary covers Terrain3D depth")
+			_assert_boundary_wall(t, boundary, "EastWall", Vector3(768.5, 30, 0), Vector3(1, 60, 1024), "east boundary covers Terrain3D depth")
 
 	# 验证概念图布局占位组存在
 	var concept_layout := scene.get_node_or_null("ConceptLayout")
@@ -155,7 +156,7 @@ func run(t) -> void:
 			var reference_mesh := layout_reference.mesh as PlaneMesh
 			t.assert_true(reference_mesh != null, "Layout reference uses PlaneMesh")
 			if reference_mesh != null:
-				t.assert_equal(reference_mesh.size, Vector2(900, 600), "Layout reference matches Main terrain footprint")
+				t.assert_equal(reference_mesh.size, Vector2(1536, 1024), "Layout reference matches Terrain3D footprint")
 			var reference_material := layout_reference.material_override as StandardMaterial3D
 			t.assert_true(reference_material != null, "Layout reference has StandardMaterial3D override")
 			if reference_material != null:
@@ -185,3 +186,33 @@ func _assert_boundary_wall(t, boundary: Node, wall_name: String, expected_positi
 	t.assert_true(box_shape != null, "%s uses BoxShape3D" % wall_name)
 	if box_shape != null:
 		t.assert_equal(box_shape.size, expected_size, message)
+
+
+func _assert_terrain3d_texture_formats_match(t, assets: Terrain3DAssets) -> void:
+	t.assert_true(assets != null, "Terrain3D texture assets are available")
+	if assets == null:
+		return
+	var expected_albedo_format := -1
+	var expected_normal_format := -1
+	for texture_index in range(assets.get_texture_count()):
+		var texture_asset := assets.get_texture(texture_index)
+		t.assert_true(texture_asset != null, "Terrain3D texture asset %d exists" % texture_index)
+		if texture_asset == null:
+			continue
+		expected_albedo_format = _assert_texture_format_matches(t, texture_asset.albedo_texture, expected_albedo_format, "albedo", texture_index)
+		expected_normal_format = _assert_texture_format_matches(t, texture_asset.normal_texture, expected_normal_format, "normal", texture_index)
+
+
+func _assert_texture_format_matches(t, texture: Texture2D, expected_format: int, channel_name: String, texture_index: int) -> int:
+	t.assert_true(texture != null, "Terrain3D %s texture %d is assigned" % [channel_name, texture_index])
+	if texture == null:
+		return expected_format
+	var image := texture.get_image()
+	t.assert_true(image != null, "Terrain3D %s texture %d can expose image data" % [channel_name, texture_index])
+	if image == null:
+		return expected_format
+	var image_format := image.get_format()
+	if expected_format < 0:
+		return image_format
+	t.assert_equal(image_format, expected_format, "Terrain3D %s texture %d uses the same imported format as texture 0" % [channel_name, texture_index])
+	return expected_format
