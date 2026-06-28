@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dkt2nvmdotbv1" path="res://assets/textures/terrain/soil/terrain_red_01/terrain_red_01_nrm_rgh.png" id="6_dirt_nrm"]
 [ext_resource type="Texture2D" uid="uid://d2qbc0j6rwq5w" path="res://assets/textures/terrain/stone_slab/rock_tile_floor/rock_tile_floor_alb_ht.png" id="7_stone_alb"]
 [ext_resource type="Texture2D" uid="uid://b2em8f2aobbpq" path="res://assets/textures/terrain/stone_slab/rock_tile_floor/rock_tile_floor_nrm_rgh.png" id="8_stone_nrm"]
+[ext_resource type="Texture2D" uid="uid://be3o2u7xfhcb8" path="res://assets/textures/terrain/grassland/rocky_terrain_02/rocky_terrain_02_alb_ht.png" id="9_h0pka"]
+[ext_resource type="Texture2D" uid="uid://cdgn0ykfoj65n" path="res://assets/textures/terrain/grassland/rocky_terrain_02/rocky_terrain_02_nrm_rgh.png" id="10_qo6lo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p4fc4"]
 transparency = 4
@@ -62,6 +64,12 @@ normal_depth = 0.6
 ao_strength = 1.0
 uv_scale = 0.5
 
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_nngye"]
+name = "草地"
+id = 4
+albedo_texture = ExtResource("9_h0pka")
+normal_texture = ExtResource("10_qo6lo")
+
 [resource]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_ok6p7")])
-texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_grass"), SubResource("Terrain3DTextureAsset_rock"), SubResource("Terrain3DTextureAsset_dirt"), SubResource("Terrain3DTextureAsset_stone")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_grass"), SubResource("Terrain3DTextureAsset_rock"), SubResource("Terrain3DTextureAsset_dirt"), SubResource("Terrain3DTextureAsset_stone"), SubResource("Terrain3DTextureAsset_nngye")])

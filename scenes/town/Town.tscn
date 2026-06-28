@@ -18,15 +18,9 @@
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof09.tscn" id="17"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof10.tscn" id="18"]
 [ext_resource type="PackedScene" path="res://scenes/npc/TownNpc.tscn" id="19"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/buildings/SmallBuildingShell.tscn" id="20"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/buildings/MediumBuildingShell.tscn" id="21"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/buildings/LargeBuildingShell.tscn" id="22"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/buildings/DistantBuildingShell.tscn" id="23"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/props/Lantern.tscn" id="24"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/props/WoodenBox.tscn" id="25"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/props/WineJar.tscn" id="26"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/props/Tree.tscn" id="27"]
-[ext_resource type="Script" uid="uid://be6tv88gv0g3i" path="res://scripts/world/SceneLodGroup.gd" id="29"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/WaterWheel/WaterWheel.tscn" id="21_pop26"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/TownHouse/TownHouse.tscn" id="22_x0ujg"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/WealthyResidence/WealthyResidence.tscn" id="23_5vy64"]
 [ext_resource type="Texture2D" uid="uid://bep22b7rlua6j" path="res://docs/concept-art/布局.png" id="30_layout"]
 [ext_resource type="Script" uid="uid://d10yqgww8s8dn" path="res://scripts/world/PathWallGenerator.gd" id="31_path_wall_generator"]
 
@@ -38,27 +32,6 @@ albedo_texture = ExtResource("30_layout")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_layout_reference"]
 size = Vector2(1536, 1024)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_MainStreetRouteClearance"]
-size = Vector3(3, 2.4, 36)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_MarketRouteClearance"]
-size = Vector3(3, 2.4, 6)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_InnEntranceClearance"]
-size = Vector3(2, 2.5, 2.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_TavernEntranceClearance"]
-size = Vector3(2, 2.5, 2.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_InnkeeperInteractionClearance"]
-size = Vector3(1.5, 2.4, 1.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_TavernKeeperInteractionClearance"]
-size = Vector3(1.5, 2.4, 1.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ReturnLandingClearance"]
-size = Vector3(2, 2.4, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(5, 4, 5)
@@ -196,356 +169,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
 [node name="Roof10" parent="RoofShowcase" unique_id=172082527 instance=ExtResource("18")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
 
-[node name="WestDistrict" type="Node3D" parent="." unique_id=112917967]
-
-[node name="CanalMarkerPlaceholder" type="Node3D" parent="WestDistrict" unique_id=280535323]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 8)
-
-[node name="WaterwheelBuilding" parent="WestDistrict" unique_id=1619518277 instance=ExtResource("21")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 10)
-
-[node name="Farmhouse_01" parent="WestDistrict" unique_id=1937797724 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 4)
-
-[node name="Farmhouse_02" parent="WestDistrict" unique_id=2006510877 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 2)
-
-[node name="Farmhouse_03" parent="WestDistrict" unique_id=1556731071 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 0)
-
-[node name="Farmhouse_NW_01" parent="WestDistrict" unique_id=753277638 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -12)
-
-[node name="Farmhouse_NW_02" parent="WestDistrict" unique_id=1449699063 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -14)
-
-[node name="Farmhouse_SW_01" parent="WestDistrict" unique_id=1537481003 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 22)
-
-[node name="Farmhouse_SW_02" parent="WestDistrict" unique_id=341964167 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 20)
-
-[node name="EastDistrict" type="Node3D" parent="." unique_id=735152332]
-
-[node name="YamenBuilding" parent="EastDistrict" unique_id=1879130107 instance=ExtResource("21")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 2)
-
-[node name="DockBuilding" parent="EastDistrict" unique_id=1168356907 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 10)
-
-[node name="SouthEastDistrict" type="Node3D" parent="." unique_id=1380221737]
-
-[node name="TempleBuilding" parent="SouthEastDistrict" unique_id=464322189 instance=ExtResource("22")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 18)
-
-[node name="NorthEastDistrict" type="Node3D" parent="." unique_id=1625841343]
-
-[node name="GranaryBuilding" parent="NorthEastDistrict" unique_id=390106417 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -16)
-
-[node name="BlacksmithBuilding" parent="NorthEastDistrict" unique_id=1955031692 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -12)
-
-[node name="ForestryTreeCluster" type="Node3D" parent="NorthEastDistrict" unique_id=2110117358]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -24)
-
-[node name="FishingHut_01" parent="NorthEastDistrict" unique_id=1525863498 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -16)
-
-[node name="FishingHut_02" parent="NorthEastDistrict" unique_id=1140494218 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -18)
-
-[node name="FishingHut_03" parent="NorthEastDistrict" unique_id=45870679 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -20)
-
-[node name="TownFlowMarkers" type="Node3D" parent="." unique_id=97752543]
-
-[node name="MainStreetRouteClearance" type="Area3D" parent="TownFlowMarkers" unique_id=1482519147]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -8)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/MainStreetRouteClearance" unique_id=917555547]
-shape = SubResource("BoxShape3D_MainStreetRouteClearance")
-
-[node name="MarketRouteClearance" type="Area3D" parent="TownFlowMarkers" unique_id=1796028144]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 8)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/MarketRouteClearance" unique_id=826129713]
-shape = SubResource("BoxShape3D_MarketRouteClearance")
-
-[node name="InnEntranceClearance" type="Area3D" parent="TownFlowMarkers" unique_id=129742742]
-transform = Transform3D(0.9393727, 0, 0.3428978, 0, 1, 0, -0.3428978, 0, 0.9393727, -11.15, 1.25, 9.05)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/InnEntranceClearance" unique_id=1723199089]
-shape = SubResource("BoxShape3D_InnEntranceClearance")
-
-[node name="TavernEntranceClearance" type="Area3D" parent="TownFlowMarkers" unique_id=432650699]
-transform = Transform3D(0.9393727, 0, -0.3428978, 0, 1, 0, 0.3428978, 0, 0.9393727, 9.15, 1.25, 15.05)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/TavernEntranceClearance" unique_id=2097738357]
-shape = SubResource("BoxShape3D_TavernEntranceClearance")
-
-[node name="InnkeeperInteractionClearance" type="Area3D" parent="TownFlowMarkers" unique_id=70875880]
-transform = Transform3D(0.9393727, 0, 0.3428978, 0, 1, 0, -0.3428978, 0, 0.9393727, -9.45, 1.2, 7.85)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/InnkeeperInteractionClearance" unique_id=1064821696]
-shape = SubResource("BoxShape3D_InnkeeperInteractionClearance")
-
-[node name="TavernKeeperInteractionClearance" type="Area3D" parent="TownFlowMarkers" unique_id=282995763]
-transform = Transform3D(0.9393727, 0, -0.3428978, 0, 1, 0, 0.3428978, 0, 0.9393727, 8.55, 1.2, 14.85)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/TavernKeeperInteractionClearance" unique_id=2116092085]
-shape = SubResource("BoxShape3D_TavernKeeperInteractionClearance")
-
-[node name="ReturnLandingClearance" type="Area3D" parent="TownFlowMarkers" unique_id=1661927649]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3.2, 24)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TownFlowMarkers/ReturnLandingClearance" unique_id=483268536]
-shape = SubResource("BoxShape3D_ReturnLandingClearance")
-
 [node name="ReturnToTownTrigger" type="Area3D" parent="." unique_id=58882631]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 24)
 script = ExtResource("2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ReturnToTownTrigger" unique_id=863962893]
 shape = SubResource("BoxShape3D_1")
-
-[node name="CoreBuildingShells" type="Node3D" parent="." unique_id=1214400664]
-
-[node name="Core_01" parent="CoreBuildingShells" unique_id=1471969201 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2)
-
-[node name="Core_02" parent="CoreBuildingShells" unique_id=488063594 instance=ExtResource("21")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
-
-[node name="Core_03" parent="CoreBuildingShells" unique_id=1468023166 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -12)
-
-[node name="Core_04" parent="CoreBuildingShells" unique_id=882067871 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
-
-[node name="Core_05" parent="CoreBuildingShells" unique_id=2030265335 instance=ExtResource("21")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 14)
-
-[node name="Core_06" parent="CoreBuildingShells" unique_id=684026639 instance=ExtResource("20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 4)
-
-[node name="DistantTownShells" type="Node3D" parent="." unique_id=1830831292]
-script = ExtResource("29")
-near_lod_path = NodePath("Near")
-mid_lod_path = NodePath("Mid")
-far_lod_path = NodePath("Far")
-mid_distance_m = 35.0
-far_distance_m = 75.0
-
-[node name="Near" type="Node3D" parent="DistantTownShells" unique_id=1398403338]
-
-[node name="D_01" parent="DistantTownShells/Near" unique_id=2115418608 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -38)
-
-[node name="D_02" parent="DistantTownShells/Near" unique_id=1980251855 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -38)
-
-[node name="D_03" parent="DistantTownShells/Near" unique_id=1865583243 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -38)
-
-[node name="D_04" parent="DistantTownShells/Near" unique_id=1513258254 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 0)
-
-[node name="D_05" parent="DistantTownShells/Near" unique_id=395393572 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 10)
-
-[node name="D_06" parent="DistantTownShells/Near" unique_id=1281058083 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 20)
-
-[node name="D_07" parent="DistantTownShells/Near" unique_id=2019327513 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -5)
-
-[node name="D_08" parent="DistantTownShells/Near" unique_id=376522065 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 5)
-
-[node name="D_09" parent="DistantTownShells/Near" unique_id=842093798 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 15)
-
-[node name="D_10" parent="DistantTownShells/Near" unique_id=1872285807 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 32)
-
-[node name="D_11" parent="DistantTownShells/Near" unique_id=852918716 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 32)
-
-[node name="D_12" parent="DistantTownShells/Near" unique_id=2141571501 instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 32)
-
-[node name="Mid" type="Node3D" parent="DistantTownShells" unique_id=1323797782]
-
-[node name="Far" type="Node3D" parent="DistantTownShells" unique_id=612173014]
-
-[node name="TownProps" type="Node3D" parent="." unique_id=399854419]
-
-[node name="StreetLanterns" type="Node3D" parent="TownProps" unique_id=308401659]
-
-[node name="L_W_01" parent="TownProps/StreetLanterns" unique_id=1386700053 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -28)
-
-[node name="L_E_01" parent="TownProps/StreetLanterns" unique_id=1072331332 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -28)
-
-[node name="L_W_02" parent="TownProps/StreetLanterns" unique_id=1019082107 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -24)
-
-[node name="L_E_02" parent="TownProps/StreetLanterns" unique_id=220762290 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -24)
-
-[node name="L_W_03" parent="TownProps/StreetLanterns" unique_id=612863603 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -20)
-
-[node name="L_E_03" parent="TownProps/StreetLanterns" unique_id=1998484440 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -20)
-
-[node name="L_W_04" parent="TownProps/StreetLanterns" unique_id=324164630 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -16)
-
-[node name="L_E_04" parent="TownProps/StreetLanterns" unique_id=1192658721 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -16)
-
-[node name="L_W_05" parent="TownProps/StreetLanterns" unique_id=1492902690 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -12)
-
-[node name="L_E_05" parent="TownProps/StreetLanterns" unique_id=673957090 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -12)
-
-[node name="L_W_06" parent="TownProps/StreetLanterns" unique_id=1968540201 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -8)
-
-[node name="L_E_06" parent="TownProps/StreetLanterns" unique_id=503649399 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -8)
-
-[node name="L_W_07" parent="TownProps/StreetLanterns" unique_id=313390654 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, -4)
-
-[node name="L_E_07" parent="TownProps/StreetLanterns" unique_id=349302828 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -4)
-
-[node name="L_W_08" parent="TownProps/StreetLanterns" unique_id=152727587 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 0)
-
-[node name="L_E_08" parent="TownProps/StreetLanterns" unique_id=6313157 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 0)
-
-[node name="L_W_09" parent="TownProps/StreetLanterns" unique_id=90623636 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 4)
-
-[node name="L_E_09" parent="TownProps/StreetLanterns" unique_id=238462035 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 4)
-
-[node name="L_W_10" parent="TownProps/StreetLanterns" unique_id=544802620 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 8)
-
-[node name="L_E_10" parent="TownProps/StreetLanterns" unique_id=1183492598 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 8)
-
-[node name="L_W_11" parent="TownProps/StreetLanterns" unique_id=1148592058 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 12)
-
-[node name="L_E_11" parent="TownProps/StreetLanterns" unique_id=1389852100 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 12)
-
-[node name="L_W_12" parent="TownProps/StreetLanterns" unique_id=1958857951 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 16)
-
-[node name="L_E_12" parent="TownProps/StreetLanterns" unique_id=903788473 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 16)
-
-[node name="L_W_13" parent="TownProps/StreetLanterns" unique_id=1932126400 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 20)
-
-[node name="L_E_13" parent="TownProps/StreetLanterns" unique_id=281556658 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 20)
-
-[node name="L_W_14" parent="TownProps/StreetLanterns" unique_id=1807033104 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 24)
-
-[node name="L_E_14" parent="TownProps/StreetLanterns" unique_id=1617195519 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 24)
-
-[node name="MarketProps" type="Node3D" parent="TownProps" unique_id=1975635509]
-
-[node name="Box_01" parent="TownProps/MarketProps" unique_id=1262200630 instance=ExtResource("25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.3, 7)
-
-[node name="Box_02" parent="TownProps/MarketProps" unique_id=1411599554 instance=ExtResource("25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.3, 9)
-
-[node name="Box_03" parent="TownProps/MarketProps" unique_id=815110265 instance=ExtResource("25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.3, 10)
-
-[node name="Jar_01" parent="TownProps/MarketProps" unique_id=588680876 instance=ExtResource("26")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.2, 7)
-
-[node name="Jar_02" parent="TownProps/MarketProps" unique_id=1611558713 instance=ExtResource("26")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 10)
-
-[node name="InnProps" type="Node3D" parent="TownProps" unique_id=292616346]
-
-[node name="Lantern_L" parent="TownProps/InnProps" unique_id=165490086 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 2.5, 7.5)
-
-[node name="Lantern_R" parent="TownProps/InnProps" unique_id=1375159412 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 2.5, 7.5)
-
-[node name="Box_Rear" parent="TownProps/InnProps" unique_id=1261311294 instance=ExtResource("25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.3, 4)
-
-[node name="TavernProps" type="Node3D" parent="TownProps" unique_id=1801754652]
-
-[node name="Lantern_L" parent="TownProps/TavernProps" unique_id=1340852520 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2.5, 13.5)
-
-[node name="Lantern_R" parent="TownProps/TavernProps" unique_id=957170165 instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 2.5, 13.5)
-
-[node name="Jar_01" parent="TownProps/TavernProps" unique_id=1000462886 instance=ExtResource("26")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.2, 15)
-
-[node name="Jar_02" parent="TownProps/TavernProps" unique_id=290179620 instance=ExtResource("26")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.2, 15)
-
-[node name="TownTrees" type="Node3D" parent="TownProps" unique_id=987114316]
-
-[node name="Tree_01" parent="TownProps/TownTrees" unique_id=920578986 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -24)
-
-[node name="Tree_02" parent="TownProps/TownTrees" unique_id=1557151808 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -16)
-
-[node name="Tree_03" parent="TownProps/TownTrees" unique_id=1558082846 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -8)
-
-[node name="Tree_04" parent="TownProps/TownTrees" unique_id=848010907 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, 0)
-
-[node name="Tree_05" parent="TownProps/TownTrees" unique_id=1915812839 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -20)
-
-[node name="Tree_06" parent="TownProps/TownTrees" unique_id=101572328 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -12)
-
-[node name="Tree_07" parent="TownProps/TownTrees" unique_id=104600015 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -4)
-
-[node name="Tree_08" parent="TownProps/TownTrees" unique_id=1115914053 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 6)
-
-[node name="Tree_09" parent="TownProps/TownTrees" unique_id=900833428 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, 10)
-
-[node name="Tree_10" parent="TownProps/TownTrees" unique_id=2050838768 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, 18)
-
-[node name="Tree_11" parent="TownProps/TownTrees" unique_id=1441594866 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 18)
-
-[node name="Tree_12" parent="TownProps/TownTrees" unique_id=334456415 instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 26)
 
 [node name="TownNpcGroup" type="Node3D" parent="." unique_id=573696098]
 
@@ -603,5 +232,26 @@ curve = SubResource("Curve3D_086wm")
 [node name="Node6" type="Path3D" parent="TownWall" unique_id=1679515195]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.390781, 0, -377.74796)
 curve = SubResource("Curve3D_lteju")
+
+[node name="WaterWheelGroup" type="Node3D" parent="." unique_id=799818213]
+transform = Transform3D(0.70467615, 0, -0.70952904, 0, 1, 0, 0.70952904, 0, 0.70467615, -252.95798, 0, 145.3733)
+
+[node name="WaterWheel" parent="WaterWheelGroup" unique_id=67455711 instance=ExtResource("21_pop26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.028930664)
+
+[node name="House" type="Node3D" parent="." unique_id=499785777]
+transform = Transform3D(0.70467615, 0, -0.70952904, 0, 1, 0, 0.70952904, 0, 0.70467615, 0.141, 1, 0.377)
+
+[node name="TownHouse" parent="House" unique_id=1343302350 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(0.7046762, 0, 0.7095291, 0, 1, 0, -0.7095291, 0, 0.7046762, 272.38318, 0, 169.82368)
+
+[node name="TownHouse2" parent="House" unique_id=1834558359 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(0.72491837, 0, 0.6888353, 0, 1, 0, -0.6888353, 0, 0.72491837, 284.14328, 0, 158.36992)
+
+[node name="Residance" type="Node3D" parent="." unique_id=604493790]
+transform = Transform3D(0.99958134, 0, -0.02894482, 0, 1, 0, 0.02894482, 0, 0.99958134, 0, 1, 0)
+
+[node name="WealthyResidence" parent="Residance" unique_id=1688175999 instance=ExtResource("23_5vy64")]
+transform = Transform3D(0.9995127, 0, 0.031216372, 0, 1, 0, -0.031216372, 0, 0.9995127, 60.056126, 0, 269.67828)
 
 [connection signal="body_entered" from="ReturnToTownTrigger" to="ReturnToTownTrigger" method="_on_body_entered"]
