@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="PackedScene" path="res://assets/models/Inn/Inn.glb" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/town/Inn/Inn.glb" id="1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
 size = Vector3(14, 6, 10)
 
 [node name="Inn" type="Node3D"]
-metadata/source_model_path = "res://assets/models/Inn/Inn.glb"
+metadata/source_model_path = "res://assets/models/town/Inn/Inn.glb"
 
 [node name="Model" parent="." instance=ExtResource("1")]
 

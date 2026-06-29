@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://1qp5oqc4207h"]
 
-[ext_resource type="PackedScene" uid="uid://bcjeldr6xykeq" path="res://assets/models/Gate/Gate.glb" id="1"]
+[ext_resource type="PackedScene" uid="uid://bcjeldr6xykeq" path="res://assets/models/town/Gate/Gate.glb" id="1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
 size = Vector3(12.09839, 6.791106, 13.328224)
@@ -12,7 +12,7 @@ size = Vector3(9.988403, 8.169067, 12.808105)
 size = Vector3(9.802734, 8.218658, 12.773804)
 
 [node name="Gate" type="Node3D" unique_id=724966319]
-metadata/source_model_path = "res://assets/models/Gate/Gate.glb"
+metadata/source_model_path = "res://assets/models/town/Gate/Gate.glb"
 
 [node name="Model" parent="." unique_id=1100292310 instance=ExtResource("1")]
 transform = Transform3D(-4.371139e-08, -4.371139e-08, -1, 4.371139e-08, 1, -4.371139e-08, 1, -4.371139e-08, -4.3711385e-08, 0, 0, 0)

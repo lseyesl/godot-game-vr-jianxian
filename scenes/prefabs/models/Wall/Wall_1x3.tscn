@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://d1s0g3gplg8oc"]
 
-[ext_resource type="PackedScene" uid="uid://b44awvepcuoyn" path="res://assets/models/Wall/Wall_1x3.glb" id="1"]
+[ext_resource type="PackedScene" uid="uid://b44awvepcuoyn" path="res://assets/models/town/Wall/Wall_1x3.glb" id="1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
 size = Vector3(1, 3, 0.1)
 
 [node name="Wall_1x3" type="Node3D" unique_id=960017127]
-metadata/source_model_path = "res://assets/models/Wall/Wall_1x3.glb"
+metadata/source_model_path = "res://assets/models/town/Wall/Wall_1x3.glb"
 
 [node name="Model" parent="." unique_id=900929741 instance=ExtResource("1")]
 

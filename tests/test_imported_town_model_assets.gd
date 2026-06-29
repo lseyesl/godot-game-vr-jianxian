@@ -2,52 +2,52 @@ extends RefCounted
 
 const IMPORTED_PREFABS := [
 	{
-		"source": "res://assets/models/WealthyResidence/WealthyResidence.glb",
+		"source": "res://assets/models/town/WealthyResidence/WealthyResidence.glb",
 		"prefab": "res://scenes/prefabs/models/WealthyResidence/WealthyResidence.tscn",
 		"root": "WealthyResidence",
 	},
 	{
-		"source": "res://assets/models/StoneBridge/StoneBridge01.glb",
+		"source": "res://assets/models/town/StoneBridge/StoneBridge01.glb",
 		"prefab": "res://scenes/prefabs/models/StoneBridge/StoneBridge01.tscn",
 		"root": "StoneBridge01",
 	},
 	{
-		"source": "res://assets/models/StoneBridge/StoneBridge02.glb",
+		"source": "res://assets/models/town/StoneBridge/StoneBridge02.glb",
 		"prefab": "res://scenes/prefabs/models/StoneBridge/StoneBridge02.tscn",
 		"root": "StoneBridge02",
 	},
 	{
-		"source": "res://assets/models/StoneBridge/StoneBridge03.glb",
+		"source": "res://assets/models/town/StoneBridge/StoneBridge03.glb",
 		"prefab": "res://scenes/prefabs/models/StoneBridge/StoneBridge03.tscn",
 		"root": "StoneBridge03",
 	},
 	{
-		"source": "res://assets/models/StoneBridge/StoneBridge04.glb",
+		"source": "res://assets/models/town/StoneBridge/StoneBridge04.glb",
 		"prefab": "res://scenes/prefabs/models/StoneBridge/StoneBridge04.tscn",
 		"root": "StoneBridge04",
 	},
 	{
-		"source": "res://assets/models/TownHouse/TownHouse.glb",
+		"source": "res://assets/models/town/TownHouse/TownHouse.glb",
 		"prefab": "res://scenes/prefabs/models/TownHouse/TownHouse.tscn",
 		"root": "TownHouse",
 	},
 	{
-		"source": "res://assets/models/WaterWheel/WaterWheel.glb",
+		"source": "res://assets/models/town/WaterWheel/WaterWheel.glb",
 		"prefab": "res://scenes/prefabs/models/WaterWheel/WaterWheel.tscn",
 		"root": "WaterWheel",
 	},
 	{
-		"source": "res://assets/models/RiverBoat/RiverBoat.glb",
+		"source": "res://assets/models/town/RiverBoat/RiverBoat.glb",
 		"prefab": "res://scenes/prefabs/models/RiverBoat/RiverBoat.tscn",
 		"root": "RiverBoat",
 	},
 	{
-		"source": "res://assets/models/BellDrumTower/BellDrumTower01.glb",
+		"source": "res://assets/models/town/BellDrumTower/BellDrumTower01.glb",
 		"prefab": "res://scenes/prefabs/models/BellDrumTower/BellDrumTower01.tscn",
 		"root": "BellDrumTower01",
 	},
 	{
-		"source": "res://assets/models/BellDrumTower/BellDrumTower02.glb",
+		"source": "res://assets/models/town/BellDrumTower/BellDrumTower02.glb",
 		"prefab": "res://scenes/prefabs/models/BellDrumTower/BellDrumTower02.tscn",
 		"root": "BellDrumTower02",
 	},

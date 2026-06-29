@@ -32,11 +32,11 @@ func _test_showcase_models(t, town: Node) -> void:
 	t.assert_true(town.has_node("WestGatePaifang/GateModel"), "West gate model is attached to the west gate")
 	var gate_model = town.get_node_or_null("GatePaifang/GateModel")
 	t.assert_true(gate_model is Node3D, "Gate model is a visible 3D node")
-	t.assert_equal(_source_model_path(gate_model), "res://assets/models/Gate/Gate.glb", "Gate model uses the Gate source asset")
+	t.assert_equal(_source_model_path(gate_model), "res://assets/models/town/Gate/Gate.glb", "Gate model uses the Gate source asset")
 	var south_gate_model = town.get_node_or_null("SouthGatePaifang/GateModel")
 	var west_gate_model = town.get_node_or_null("WestGatePaifang/GateModel")
-	t.assert_equal(_source_model_path(south_gate_model), "res://assets/models/Gate/Gate.glb", "South gate uses the Gate source asset")
-	t.assert_equal(_source_model_path(west_gate_model), "res://assets/models/Gate/Gate.glb", "West gate uses the Gate source asset")
+	t.assert_equal(_source_model_path(south_gate_model), "res://assets/models/town/Gate/Gate.glb", "South gate uses the Gate source asset")
+	t.assert_equal(_source_model_path(west_gate_model), "res://assets/models/town/Gate/Gate.glb", "West gate uses the Gate source asset")
 	t.assert_true(town.has_node("MarketStreet/StallCenter"), "Center market stall is placed in town")
 	t.assert_true(town.has_node("MarketStreet/StallLeft"), "Left market stall is placed in town")
 	t.assert_true(town.has_node("MarketStreet/StallRight"), "Right market stall is placed in town")
@@ -65,7 +65,7 @@ func _test_roof_showcase_models(t, town: Node) -> void:
 		t.assert_true(town.has_node(roof_path), "%s is placed in town" % roof_path)
 		var roof = town.get_node_or_null(roof_path)
 		t.assert_true(roof is Node3D, "%s is a 3D roof node" % roof_path)
-		t.assert_equal(_source_model_path(roof), "res://assets/models/Roof/%s.glb" % roof_name, "%s uses the matching Roof source asset" % roof_name)
+		t.assert_equal(_source_model_path(roof), "res://assets/models/town/Roof/%s.glb" % roof_name, "%s uses the matching Roof source asset" % roof_name)
 
 func _test_town_wall_models(t, town: Node) -> void:
 	t.assert_true(town.has_node("TownWall"), "Town wall path anchor exists")
@@ -100,7 +100,7 @@ func _test_town_wall_models(t, town: Node) -> void:
 	for wall in generated.get_children():
 		t.assert_true(wall is Node3D, "%s is a generated 3D wall segment" % wall.name)
 		t.assert_equal(wall.owner, null, "%s remains unsaved runtime/editor preview data" % wall.name)
-		t.assert_equal(_source_model_path(wall), "res://assets/models/Wall/Wall_2x3.glb", "%s uses the Wall_2x3 model" % wall.name)
+		t.assert_equal(_source_model_path(wall), "res://assets/models/town/Wall/Wall_2x3.glb", "%s uses the Wall_2x3 model" % wall.name)
 		var path_name: String = wall.get_meta("path_name", "")
 		t.assert_true(expected_lengths.has(path_name), "%s records a source path name" % wall.name)
 		t.assert_true(wall.has_meta("segment_length_m"), "%s records segment length" % wall.name)

@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="PackedScene" path="res://assets/models/Roof/Roof03.glb" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/town/Roof/Roof03.glb" id="1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
 size = Vector3(4.771723, 3.532074, 5.996384)
 
 [node name="Roof03" type="Node3D"]
-metadata/source_model_path = "res://assets/models/Roof/Roof03.glb"
+metadata/source_model_path = "res://assets/models/town/Roof/Roof03.glb"
 
 [node name="Model" instance=ExtResource("1") parent="."]
 

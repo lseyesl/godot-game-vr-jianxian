@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://dlqa4wwd8bwso"]
 
-[ext_resource type="PackedScene" uid="uid://degd08svhds6w" path="res://assets/models/Market_Stall/Market_Stall.glb" id="1"]
+[ext_resource type="PackedScene" uid="uid://degd08svhds6w" path="res://assets/models/town/Market_Stall/Market_Stall.glb" id="1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
 size = Vector3(1.467849, 1.659866, 1.995431)
 
 [node name="Market_Stall" type="Node3D" unique_id=725788218]
-metadata/source_model_path = "res://assets/models/Market_Stall/Market_Stall.glb"
+metadata/source_model_path = "res://assets/models/town/Market_Stall/Market_Stall.glb"
 
 [node name="Model" parent="." unique_id=1943902861 instance=ExtResource("1")]
 
