@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/vegetation/bamboo_01/bamboo_01.glb" id="1"]
+
+[node name="bamboo_01" type="Node3D"]
+metadata/source_model_path = "res://assets/models/vegetation/bamboo_01/bamboo_01.glb"
+
+[node name="Model" parent="." instance=ExtResource("1")]
