@@ -72,6 +72,11 @@ func _test_town_npc_scene(t) -> void:
 	t.assert_true(scene.get_node_or_null("Visual") is MeshInstance3D, "TownNpc has visible mesh")
 	t.assert_true(scene.get_node_or_null("SenseArea") is Area3D, "TownNpc has sense area")
 	t.assert_true(scene.get_node_or_null("BehaviorTree") != null, "TownNpc has Beehave tree")
+	var nav_agent = scene.get_node_or_null("NavigationAgent3D")
+	t.assert_true(nav_agent != null, "TownNpc has NavigationAgent3D node")
+	if nav_agent:
+		t.assert_equal(nav_agent.get("radius"), 0.3, "NavigationAgent3D radius is 0.3")
+		t.assert_equal(nav_agent.get("max_speed"), 1.0, "NavigationAgent3D max_speed is 1.0")
 	scene.free()
 
 
