@@ -115,6 +115,30 @@ The full Godot XR Tools addon is NOT tracked in this repo (it caused headless Go
 - Export command: `godot --headless --path . --export-release "PCVR Demo" builds/pcvr/VRXianxiaDemo.exe`
 - Requires Windows export templates installed for Godot 4.6+
 
+## Editor Plugins
+
+The repo includes several Godot editor plugins for development workflow. All are tracked in `addons/`.
+
+| Plugin | Directory | Description |
+|--------|-----------|-------------|
+| **Asset Placer** | `addons/asset_placer/` | Browse and place prefab assets in the 3D viewport |
+| **Prefab Inspector** | `addons/prefab_inspector/` | Bottom-panel dashboard that scans all TSCN prefabs and displays metadata: scene name, root type, GLB source, collision shape, script binding, material count, audio/particle presence. Tested in `tests/test_prefab_inspector.gd`. |
+| **NavMesh Workflow** | `addons/navmesh_workflow/` | Bottom-panel tool to scan the current scene for `NavigationRegion3D` nodes, display polygon counts, and bake/rebake selected or all NavRegions. Uses `NavigationServer3D` API + Terrain3D terrain geometry. Tested in `tests/test_navmesh_workflow_plugin.gd`. |
+
+### NavMesh Workflow Panel
+
+- **Scan NavRegions** — finds all `NavigationRegion3D` nodes in the edited scene root
+- **List** — shows each NavRegion with name and polygon count
+- **Bake Selected** — bakes the selected NavRegion using `NavigationServer3D.bake_from_source_geometry_data()` and Terrain3D `generate_nav_mesh_source_geometry()` for terrain children
+- **Bake All** — bakes all detected NavRegions
+- Post-processes vertex positions to align to the cell grid (workaround for Godot issue #85548)
+
+### Prefab Inspector Panel
+
+- **Scanner** (`addons/prefab_inspector/scripts/prefab_scanner.gd`) scans `res://scenes/prefabs/` for all `.tscn` files
+- **Dashboard** shows a sortable/filterable tree table with columns: Scene, Root Type, GLB Source, Collision, Script, Materials, Audio, Particles
+- Search box filters by scene name; column headers support click-to-sort
+
 ## Headless Environment Limitations
 
 - No HMD detected; OpenXR features untestable in CI/headless
