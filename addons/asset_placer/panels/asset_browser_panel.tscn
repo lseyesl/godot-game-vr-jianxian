@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/asset_placer/panels/asset_browser_panel.gd" id="1"]
+
+[node name="AssetBrowserPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPanel" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Toolbar" type="HBoxContainer" parent="HBox/LeftPanel"]
+layout_mode = 2
+
+[node name="SearchBox" type="LineEdit" parent="HBox/LeftPanel/Toolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "搜索预制体..."
+unique_name_in_owner = true
+
+[node name="CategoryFilter" type="OptionButton" parent="HBox/LeftPanel/Toolbar"]
+layout_mode = 2
+unique_name_in_owner = true
+
+[node name="PrefabList" type="ItemList" parent="HBox/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+unique_name_in_owner = true
+
+[node name="StatusLabel" type="Label" parent="HBox/LeftPanel"]
+layout_mode = 2
+unique_name_in_owner = true
+
+[node name="RightPanel" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="SelectedLabel" type="Label" parent="HBox/RightPanel"]
+layout_mode = 2
+text = "选中："
+
+[node name="PlaceButton" type="Button" parent="HBox/RightPanel"]
+layout_mode = 2
+unique_name_in_owner = true

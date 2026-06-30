@@ -34,6 +34,7 @@ func _init() -> void:
 		"res://tests/test_town_playability.gd",
 		"res://tests/test_town_showcase.gd",
 		"res://tests/test_terrain.gd",
+		"res://tests/test_asset_placer.gd",
 	]
 	for path in test_paths:
 		if FileAccess.file_exists(path):
