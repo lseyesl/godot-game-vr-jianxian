@@ -9,7 +9,7 @@ const VR_PLAYER_SCENE_PATH := "res://scenes/player/XRPlayer.tscn"
 @export_enum("desktop_simulation", "vr") var player_mode := PLAYER_MODE_DESKTOP_SIMULATION
 @export var player_spawn_path: NodePath = ^"PlayerSpawn"
 @export var player_spawn_position := Vector3(0, 0, 6)
-@export var terrain_spawn_path: NodePath = ^"TerrainContainer/Terrain3D"
+@export var terrain_spawn_path: NodePath = ^"TerrainContainer/NavigationRegion3D/Terrain3D"
 @export var player_spawn_surface_clearance_m := 0.05
 
 var player_node: Node

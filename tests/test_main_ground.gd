@@ -9,7 +9,7 @@ func run(t) -> void:
 	var container := scene.get_node_or_null("TerrainContainer")
 	t.assert_true(container != null, "Main scene has TerrainContainer child")
 	if container != null:
-		t.assert_true(container.get_node_or_null("Terrain3D") != null, "TerrainContainer has Terrain3D")
+		t.assert_true(container.get_node_or_null("NavigationRegion3D/Terrain3D") != null, "TerrainContainer has Terrain3D")
 		t.assert_true(container.get_node_or_null("WorldBoundary") != null, "TerrainContainer has WorldBoundary")
 		t.assert_true(container.get_node_or_null("TownGround") == null, "TerrainContainer does not instance old TownGround")
 		t.assert_true(container.get_node_or_null("SuburbGround") == null, "TerrainContainer does not instance old SuburbGround")

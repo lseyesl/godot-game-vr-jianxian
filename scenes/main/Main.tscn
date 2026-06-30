@@ -23,6 +23,14 @@ fog_height_density = 0.4
 [sub_resource type="FogMaterial" id="FogMaterial_valley"]
 density = 0.01
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_terrain"]
+cell_size = 0.25
+cell_height = 0.2
+agent_radius = 0.3
+agent_height = 1.55
+agent_max_slope = 45.0
+agent_max_climb = 0.3
+
 [node name="Main" type="Node3D" unique_id=1958681121]
 script = ExtResource("1")
 
@@ -49,7 +57,10 @@ world_environment_path = NodePath("../WorldEnvironment")
 
 [node name="TerrainContainer" type="Node3D" parent="." unique_id=1322107783]
 
-[node name="Terrain3D" type="Terrain3D" parent="TerrainContainer" unique_id=81990452]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="TerrainContainer"]
+navigation_mesh = SubResource("NavigationMesh_terrain")
+
+[node name="Terrain3D" type="Terrain3D" parent="TerrainContainer/NavigationRegion3D" unique_id=81990452]
 data_directory = "res://assets/terrain3d/data/"
 material = ExtResource("23")
 assets = ExtResource("22")

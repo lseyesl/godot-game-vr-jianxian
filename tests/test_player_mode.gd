@@ -14,7 +14,7 @@ func run(t) -> void:
 	t.assert_equal(main.resolve_player_scene_path("vr"), "res://scenes/player/XRPlayer.tscn", "vr resolves XR player scene")
 	t.assert_equal(main.normalize_player_mode("unknown"), "desktop_simulation", "unknown mode falls back to desktop simulation")
 	t.assert_equal(main.player_spawn_path, NodePath("PlayerSpawn"), "Main resolves player spawn from PlayerSpawn by default")
-	t.assert_equal(main.terrain_spawn_path, NodePath("TerrainContainer/Terrain3D"), "Main resolves spawn height from the Terrain3D node by default")
+	t.assert_equal(main.terrain_spawn_path, NodePath("TerrainContainer/NavigationRegion3D/Terrain3D"), "Main resolves spawn height from the Terrain3D node by default")
 	var desktop_player = main.instantiate_player_for_mode("desktop_simulation")
 	t.assert_true(desktop_player != null, "desktop player instantiates")
 	if desktop_player != null:

@@ -66,7 +66,7 @@ func run(t) -> void:
 	t.assert_true(container != null, "Main scene has TerrainContainer child")
 	if container != null:
 		# Terrain3D 替代了 HeightmapTerrain
-		var terrain3d := container.get_node_or_null("Terrain3D")
+		var terrain3d := container.get_node_or_null("NavigationRegion3D/Terrain3D")
 		t.assert_true(terrain3d != null, "TerrainContainer has Terrain3D")
 		if terrain3d != null:
 			t.assert_true(terrain3d is Terrain3D, "Terrain3D node is of type Terrain3D")
