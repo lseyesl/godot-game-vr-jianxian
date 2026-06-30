@@ -12,8 +12,16 @@ var last_spoken_line := ""
 var nearby_player: Node3D
 var wait_remaining_s := 0.0
 
+# NavigationAgent3D state
+var _nav_agent: NavigationAgent3D
+var _navigating := false
+var nav_target_reached := false
+
 
 func _ready() -> void:
+	_nav_agent = get_node_or_null("NavigationAgent3D") as NavigationAgent3D
+	if _nav_agent:
+		_nav_agent.navigation_finished.connect(_on_nav_target_reached)
 	var tree := $BehaviorTree as BeehaveTree
 	if tree != null:
 		tree.process_thread = BeehaveTree.ProcessThread.MANUAL
@@ -22,6 +30,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if _navigating and _nav_agent != null:
+		_update_nav_velocity()
 	var tree := $BehaviorTree as BeehaveTree
 	if tree != null and tree.enabled:
 		tree.blackboard.set_value("delta", delta, str(get_instance_id()))
@@ -68,7 +78,49 @@ func clear_nearby_player(player: Node) -> void:
 func has_nearby_player() -> bool:
 	return nearby_player != null and is_instance_valid(nearby_player)
 
+func _update_nav_velocity() -> void:
+	if _nav_agent == null or not _navigating:
+		return
+	if _nav_agent.is_navigation_finished():
+		_navigating = false
+		velocity = Vector3.ZERO
+		return
+	var next_pos := _nav_agent.get_next_path_position()
+	var direction := global_position.direction_to(next_pos)
+	direction.y = 0.0
+	velocity = direction * move_speed_mps
+	move_and_slide()
+
+
+func _on_nav_target_reached() -> void:
+	nav_target_reached = true
+	_navigating = false
+
+
+# --- Behavior tree navigation interface ---
+
 func move_to_next_waypoint(delta: float) -> bool:
+	if waypoints.is_empty():
+		_navigating = false
+		nav_target_reached = false
+		velocity = Vector3.ZERO
+		return false
+	if _nav_agent != null:
+		var target: Vector3 = waypoints[current_waypoint_index]
+		_nav_agent.target_position = target
+		_navigating = true
+		nav_target_reached = false
+		return true
+	return _legacy_move_to_next_waypoint(delta)
+
+
+func is_at_waypoint() -> bool:
+	if _nav_agent != null:
+		return nav_target_reached
+	return _legacy_is_at_waypoint()
+
+
+func _legacy_move_to_next_waypoint(delta: float) -> bool:
 	if waypoints.is_empty():
 		velocity = Vector3.ZERO
 		return false
@@ -87,7 +139,8 @@ func move_to_next_waypoint(delta: float) -> bool:
 		position += step * delta
 	return true
 
-func is_at_waypoint() -> bool:
+
+func _legacy_is_at_waypoint() -> bool:
 	if waypoints.is_empty():
 		return true
 	var current := global_position if is_inside_tree() else position
