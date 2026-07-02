@@ -10,6 +10,8 @@ var placer: AssetPlacer
 
 
 func _enter_tree() -> void:
+	set_input_event_forwarding_always_enabled()
+
 	scanner = AssetScanner.new()
 	placer = AssetPlacer.new()
 
@@ -21,6 +23,7 @@ func _enter_tree() -> void:
 	browser_panel.stop_placing.connect(_on_stop_placing)
 
 	add_control_to_bottom_panel(bottom_panel, PANEL_NAME)
+	make_bottom_panel_item_visible(bottom_panel)
 
 
 func _exit_tree() -> void:

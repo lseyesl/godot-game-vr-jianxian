@@ -1,3 +1,4 @@
+@tool
 class_name AssetBrowserPanel
 extends Control
 
@@ -10,7 +11,8 @@ signal stop_placing()
 var scanner: AssetScanner:
 	set(value):
 		scanner = value
-		_refresh_list()
+		if is_node_ready():
+			_refresh_list()
 
 var _all_entries: Array[AssetScanner.PrefabEntry] = []
 var _filtered_entries: Array[AssetScanner.PrefabEntry] = []
@@ -34,6 +36,9 @@ func _ready() -> void:
 	_prefab_list.item_selected.connect(_on_prefab_selected)
 	_prefab_list.item_activated.connect(_on_prefab_activated)
 	_place_btn.toggled.connect(_on_place_toggled)
+
+	if scanner:
+		_refresh_list()
 
 
 func _refresh_list() -> void:

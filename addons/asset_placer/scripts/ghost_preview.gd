@@ -1,3 +1,4 @@
+@tool
 class_name GhostPreview
 extends Node3D
 

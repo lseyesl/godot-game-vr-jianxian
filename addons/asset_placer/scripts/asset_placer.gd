@@ -1,3 +1,4 @@
+@tool
 class_name AssetPlacer
 extends RefCounted
 
@@ -72,7 +73,10 @@ func _update_ghost(camera: Camera3D, mouse_pos: Vector2) -> void:
 func _raycast(camera: Camera3D, mouse_pos: Vector2) -> Dictionary:
 	var space := camera.get_world_3d().direct_space_state
 	if not space:
-		return {}
+		return _intersect_ground_plane(
+			camera.project_ray_origin(mouse_pos),
+			camera.project_ray_normal(mouse_pos)
+		)
 
 	var origin := camera.project_ray_origin(mouse_pos)
 	var normal := camera.project_ray_normal(mouse_pos)
@@ -81,7 +85,22 @@ func _raycast(camera: Camera3D, mouse_pos: Vector2) -> Dictionary:
 	var query := PhysicsRayQueryParameters3D.create(origin, end)
 	if _ghost:
 		query.exclude = [_ghost]
-	return space.intersect_ray(query)
+	var result := space.intersect_ray(query)
+	if not result.is_empty():
+		return result
+	return _intersect_ground_plane(origin, normal)
+
+
+func _intersect_ground_plane(origin: Vector3, direction: Vector3) -> Dictionary:
+	if absf(direction.y) < 0.0001:
+		return {}
+	var distance := -origin.y / direction.y
+	if distance < 0.0:
+		return {}
+	return {
+		"position": origin + direction * distance,
+		"normal": Vector3.UP,
+	}
 
 
 func _place(camera: Camera3D, mouse_pos: Vector2) -> void:

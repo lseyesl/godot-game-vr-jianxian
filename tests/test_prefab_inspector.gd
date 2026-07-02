@@ -21,6 +21,7 @@ func run(t) -> void:
 		_test_particles_detection(t, ScannerScript)
 		_test_root_type_extraction(t, ScannerScript)
 		_test_root_name_matching(t, ScannerScript)
+		_test_panel_accepts_scanner_before_ready(t, ScannerScript)
 
 	_test_panel_exists(t)
 
@@ -104,3 +105,21 @@ func _test_panel_exists(t) -> void:
 		ResourceLoader.exists("res://addons/prefab_inspector/panels/inspector_panel.tscn"),
 		"InspectorPanel scene should exist"
 	)
+
+
+func _test_panel_accepts_scanner_before_ready(t, ScannerScript) -> void:
+	var panel_scene := load("res://addons/prefab_inspector/panels/inspector_panel.tscn") as PackedScene
+	t.assert_true(panel_scene != null, "InspectorPanel scene should load")
+	if panel_scene == null:
+		return
+
+	var panel := panel_scene.instantiate() as Control
+	t.assert_true(panel != null, "InspectorPanel root should be Control")
+	if panel == null:
+		return
+
+	var scanner = ScannerScript.new()
+	panel.scanner = scanner
+	t.assert_equal(panel.scanner, scanner, "InspectorPanel should accept scanner before ready")
+
+	panel.free()

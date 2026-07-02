@@ -1,3 +1,4 @@
+@tool
 class_name PrefabInspectorPanel
 extends Control
 
@@ -8,7 +9,8 @@ signal prefab_selected(path: String)
 var scanner: PrefabInspectorScanner:
 	set(value):
 		scanner = value
-		_refresh_list()
+		if is_node_ready():
+			_refresh_list()
 
 var _all_entries: Array[PrefabInspectorScanner.PrefabEntry] = []
 var _filtered_entries: Array[PrefabInspectorScanner.PrefabEntry] = []
@@ -79,6 +81,9 @@ func _ready() -> void:
 	_prefab_tree.item_activated.connect(_on_item_activated)
 	_prefab_tree.item_mouse_selected.connect(_on_item_selected)
 	_scan_btn.pressed.connect(_refresh_list)
+
+	if scanner:
+		_refresh_list()
 
 
 func _refresh_list() -> void:
