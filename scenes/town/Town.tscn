@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/WaterWheel/WaterWheel.tscn" id="21_pop26"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/TownHouse/TownHouse.tscn" id="22_x0ujg"]
 [ext_resource type="PackedScene" path="res://scenes/prefabs/models/WealthyResidence/WealthyResidence.tscn" id="23_5vy64"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/BellDrumTower/BellDrumTower01.tscn" id="24_gdn34"]
 [ext_resource type="Texture2D" uid="uid://bep22b7rlua6j" path="res://docs/concept-art/布局.png" id="30_layout"]
 [ext_resource type="Script" uid="uid://d10yqgww8s8dn" path="res://scripts/world/PathWallGenerator.gd" id="31_path_wall_generator"]
 
@@ -239,19 +240,48 @@ transform = Transform3D(0.70467615, 0, -0.70952904, 0, 1, 0, 0.70952904, 0, 0.70
 [node name="WaterWheel" parent="WaterWheelGroup" unique_id=67455711 instance=ExtResource("21_pop26")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.028930664)
 
-[node name="House" type="Node3D" parent="." unique_id=499785777]
-transform = Transform3D(0.70467615, 0, -0.70952904, 0, 1, 0, 0.70952904, 0, 0.70467615, 0.141, 1, 0.377)
-
-[node name="TownHouse" parent="House" unique_id=1343302350 instance=ExtResource("22_x0ujg")]
-transform = Transform3D(0.7046762, 0, 0.7095291, 0, 1, 0, -0.7095291, 0, 0.7046762, 272.38318, 0, 169.82368)
-
-[node name="TownHouse2" parent="House" unique_id=1834558359 instance=ExtResource("22_x0ujg")]
-transform = Transform3D(0.72491837, 0, 0.6888353, 0, 1, 0, -0.6888353, 0, 0.72491837, 284.14328, 0, 158.36992)
-
 [node name="Residance" type="Node3D" parent="." unique_id=604493790]
 transform = Transform3D(0.99958134, 0, -0.02894482, 0, 1, 0, 0.02894482, 0, 0.99958134, 0, 1, 0)
 
 [node name="WealthyResidence" parent="Residance" unique_id=1688175999 instance=ExtResource("23_5vy64")]
 transform = Transform3D(0.9995127, 0, 0.031216372, 0, 1, 0, -0.031216372, 0, 0.9995127, 60.056126, 0, 269.67828)
+
+[node name="SouthDist" type="Node3D" parent="." unique_id=596617201]
+
+[node name="BellDrumTower01" parent="SouthDist" unique_id=461657255 instance=ExtResource("24_gdn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 215.5168, 5.4330444, 364.9871)
+
+[node name="TownHouse" parent="SouthDist" unique_id=1343302350 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.111763, 1, 336.78784)
+
+[node name="TownHouse2" parent="SouthDist" unique_id=1834558359 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(0.99958134, 0, -0.02894482, 0, 1, 0, 0.02894482, 0, 0.99958134, 56.560204, 1, 337.4624)
+
+[node name="TownHouse" type="Node3D" parent="." unique_id=714723321 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.87258, 0, 337.43857)
+
+[node name="TownHouse2" type="Node3D" parent="." unique_id=1389173992 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.25022, 0, 337.5456)
+
+[node name="TownHouse3" type="Node3D" parent="." unique_id=1128579374 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.70346, 0, 336.9587)
+
+[node name="TownHouse4" type="Node3D" parent="." unique_id=1916377560 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.42685, 0, 327.04953)
+
+[node name="TownHouse5" type="Node3D" parent="." unique_id=670660127 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.79402, 0, 327.23392)
+
+[node name="TownHouse6" type="Node3D" parent="." unique_id=218951065 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.01902, 0, 327.3203)
+
+[node name="TownHouse7" type="Node3D" parent="." unique_id=1344609066 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.396286, 0, 327.21774)
+
+[node name="TownHouse8" type="Node3D" parent="." unique_id=1205670193 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.888794, 0, 327.1329)
+
+[node name="TownHouse9" type="Node3D" parent="." unique_id=2059154648 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.755, 0, 327.06903)
 
 [connection signal="body_entered" from="ReturnToTownTrigger" to="ReturnToTownTrigger" method="_on_body_entered"]
