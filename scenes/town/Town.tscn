@@ -1,0 +1,257 @@
+[gd_scene format=3 uid="uid://bko50we0fm2yr"]
+
+[ext_resource type="PackedScene" uid="uid://dpq3ixd3u85jn" path="res://scenes/npc/Npc.tscn" id="1"]
+[ext_resource type="Script" uid="uid://dk1j0axibvk6x" path="res://scripts/world/ReturnToTownTrigger.gd" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Inn/Inn.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Tavern/Tavern.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://dlqa4wwd8bwso" path="res://scenes/prefabs/models/Market_Stall/Market_Stall.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://1qp5oqc4207h" path="res://scenes/prefabs/models/Gate/Gate.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://c8olh5tnwn5b1" path="res://scenes/prefabs/models/Wall/Wall_2x3.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://dg1yyvepqmqlj" path="res://scenes/prefabs/models/Roof/Roof01.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof02.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof03.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof04.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof05.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof06.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof07.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof08.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof09.tscn" id="17"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/Roof/Roof10.tscn" id="18"]
+[ext_resource type="PackedScene" path="res://scenes/npc/TownNpc.tscn" id="19"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/WaterWheel/WaterWheel.tscn" id="21_pop26"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/TownHouse/TownHouse.tscn" id="22_x0ujg"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/models/WealthyResidence/WealthyResidence.tscn" id="23_5vy64"]
+[ext_resource type="Texture2D" uid="uid://bep22b7rlua6j" path="res://docs/concept-art/布局.png" id="30_layout"]
+[ext_resource type="Script" uid="uid://d10yqgww8s8dn" path="res://scripts/world/PathWallGenerator.gd" id="31_path_wall_generator"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_layout_reference"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.65)
+albedo_texture = ExtResource("30_layout")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_layout_reference"]
+size = Vector2(1536, 1024)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(5, 4, 5)
+
+[sub_resource type="Curve3D" id="Curve3D_qet4j"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -40.696342, 0, 0.519989, 0, 0, 0, 0, 0, 0, -38.132713, 0, -46.479675, 0, 0, 0, 0, 0, 0, -83.4233, -0.003540039, -47.9039, 0, 0, 0, 0, 0, 0, -129.56844, -0.007080078, -50.18268, 0, 0, 0, 0, 0, 0, -209.04059, -0.044189453, -113.41858),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="Curve3D" id="Curve3D_587hs"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72.59558, 0, 0.55441284, 0, 0, 0, 0, 0, 0, 74.256805, 0, -11.738678, 0, 0, 0, 0, 0, 0, 135.38991, 0, -8.083984, 0, 0, 0, 0, 0, 0, 175.92384, 0, 5.538086, 0, 0, 0, 0, 0, 0, 208.48387, 0, 5.538086),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="Curve3D" id="Curve3D_prosl"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.76638794, 0, 29.710752, 0, 0, 0, 0, 0, 0, 0.16741943, 0, 75.91987, 0, 0, 0, 0, 0, 0, 18.108673, 0, 138.38197),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Curve3D" id="Curve3D_8otme"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.1889343, 0.05029297, -28.803368, 0, 0, 0, 0, 0, 0, 2.1399536, 0.1809082, -57.73979, 0, 0, 0, 0, 0, 0, -9.36026, 0.17138672, -83.39119, 0, 0, 0, 0, 0, 0, -18.592499, 0, -106.98105, 0, 0, 0, 0, 0, 0, -14.273315, 0, -151.5019, 0, 0, 0, 0, 0, 0, -12.612061, 0, -200.00972, 0, 0, 0, 0, 0, 0, 11.97406, 0, -264.46527, 0, 0, 0, 0, 0, 0, 24.93161, 0, -317.95676),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="Curve3D" id="Curve3D_086wm"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -11.402466, 0.10473633, -24.041077, 0, 0, 0, 0, 0, 0, 17.59433, 0.15002441, -38.820496, 0, 0, 0, 0, 0, 0, 53.16977, 0.22717285, -57.047455, 0, 0, 0, 0, 0, 0, 96.27823, 0.013427734, -56.28299, 0, 0, 0, 0, 0, 0, 139.17294, 0.009765625, -56.39279, 0, 0, 0, 0, 0, 0, 143.92203, 0.024047852, -94.54495, 0, 0, 0, 0, 0, 0, 182.83105, 0.008300781, -103.71243, 0, 0, 0, 0, 0, 0, 212.68634, -0.044189453, -110.62103),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="Curve3D" id="Curve3D_lteju"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19.050646, 0.032958984, -5.8902283, 0, 0, 0, 0, 0, 0, 34.120018, 0.038085938, -7.9305115, 0, 0, 0, 0, 0, 0, 47.222717, 0.029541016, -8.167267, 0, 0, 0, 0, 0, 0, 70.02347, 0.02746582, -10.431549, 0, 0, 0, 0, 0, 0, 95.12726, 0.03491211, -13.402527, 0, 0, 0, 0, 0, 0, 117.464935, 0.042114258, -15.158813, 0, 0, 0, 0, 0, 0, 141.4235, 0.030761719, -14.811401, 0, 0, 0, 0, 0, 0, 146.65211, 0.103759766, -30.688843, 0, 0, 0, 0, 0, 0, 179.76556, 0.12475586, -33.059387, 0, 0, 0, 0, 0, 0, 210.9445, 0.12927246, -35.455566, 0, 0, 0, 0, 0, 0, 234.90309, 0.12890625, -35.108063, 0, 0, 0, 0, 0, 0, 264.28583, 0.122680664, -34.7843, 0, 0, 0, 0, 0, 0, 298.67206, 0.11706543, -35.121765),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 14
+
+[node name="Town" type="Node3D" unique_id=8724783]
+
+[node name="LayoutReference" type="MeshInstance3D" parent="." unique_id=1650056865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+material_override = SubResource("StandardMaterial3D_layout_reference")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_layout_reference")
+
+[node name="Inn" type="Node3D" parent="." unique_id=749930718]
+transform = Transform3D(0.9393727, 0, 0.3428978, 0, 1, 0, -0.3428978, 0, 0.9393727, -12, 0, 6)
+
+[node name="InnModel" parent="Inn" unique_id=1116407412 instance=ExtResource("3")]
+
+[node name="Innkeeper" parent="Inn" unique_id=1060692209 instance=ExtResource("1")]
+transform = Transform3D(-0.9422223, 0, 0.3349882, 0, 1, 0, -0.3349882, 0, -0.9422223, 1.5, 0, 2.5)
+npc_id = "innkeeper"
+
+[node name="Tavern" type="Node3D" parent="." unique_id=865168633]
+transform = Transform3D(0.9393727, 0, -0.3428978, 0, 1, 0, 0.3428978, 0, 0.9393727, 10, 0, 12)
+
+[node name="TavernModel" parent="Tavern" unique_id=1833055172 instance=ExtResource("4")]
+
+[node name="TavernKeeper" parent="Tavern" unique_id=791312724 instance=ExtResource("1")]
+transform = Transform3D(-0.9422223, 0, -0.3349882, 0, 1, 0, 0.3349882, 0, -0.9422223, -1.5, 0, 2.5)
+npc_id = "tavern_keeper"
+
+[node name="MarketStreet" type="Node3D" parent="." unique_id=353811937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="StallCenter" parent="MarketStreet" unique_id=1349453600 instance=ExtResource("5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="StallLeft" parent="MarketStreet" unique_id=611389599 instance=ExtResource("5")]
+transform = Transform3D(0.90044713, 0, 0.43496552, 0, 1, 0, -0.43496552, 0, 0.90044713, -3, 0, 1.5)
+
+[node name="StallRight" parent="MarketStreet" unique_id=288536804 instance=ExtResource("5")]
+transform = Transform3D(0.90044713, 0, -0.43496552, 0, 1, 0, 0.43496552, 0, 0.90044713, 3, 0, 1.5)
+
+[node name="GatePaifang" type="Node3D" parent="." unique_id=63409185]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
+
+[node name="GateModel" parent="GatePaifang" unique_id=2008448597 instance=ExtResource("7")]
+transform = Transform3D(0.9871269, 0, 0.15993896, 0, 1, 0, -0.15993896, 0, 0.9871269, -36.64129, 0, -342.692)
+
+[node name="SouthGatePaifang" type="Node3D" parent="." unique_id=1188221121]
+transform = Transform3D(-1, 0, 2.5351817e-06, 0, 1, 0, -2.5351817e-06, 0, -1, 0, 0, 28)
+
+[node name="GateModel" parent="SouthGatePaifang" unique_id=745674973 instance=ExtResource("7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.786334, 0, -336.75253)
+
+[node name="WestGatePaifang" type="Node3D" parent="." unique_id=82923745]
+transform = Transform3D(-3.6199901e-06, 0, -1, 0, 1, 0, 1, 0, -3.6199901e-06, -24, 0, 10)
+
+[node name="GateModel" parent="WestGatePaifang" unique_id=41887502 instance=ExtResource("7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9843893, 0, 338.17532)
+
+[node name="SwordPracticeYard" type="Node3D" parent="." unique_id=1224037680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 4)
+
+[node name="RoofShowcase" type="Node3D" parent="." unique_id=1343000135]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+
+[node name="Roof01" parent="RoofShowcase" unique_id=463438234 instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="Roof02" parent="RoofShowcase" unique_id=2004492882 instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Roof03" parent="RoofShowcase" unique_id=1409560735 instance=ExtResource("11")]
+
+[node name="Roof04" parent="RoofShowcase" unique_id=1984114165 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Roof05" parent="RoofShowcase" unique_id=1381785471 instance=ExtResource("13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="Roof06" parent="RoofShowcase" unique_id=1702267721 instance=ExtResource("14")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 4)
+
+[node name="Roof07" parent="RoofShowcase" unique_id=1470464486 instance=ExtResource("15")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+
+[node name="Roof08" parent="RoofShowcase" unique_id=2066105006 instance=ExtResource("16")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Roof09" parent="RoofShowcase" unique_id=574546406 instance=ExtResource("17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="Roof10" parent="RoofShowcase" unique_id=172082527 instance=ExtResource("18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="ReturnToTownTrigger" type="Area3D" parent="." unique_id=58882631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 24)
+script = ExtResource("2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReturnToTownTrigger" unique_id=863962893]
+shape = SubResource("BoxShape3D_1")
+
+[node name="TownNpcGroup" type="Node3D" parent="." unique_id=573696098]
+
+[node name="MarketVendorCenter" parent="TownNpcGroup" unique_id=1811335792 instance=ExtResource("19")]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 0.8, 0, 5.2)
+npc_role = "vendor"
+
+[node name="MarketVendorLeft" parent="TownNpcGroup" unique_id=593942808 instance=ExtResource("19")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -2.2, 0, 9.1)
+npc_role = "vendor"
+
+[node name="InnOwnerAmbient" parent="TownNpcGroup" unique_id=1090865847 instance=ExtResource("19")]
+transform = Transform3D(-0.9396926, 0, 0.34202015, 0, 1, 0, -0.34202015, 0, -0.9396926, -10.7, 0, 8)
+npc_role = "inn_owner"
+
+[node name="TavernOwnerAmbient" parent="TownNpcGroup" unique_id=318058 instance=ExtResource("19")]
+transform = Transform3D(-0.9396926, 0, -0.34202015, 0, 1, 0, 0.34202015, 0, -0.9396926, 8.7, 0, 14)
+npc_role = "tavern_owner"
+
+[node name="PedestrianA" parent="TownNpcGroup" unique_id=1982182622 instance=ExtResource("19")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+waypoints = Array[Vector3]([Vector3(-2, 0, 2), Vector3(-2, 0, 12), Vector3(2, 0, 12), Vector3(2, 0, 2)])
+
+[node name="PedestrianB" parent="TownNpcGroup" unique_id=1664221878 instance=ExtResource("19")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 18)
+waypoints = Array[Vector3]([Vector3(4, 0, 18), Vector3(8, 0, 20), Vector3(8, 0, 25), Vector3(4, 0, 25)])
+
+[node name="TownAmbience" type="AudioStreamPlayer3D" parent="." unique_id=2146811265]
+unit_size = 12.0
+
+[node name="TownWall" type="Node3D" parent="." unique_id=370361205]
+script = ExtResource("31_path_wall_generator")
+wall_scene = ExtResource("8")
+
+[node name="Node1" type="Path3D" parent="TownWall" unique_id=692881635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3123951, 0, 365.59213)
+curve = SubResource("Curve3D_qet4j")
+
+[node name="Node2" type="Path3D" parent="TownWall" unique_id=1235292699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.953014, 0, 365.6153)
+curve = SubResource("Curve3D_587hs")
+
+[node name="Node3" type="Path3D" parent="TownWall" unique_id=1980909555]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -362.47675, 0, 28.310747)
+curve = SubResource("Curve3D_prosl")
+
+[node name="Node4" type="Path3D" parent="TownWall" unique_id=1850005739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -362.48688, 0, 5.599984)
+curve = SubResource("Curve3D_8otme")
+
+[node name="Node5" type="Path3D" parent="TownWall" unique_id=127995109]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -303.72113, 0, -318.19626)
+curve = SubResource("Curve3D_086wm")
+
+[node name="Node6" type="Path3D" parent="TownWall" unique_id=1679515195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.390781, 0, -377.74796)
+curve = SubResource("Curve3D_lteju")
+
+[node name="WaterWheelGroup" type="Node3D" parent="." unique_id=799818213]
+transform = Transform3D(0.70467615, 0, -0.70952904, 0, 1, 0, 0.70952904, 0, 0.70467615, -252.95798, 0, 145.3733)
+
+[node name="WaterWheel" parent="WaterWheelGroup" unique_id=67455711 instance=ExtResource("21_pop26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.028930664)
+
+[node name="House" type="Node3D" parent="." unique_id=499785777]
+transform = Transform3D(0.70467615, 0, -0.70952904, 0, 1, 0, 0.70952904, 0, 0.70467615, 0.141, 1, 0.377)
+
+[node name="TownHouse" parent="House" unique_id=1343302350 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(0.7046762, 0, 0.7095291, 0, 1, 0, -0.7095291, 0, 0.7046762, 272.38318, 0, 169.82368)
+
+[node name="TownHouse2" parent="House" unique_id=1834558359 instance=ExtResource("22_x0ujg")]
+transform = Transform3D(0.72491837, 0, 0.6888353, 0, 1, 0, -0.6888353, 0, 0.72491837, 284.14328, 0, 158.36992)
+
+[node name="Residance" type="Node3D" parent="." unique_id=604493790]
+transform = Transform3D(0.99958134, 0, -0.02894482, 0, 1, 0, 0.02894482, 0, 0.99958134, 0, 1, 0)
+
+[node name="WealthyResidence" parent="Residance" unique_id=1688175999 instance=ExtResource("23_5vy64")]
+transform = Transform3D(0.9995127, 0, 0.031216372, 0, 1, 0, -0.031216372, 0, 0.9995127, 60.056126, 0, 269.67828)
+
+[connection signal="body_entered" from="ReturnToTownTrigger" to="ReturnToTownTrigger" method="_on_body_entered"]

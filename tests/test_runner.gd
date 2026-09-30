@@ -1,0 +1,82 @@
+extends SceneTree
+
+var assertions := 0
+var failures: Array[String] = []
+
+func _init() -> void:
+	var test_paths := [
+		"res://tests/test_comfort_settings.gd",
+		"res://tests/test_environment_state.gd",
+		"res://tests/test_environment_controller.gd",
+		"res://tests/test_health_component.gd",
+		"res://tests/test_quest_state.gd",
+		"res://tests/test_main_flow_acceptance.gd",
+		"res://tests/test_completion_feedback.gd",
+		"res://tests/test_dialogue.gd",
+		"res://tests/test_town_npc.gd",
+		"res://tests/test_spell_caster.gd",
+		"res://tests/test_player_spell_controller.gd",
+		"res://tests/test_lesser_demon.gd",
+		"res://tests/test_lesser_demon_scene.gd",
+		"res://tests/test_seal_encounter.gd",
+		"res://tests/test_flying_sword.gd",
+		"res://tests/test_player_mode.gd",
+		"res://tests/test_player_test_arena.gd",
+		"res://tests/test_mountain_trial_combat.gd",
+		"res://tests/test_desktop_debug_player.gd",
+		"res://tests/test_xr_player.gd",
+		"res://tests/test_scene_lod_group.gd",
+		"res://tests/test_model_prefabs.gd",
+		"res://tests/test_imported_town_model_assets.gd",
+		"res://tests/test_model_prefab_colliders.gd",
+		"res://tests/test_water_prefabs.gd",
+		"res://tests/test_main_ground.gd",
+		"res://tests/test_town_playability.gd",
+		"res://tests/test_town_showcase.gd",
+		"res://tests/test_terrain.gd",
+		"res://tests/test_asset_placer.gd",
+		"res://tests/test_prefab_inspector.gd",
+		"res://tests/test_navmesh_setup.gd",
+		"res://tests/test_navmesh_workflow_plugin.gd",
+	]
+	for path in test_paths:
+		if FileAccess.file_exists(path):
+			_run_test_script(path)
+	if failures.is_empty():
+		print("TESTS PASSED: %d assertions" % assertions)
+		call_deferred("_finish", 0)
+	else:
+		for failure in failures:
+			printerr(failure)
+		printerr("TESTS FAILED: %d failure(s), %d assertion(s)" % [failures.size(), assertions])
+		call_deferred("_finish", 1)
+
+func _finish(exit_code: int) -> void:
+	quit(exit_code)
+
+func _run_test_script(path: String) -> void:
+	var script := load(path)
+	if script == null:
+		fail(path, "failed to load test script")
+		return
+	if script is GDScript and not script.can_instantiate():
+		fail(path, "test script cannot instantiate")
+		return
+	var instance: Object = script.new()
+	if instance.has_method("run"):
+		instance.run(self)
+	else:
+		fail(path, "missing run(test_runner) method")
+
+func assert_true(value: bool, message: String) -> void:
+	assertions += 1
+	if not value:
+		fail("assert_true", message)
+
+func assert_equal(actual: Variant, expected: Variant, message: String) -> void:
+	assertions += 1
+	if actual != expected:
+		fail("assert_equal", "%s | actual=%s expected=%s" % [message, str(actual), str(expected)])
+
+func fail(source: String, message: String) -> void:
+	failures.append("%s: %s" % [source, message])

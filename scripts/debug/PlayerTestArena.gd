@@ -1,0 +1,57 @@
+extends Node3D
+class_name PlayerTestArena
+
+const PLAYER_MODE_DESKTOP_SIMULATION := "desktop_simulation"
+const PLAYER_MODE_VR := "vr"
+const DESKTOP_PLAYER_SCENE_PATH := "res://scenes/player/DesktopDebugPlayer.tscn"
+const VR_PLAYER_SCENE_PATH := "res://scenes/player/XRPlayer.tscn"
+
+@export_enum("desktop_simulation", "vr") var player_mode := PLAYER_MODE_DESKTOP_SIMULATION
+
+var player_node: Node
+
+func _ready() -> void:
+	if player_mode == PLAYER_MODE_DESKTOP_SIMULATION:
+		_disable_openxr()
+	spawn_player()
+
+func _disable_openxr() -> void:
+	var xr_interface := XRServer.find_interface("OpenXR")
+	if xr_interface != null and xr_interface.is_initialized():
+		xr_interface.uninitialize()
+		print("OpenXR disabled for desktop simulation mode")
+
+func normalize_player_mode(mode: String) -> String:
+	if mode == PLAYER_MODE_VR:
+		return PLAYER_MODE_VR
+	return PLAYER_MODE_DESKTOP_SIMULATION
+
+func resolve_player_scene_path(mode: String = player_mode) -> String:
+	if normalize_player_mode(mode) == PLAYER_MODE_VR:
+		return VR_PLAYER_SCENE_PATH
+	return DESKTOP_PLAYER_SCENE_PATH
+
+func instantiate_player_for_mode(mode: String) -> Node:
+	var scene_path := resolve_player_scene_path(mode)
+	var packed_scene := load(scene_path)
+	if packed_scene == null or not packed_scene is PackedScene:
+		push_error("Unable to load player scene: %s" % scene_path)
+		return null
+	return packed_scene.instantiate()
+
+func spawn_player() -> Node:
+	if player_node != null:
+		if player_node.get_parent() != null:
+			player_node.get_parent().remove_child(player_node)
+		player_node.free()
+	player_node = instantiate_player_for_mode(player_mode)
+	if player_node == null:
+		return null
+	add_child(player_node)
+	var spawn := get_node_or_null("PlayerSpawn") as Node3D
+	if player_node is Node3D and spawn != null:
+		if player_node.is_inside_tree() and spawn.is_inside_tree():
+			player_node.global_position = spawn.global_position
+		else:
+			player_node.position = spawn.position
+	return player_node

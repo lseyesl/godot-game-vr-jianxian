@@ -1,0 +1,15 @@
+.godot/
+.worktrees/
+*.tmp
+*.import
+export_presets.cfg.bak
+*.translation
+.DS_Store
+.omo/
+
+# Blender backups
+*.blend[0-9]*
+
+# Blender temp/recovery
+*.blend@
+.quit.blend

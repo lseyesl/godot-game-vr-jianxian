@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Material" path="res://assets/materials/mat_warm_wood.tres" id="1"]
+
+[sub_resource type="BoxMesh" id="Board_mesh"]
+size = Vector3(0.6, 0.4, 0.05)
+material = ExtResource("1")
+
+[sub_resource type="CylinderMesh" id="Post_mesh"]
+top_radius = 0.03
+bottom_radius = 0.03
+height = 1.5
+
+[node name="Signboard" type="Node3D"]
+
+[node name="Post" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("Post_mesh")
+
+[node name="Board" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("Board_mesh")

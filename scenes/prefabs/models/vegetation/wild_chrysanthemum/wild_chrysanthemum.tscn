@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/vegetation/wild_chrysanthemum/wild_chrysanthemum.glb" id="1"]
+
+[node name="wild_chrysanthemum" type="Node3D"]
+metadata/source_model_path = "res://assets/models/vegetation/wild_chrysanthemum/wild_chrysanthemum.glb"
+
+[node name="Model" parent="." instance=ExtResource("1")]

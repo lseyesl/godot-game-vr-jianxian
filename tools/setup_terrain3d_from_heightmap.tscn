@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://tools/setup_terrain3d_from_heightmap.gd" id="1"]
+
+[node name="SetupTerrain3D" type="Node"]
+script = ExtResource("1")

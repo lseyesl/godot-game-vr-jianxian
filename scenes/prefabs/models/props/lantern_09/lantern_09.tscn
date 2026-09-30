@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/props/lantern_09/lantern_09.glb" id="1"]
+
+[node name="lantern_09" type="Node3D"]
+metadata/source_model_path = "res://assets/models/props/lantern_09/lantern_09.glb"
+
+[node name="Model" parent="." instance=ExtResource("1")]

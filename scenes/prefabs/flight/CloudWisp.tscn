@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Material" path="res://assets/materials/mat_mist_blue.tres" id="1"]
+
+[sub_resource type="PlaneMesh" id="Cloud_plane"]
+size = Vector2(4, 2)
+
+[node name="CloudWisp" type="Node3D"]
+
+[node name="Cloud" type="MeshInstance3D" parent="."]
+mesh = SubResource("Cloud_plane")
+surface_material_override/0 = ExtResource("1")

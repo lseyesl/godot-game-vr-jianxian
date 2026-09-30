@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Material" path="res://assets/materials/mat_warm_wood.tres" id="1"]
+[ext_resource type="Material" path="res://assets/materials/mat_dark_roof_tile.tres" id="2"]
+
+[sub_resource type="BoxMesh" id="Walls_mesh"]
+size = Vector3(8, 5, 8)
+material = ExtResource("1")
+
+[sub_resource type="BoxShape3D" id="Walls_col"]
+size = Vector3(8, 5, 8)
+
+[node name="LargeBuildingShell" type="StaticBody3D"]
+
+[node name="Walls" type="MeshInstance3D" parent="."]
+mesh = SubResource("Walls_mesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("Walls_col")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
