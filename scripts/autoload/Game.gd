@@ -11,6 +11,35 @@ var save_state = SaveStateResource.new()
 var comfort_settings = ComfortSettingsResource.new()
 var quest_state = QuestStateResource.new()
 var completion_feedback_emitted := false
+var selected_player_mode := "desktop_simulation"
+var checkpoint_path := "user://jianxian_checkpoint.json"
+const Checkpoints = preload("res://scripts/core/CheckpointStore.gd")
+
+func save_checkpoint() -> bool:
+	var result := Checkpoints.write_checkpoint({
+		"version": Checkpoints.VERSION,
+		"quest_step": quest_state.current_step,
+		"comfort_mode": comfort_settings.movement_mode,
+	}, checkpoint_path)
+	if result != OK and is_inside_tree():
+		var bus := _get_event_bus()
+		if bus != null: bus.notification_requested.emit("存档写入失败；当前游戏仍可继续")
+	return result == OK
+
+func has_checkpoint() -> bool:
+	return not Checkpoints.read_checkpoint(checkpoint_path).is_empty()
+
+func load_checkpoint() -> bool:
+	var data := Checkpoints.read_checkpoint(checkpoint_path)
+	if data.is_empty(): return false
+	quest_state.current_step = data.quest_step
+	save_state.quest_step = data.quest_step
+	save_state.sword_unlocked = data.sword_unlocked
+	comfort_settings.apply_mode(data.comfort_mode)
+	save_state.comfort_mode = comfort_settings.movement_mode
+	completion_feedback_emitted = false
+	return true
+
 
 func reset_demo() -> void:
 	save_state.reset()
@@ -29,6 +58,8 @@ func advance_quest(event_id: String) -> bool:
 	var advanced: bool = quest_state.advance(event_id)
 	if advanced:
 		save_state.quest_step = quest_state.current_step
+		save_state.sword_unlocked = quest_state.current_step in ["fly_back", "complete"]
+		if is_inside_tree(): save_checkpoint()
 		var event_bus := _get_event_bus()
 		if event_bus != null:
 			if event_bus.has_signal("quest_step_changed"):
@@ -50,3 +81,4 @@ func _get_event_bus() -> Node:
 	if is_inside_tree():
 		return get_node_or_null("/root/EventBus")
 	return null
+

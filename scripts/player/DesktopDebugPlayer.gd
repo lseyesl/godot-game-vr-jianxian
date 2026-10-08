@@ -23,18 +23,32 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var input := get_movement_input_vector()
+	var game := get_node_or_null("/root/Game")
 	var speed := flight_speed_mps if flight_enabled else walk_speed_mps
-	velocity = get_yaw_relative_direction(input) * speed
+	if flight_enabled and game != null: speed = game.comfort_settings.flight_speed_limit_mps
+	var horizontal := get_yaw_relative_direction(input) * speed
+	velocity.x = horizontal.x
+	velocity.z = horizontal.z
 	if flight_enabled:
-		velocity.y = Input.get_action_strength("ui_accept") * speed
+		velocity.y = (Input.get_action_strength("flight_ascend") - Input.get_action_strength("flight_descend")) * speed
+		velocity = velocity.limit_length(speed)
+		if game != null and global_position.y >= game.comfort_settings.flight_height_limit_m:
+			velocity.y = minf(velocity.y, 0.0)
 	else:
-		velocity.y -= 9.8 * delta
+		velocity.y = 0.0 if is_on_floor() else velocity.y - 9.8 * delta
 	move_and_slide()
+	if flight_enabled and game != null:
+		global_position.y = minf(global_position.y, game.comfort_settings.flight_height_limit_m)
 	var controller := get_spell_controller()
 	if controller != null and controller.has_method("tick_cooldowns"):
 		controller.tick_cooldowns(delta)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("flight_toggle"):
+		var game := get_node_or_null("/root/Game")
+		if game != null and game.save_state.sword_unlocked:
+			get_node("/root/EventBus").flight_mode_changed.emit(not flight_enabled)
+		return
 	if event.is_action_pressed("ui_cancel"):
 		release_mouse_capture()
 		return
@@ -85,6 +99,9 @@ func get_health_component() -> Node:
 
 func receive_damage(amount: int, source_id: String = "") -> int:
 	var health = get_health_component()
+	var controller = get_spell_controller()
+	if health != null and controller != null and controller.guard_remaining > 0.0:
+		return health.current_health
 	if health == null:
 		return 0
 	var current: int = health.apply_damage(amount, source_id)
@@ -128,3 +145,4 @@ func get_spell_emitter() -> Node3D:
 
 func _on_flight_mode_changed(enabled: bool) -> void:
 	flight_enabled = enabled
+

@@ -5,6 +5,8 @@ var failures: Array[String] = []
 
 func _init() -> void:
 	var test_paths := [
+		"res://tests/test_checkpoint_store.gd",
+		"res://tests/test_playable_rules.gd",
 		"res://tests/test_comfort_settings.gd",
 		"res://tests/test_environment_state.gd",
 		"res://tests/test_environment_controller.gd",
@@ -39,9 +41,22 @@ func _init() -> void:
 		"res://tests/test_navmesh_setup.gd",
 		"res://tests/test_navmesh_workflow_plugin.gd",
 	]
+	# Explicit portable suite; default still runs the complete original asset suite.
+	var gameplay := OS.get_cmdline_user_args().has("--suite=gameplay")
+	var gameplay_tests := [
+		"test_checkpoint_store.gd", "test_playable_rules.gd", "test_comfort_settings.gd",
+		"test_environment_state.gd", "test_health_component.gd",
+		"test_quest_state.gd", "test_completion_feedback.gd", "test_dialogue.gd",
+		"test_spell_caster.gd", "test_player_spell_controller.gd", "test_lesser_demon.gd",
+		"test_lesser_demon_scene.gd", "test_seal_encounter.gd", "test_flying_sword.gd",
+		"test_desktop_debug_player.gd", "test_xr_player.gd", "test_scene_lod_group.gd",
+	]
 	for path in test_paths:
+		if gameplay and not path.get_file() in gameplay_tests: continue
 		if FileAccess.file_exists(path):
 			_run_test_script(path)
+		else:
+			fail(path, "missing required test file")
 	if failures.is_empty():
 		print("TESTS PASSED: %d assertions" % assertions)
 		call_deferred("_finish", 0)
@@ -80,3 +95,4 @@ func assert_equal(actual: Variant, expected: Variant, message: String) -> void:
 
 func fail(source: String, message: String) -> void:
 	failures.append("%s: %s" % [source, message])
+

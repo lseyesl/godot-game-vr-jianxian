@@ -6,6 +6,8 @@ const SpellCasterScript := preload("res://scripts/spells/SpellCaster.gd")
 @export var projectile_scene_path := "res://scenes/spells/SpellProjectile.tscn"
 
 var spell_caster: SpellCaster
+var guard_remaining := 0.0
+
 var last_cast_spell_id := ""
 var last_spawned_projectile: Node
 var spawned_projectiles: Array[Node] = []
@@ -27,6 +29,7 @@ func cast_spell(spell_id: String, origin: Vector3, forward: Vector3) -> bool:
 			projectile.free()
 		return false
 	last_cast_spell_id = spell_id
+	if spell_id == "guard_charm": guard_remaining = 3.0
 	if projectile != null:
 		return _add_projectile(projectile, origin, forward)
 	return true
@@ -48,6 +51,7 @@ func get_spawned_projectile_count() -> int:
 	return spawned_projectiles.size()
 
 func tick_cooldowns(delta: float) -> void:
+	guard_remaining = maxf(0.0, guard_remaining - delta)
 	_ensure_spell_caster()
 	if spell_caster != null:
 		spell_caster.tick_cooldowns(delta)
@@ -91,3 +95,4 @@ func _add_projectile(projectile: Node, origin: Vector3, forward: Vector3) -> boo
 	spawned_projectiles.append(projectile)
 	projectile.tree_exited.connect(_on_projectile_freed.bind(projectile))
 	return true
+

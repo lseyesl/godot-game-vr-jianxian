@@ -7,7 +7,8 @@ var _editor_visible: bool = false # Track editor visibility
 
 
 func _enter_tree() -> void:
-	EngineDebugger.register_message_capture("beehave", _on_debug_message)
+	if EngineDebugger.is_active():
+		EngineDebugger.register_message_capture("beehave", _on_debug_message)
 
 
 func _on_debug_message(message: String, data: Array) -> bool:
@@ -68,3 +69,4 @@ func unregister_tree(tree) -> void:
 		_active_tree = null
 	if _pending_activation_id == tree_id:
 		_pending_activation_id = -1
+

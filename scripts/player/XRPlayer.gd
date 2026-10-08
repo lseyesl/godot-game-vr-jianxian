@@ -16,7 +16,19 @@ const TURN_MODE_SMOOTH := 2
 var flight_enabled := false
 
 func _ready() -> void:
-	add_to_group("player")
+	var body := get_node_or_null("XROrigin3D/PlayerBody")
+	if body != null: body.add_to_group("player")
+	var right := get_node_or_null("XROrigin3D/RightHand") as XRController3D
+	var left := get_node_or_null("XROrigin3D/LeftHand") as XRController3D
+	if right != null: right.button_pressed.connect(_on_right_button)
+	if left != null: left.button_pressed.connect(_on_left_button)
+	# Controllers must still dispatch pause/retry input while the gameplay tree is paused.
+	if right != null:
+		right.process_mode = Node.PROCESS_MODE_ALWAYS
+		for child in right.get_children(): child.process_mode = Node.PROCESS_MODE_PAUSABLE
+	if left != null:
+		left.process_mode = Node.PROCESS_MODE_ALWAYS
+		for child in left.get_children(): child.process_mode = Node.PROCESS_MODE_PAUSABLE
 	if comfort_settings == null:
 		var game := get_node_or_null("/root/Game")
 		if game != null:
@@ -24,11 +36,19 @@ func _ready() -> void:
 	var event_bus := get_node_or_null("/root/EventBus")
 	if event_bus != null:
 		event_bus.flight_mode_changed.connect(_on_flight_mode_changed)
+		event_bus.player_damage_requested.connect(receive_damage)
 		event_bus.comfort_settings_changed.connect(_on_comfort_settings_changed)
 	apply_comfort_settings()
 	apply_flight_state()
 
 func _physics_process(delta: float) -> void:
+	var body := get_node_or_null("XROrigin3D/PlayerBody")
+	var origin := get_node_or_null("XROrigin3D") as Node3D
+	if body != null and origin != null and comfort_settings != null:
+		var excess: float = body.global_position.y - comfort_settings.flight_height_limit_m
+		if excess > 0.0:
+			origin.global_position.y -= excess
+			body.velocity.y = minf(body.velocity.y, 0.0)
 	var controller := get_spell_controller()
 	if controller != null and controller.has_method("tick_cooldowns"):
 		controller.tick_cooldowns(delta)
@@ -80,6 +100,9 @@ func get_health_component() -> Node:
 
 func receive_damage(amount: int, source_id: String = "") -> int:
 	var health = get_health_component()
+	var controller = get_spell_controller()
+	if health != null and controller != null and controller.guard_remaining > 0.0:
+		return health.current_health
 	if health == null:
 		return 0
 	var current: int = health.apply_damage(amount, source_id)
@@ -103,3 +126,29 @@ func cast_spell_from_emitter(spell_id: String, emitter_path: NodePath = spell_em
 
 func get_spell_controller() -> Node:
 	return get_node_or_null(spell_controller_path)
+
+
+func get_body_position() -> Vector3:
+	var body := get_node_or_null("XROrigin3D/PlayerBody") as Node3D
+	return body.global_position if body != null else global_position
+
+func _on_right_button(button: String) -> void:
+	var bus := get_node_or_null("/root/EventBus")
+	if bus == null: return
+	if button == "by_button":
+		bus.pause_requested.emit()
+		return
+	if get_tree().paused: return
+	match button:
+		"trigger_click": cast_spell_id("spirit_bolt")
+		"grip_click": cast_spell_id("seal_break")
+		"ax_button": bus.interaction_requested.emit()
+
+func _on_left_button(button: String) -> void:
+	var bus := get_node_or_null("/root/EventBus")
+	if bus == null: return
+	if get_tree().paused:
+		if button == "ax_button": bus.retry_requested.emit()
+		elif button == "by_button": bus.menu_requested.emit()
+		return
+	if button == "grip_click": cast_spell_id("guard_charm")

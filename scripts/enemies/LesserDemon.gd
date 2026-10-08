@@ -14,12 +14,18 @@ var attack_cooldown_remaining := 0.0
 var defeated := false
 
 func _ready() -> void:
+	add_to_group("enemy")
 	var health := get_health_component()
 	if health != null and health.has_signal("died"):
 		health.died.connect(_on_health_died)
 
 func _physics_process(delta: float) -> void:
 	tick_attack_cooldown(delta)
+	# Existing scenes use Beehave; the portable trial uses this equivalent fallback.
+	if get_node_or_null("BehaviorTree") == null and not is_defeated():
+		find_target()
+		if is_in_attack_range(): try_attack_target()
+		else: move_toward_target(delta)
 
 func get_health_component() -> Node:
 	return get_node_or_null(health_component_path)
@@ -43,6 +49,9 @@ func receive_damage(amount: int, source_id: String = "") -> int:
 	if health == null or not health.has_method("apply_damage"):
 		return 0
 	var current: int = health.apply_damage(amount, source_id)
+	if is_inside_tree():
+		var bus := get_node_or_null("/root/EventBus")
+		if bus != null: bus.combat_feedback_requested.emit(source_id, enemy_id, "hit")
 	return current
 
 func set_target(new_target: Node3D) -> void:
@@ -120,3 +129,4 @@ func _target_position() -> Vector3:
 	if target == null:
 		return Vector3.ZERO
 	return target.global_position if target.is_inside_tree() else target.position
+

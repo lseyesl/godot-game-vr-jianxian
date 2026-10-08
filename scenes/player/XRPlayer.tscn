@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://scripts/combat/HealthComponent.gd" id="8"]
 [ext_resource type="Script" path="res://scripts/player/PlayerSpellController.gd" id="9"]
 
+[ext_resource type="Script" path="res://scripts/player/JourneyXRBody.gd" id="10"]
+
 [node name="XRPlayer" type="Node3D"]
 script = ExtResource("1")
 
@@ -45,4 +47,7 @@ position = Vector3(0, 0, -0.08)
 
 [node name="PlayerBody" parent="XROrigin3D" groups=["player"] instance=ExtResource("2")]
 
+script = ExtResource("10")
+
 [node name="MovementFlight" parent="XROrigin3D" instance=ExtResource("6")]
+
