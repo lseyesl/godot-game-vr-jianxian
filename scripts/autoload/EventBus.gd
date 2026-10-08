@@ -17,3 +17,13 @@ signal combat_feedback_requested(spell_id: String, target_id: String, outcome: S
 signal player_health_changed(current_health: int, max_health: int)
 signal quest_completed()
 signal completion_feedback_requested(title: String, message: String)
+
+
+signal dialogue_shown(npc_id: String, text: String)
+signal interaction_requested()
+signal notification_requested(text: String)
+signal pause_requested()
+signal retry_requested()
+signal menu_requested()
+
+signal player_damage_requested(amount: int, source_id: String)

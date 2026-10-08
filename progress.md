@@ -1,3 +1,11 @@
+# 2026-10-08 可玩试玩版
+
+新增默认菜单和紧凑主线关卡，补齐对话/HUD、存档、暂停/失败重试、御剑升降、护符防御、任务顺序保护及 XR 输入。玩法测试 280 断言、真实场景集成 41 断言和 XR 场景桥接通过；原完整美术/地形测试未通过，VR 真机和独立可执行文件仍待验收。
+
+详见 [本次验证记录](docs/testing/playable-release.md)。下面保留旧进度记录作为历史，其“测试全绿”等描述不代表本次环境的验证结论。
+
+---
+
 # 项目进度总览
 
 > 最后更新: 2026-06-16
@@ -88,3 +96,4 @@
 | Godot XR Tools 不可在 headless 测试 | 插件安装后需 `--xr-mode off` 启动 | 低 |
 | Beehave debugger headless 噪音 | `Capture not registered: 'beehave'` 在清理阶段出现，不影响功能 | 低 |
 | 弹道体 HitEffect.tscn Curve 格式 | `_data` 中 mode 字段使用 float 而非 int，引擎报 warning 但不崩溃 | 低 |
+

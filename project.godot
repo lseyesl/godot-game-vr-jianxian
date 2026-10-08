@@ -10,28 +10,31 @@ config_version=5
 
 [application]
 
-config/name="VR Xianxia Demo"
-run/main_scene="res://scenes/main/Main.tscn"
+config/name="青岚 · 剑仙试炼"
+run/main_scene="res://scenes/menu/MainMenu.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [autoload]
 
 EventBus="*res://scripts/autoload/EventBus.gd"
 Game="*res://scripts/autoload/Game.gd"
-XRToolsUserSettings="*uid://bqgb8i74tm0t"
-XRToolsRumbleManager="*uid://by853dk86g1qw"
-BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
-BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
+XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
+XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
+BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
+BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/vsync/vsync_mode=0
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 
@@ -81,6 +84,15 @@ flight_toggle={
 ]
 }
 
+flight_ascend={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":32)]
+}
+flight_descend={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":4194326)]
+}
+
 [rendering]
 
 renderer/rendering_method="mobile"
@@ -90,3 +102,4 @@ environment/defaults/default_clear_color=Color(0.46, 0.55, 0.62, 1)
 [xr]
 
 openxr/enabled=true
+

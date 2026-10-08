@@ -46,12 +46,12 @@ const _DefaultMaterial := preload("res://addons/godot-xr-tools/materials/capsule
 
 ## Teleport texture
 @export var arc_texture : Texture2D \
-	= preload("res://addons/godot-xr-tools/images/teleport_arrow.png") \
+	= preload("res://assets/ui/teleport_arrow.svg") \
 	: set = set_arc_texture
 
 ## Target texture
 @export var target_texture : Texture2D \
-	= preload("res://addons/godot-xr-tools/images/teleport_target.png") \
+	= preload("res://assets/ui/teleport_target.svg") \
 	: set = set_target_texture
 
 # Player Group
@@ -493,3 +493,4 @@ func _update_player_scene() -> void:
 func _update_player_material():
 	if player_material:
 		capsule.set_surface_override_material(0, player_material)
+

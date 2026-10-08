@@ -26,6 +26,13 @@ const EVENTS := {
 	"tavern_keeper": {"ask_tavern": "talked_to_tavern_keeper"},
 }
 
+func _ready() -> void:
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null: bus.interaction_requested.connect(_on_interaction_requested)
+
+func _on_interaction_requested() -> void:
+	if has_nearby_player(): interact_with_current_step()
+
 func line_for_step(step: String) -> String:
 	var npc_lines: Dictionary = LINES.get(npc_id, {})
 	return npc_lines.get(step, npc_lines.get("default", "……"))
@@ -41,6 +48,9 @@ func interact(current_step: String) -> String:
 		if game != null and game.has_method("advance_quest"):
 			game.advance_quest(event_id)
 	last_line = line_for_step(current_step)
+	if is_inside_tree():
+		var bus := get_node_or_null("/root/EventBus")
+		if bus != null: bus.dialogue_shown.emit(npc_id, last_line)
 	return last_line
 
 func has_nearby_player() -> bool:
@@ -56,6 +66,7 @@ func interact_with_current_step() -> String:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and has_nearby_player():
 		interact_with_current_step()
+		if is_inside_tree(): get_viewport().set_input_as_handled()
 
 func _on_interact_area_body_entered(body: Node3D) -> void:
 	if not body.is_in_group("player"):
@@ -73,3 +84,4 @@ func _get_game() -> Node:
 	if is_inside_tree():
 		return get_node_or_null("/root/Game")
 	return null
+

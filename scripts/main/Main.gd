@@ -77,11 +77,11 @@ func get_terrain_height_at_world_position(terrain: Node, world_position: Vector3
 		return NAN
 	if terrain.has_method("get_height_at_world_position"):
 		return terrain.get_height_at_world_position(world_position)
-	if terrain is Terrain3D:
-		var terrain3d := terrain as Terrain3D
-		if terrain3d.data == null:
+	if terrain.is_class("Terrain3D"):
+		var terrain3d: Node = terrain
+		if terrain3d.get("data") == null:
 			return NAN
-		return terrain3d.data.get_height(world_position)
+		return terrain3d.get("data").get_height(world_position)
 	return NAN
 
 func get_lowest_collision_offset(player: Node) -> float:
@@ -114,3 +114,4 @@ func get_shape_half_height(shape: Shape3D) -> float:
 	if shape is SphereShape3D:
 		return (shape as SphereShape3D).radius
 	return 0.0
+

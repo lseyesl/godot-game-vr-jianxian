@@ -3,11 +3,20 @@ class_name SealEncounter
 
 @export var remaining_hits := 3
 @export var target_id := "seal"
+@export var require_defeated_enemies := false
 var cleansed := false
 
 func receive_spell(spell_id: String) -> void:
 	if cleansed:
 		return
+	if is_inside_tree() and get_tree().current_scene != null:
+		var game := get_node_or_null("/root/Game")
+		if game != null and game.quest_state.current_step != "cleanse_seal": return
+		if require_defeated_enemies:
+			for enemy in get_tree().get_nodes_in_group("enemy"):
+				if enemy.has_method("is_defeated") and not enemy.is_defeated():
+					_emit_combat_feedback(spell_id, "blocked")
+					return
 	var outcome := ""
 	if spell_id == "spirit_bolt":
 		remaining_hits = max(0, remaining_hits - 1)
@@ -55,3 +64,4 @@ func _cleanse() -> void:
 func _on_hit_area_area_entered(area: Area3D) -> void:
 	if "spell_id" in area:
 		receive_spell(area.spell_id)
+

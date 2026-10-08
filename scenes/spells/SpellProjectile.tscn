@@ -35,6 +35,8 @@ material = ExtResource("3")
 
 [node name="SpellProjectile" type="Area3D"]
 script = ExtResource("1")
+collision_layer = 4
+collision_mask = 3
 
 [node name="Visual" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_1")
@@ -54,3 +56,4 @@ draw_pass_1 = SubResource("SphereMesh_2")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+

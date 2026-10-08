@@ -1,0 +1,37 @@
+name: Playable demo
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: chickensoft-games/setup-godot@v1
+        with:
+          version: 4.6.3
+          use-global-templates: true
+      - name: Stage portable source (no LFS or Terrain3D required)
+        run: python3 tools/package_playable.py /tmp/jianxian
+      - name: Import
+        run: godot --headless --xr-mode off --path /tmp/jianxian --editor --import --quit
+      - name: Gameplay regression
+        run: godot --headless --xr-mode off --path /tmp/jianxian --script res://tests/test_runner.gd -- --suite=gameplay
+      - name: Complete journey integration
+        run: godot --headless --xr-mode off --fixed-fps 60 --path /tmp/jianxian --script res://tests/test_playable_integration.gd
+      - name: XR scene and input bridge
+        run: godot --headless --xr-mode off --path /tmp/jianxian --script res://tests/test_xr_integration.gd
+      - name: Export Windows and Linux
+        run: |
+          mkdir -p /tmp/jianxian/builds/playable
+          godot --headless --xr-mode off --path /tmp/jianxian --export-release "Playable Windows" /tmp/jianxian/builds/playable/Jianxian.exe
+          godot --headless --xr-mode off --path /tmp/jianxian --export-release "Playable Linux" /tmp/jianxian/builds/playable/Jianxian.x86_64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Jianxian-playable
+          path: /tmp/jianxian/builds/playable/
